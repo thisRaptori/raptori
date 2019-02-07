@@ -1,11 +1,19 @@
-import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
+
+import Icon from './Icon'
+import Link from './Link'
 
 const Header = ({ siteTitle }) => (
 	<header>
 		<h1>
 			<Link to="/">{siteTitle}</Link>
+			<Link to="https://github.com/jtmcgrath">
+				<Icon name="GitHub" />
+			</Link>
+			<Link to="https://www.linkedin.com/in/joetmcgrath/">
+				<Icon name="LinkedIn" />
+			</Link>
 		</h1>
 	</header>
 )
