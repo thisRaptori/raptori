@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { Icon, Link } from 'src/components'
+import { Icon, Link } from 'src/primitives'
 
 const Header = ({ siteTitle }) => (
 	<header>
