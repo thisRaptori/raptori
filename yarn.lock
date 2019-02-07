@@ -7046,6 +7046,11 @@ minipass@^2.3.4:
     safe-buffer "^5.1.2"
     yallist "^3.0.0"
 
+minireset.css@~0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/minireset.css/-/minireset.css-0.0.4.tgz#50bbebb8e9466bb2c0323973da8aa96e2241615d"
+  integrity sha512-G8tD/ZCIOEoZubKyhL+dg25T6EgO08RUmSHzB4U6WJe1NuxmmO+xTNviacRYN2z/rozRRVE7kmafe+9ANYuP3A==
+
 minizlib@^1.1.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/minizlib/-/minizlib-1.2.1.tgz#dd27ea6136243c7c880684e8672bb3a45fd9b614"

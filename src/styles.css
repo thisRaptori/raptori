@@ -1,0 +1,48 @@
+:root {
+	--primary-1: #51eae6;
+	--primary-2: #3fc4c0;
+	--primary-3: #1ea0b1;
+	--primary-4: #097482;
+	--secondary: #7a61c1;
+	--light: #d3e0e8;
+	--dark: #15222b;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	border-top: 2px solid var(--standard);
+	background-color: var(--background);
+	color: var(--text);
+	font-size: 1.8rem;
+	transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+body.light {
+	--background: var(--light);
+	--text: var(--dark);
+	--standard: var(--primary-4);
+	--highlight: var(--primary-3);
+}
+
+body.dark {
+	--background: var(--dark);
+	--text: var(--light);
+	--standard: var(--primary-2);
+	--highlight: var(--primary-1);
+}
+
+a,
+a:link {
+	color: var(--standard);
+}
+
+a:hover {
+	color: var(--highlight);
+}
+
+a:visited {
+	color: var(--secondary);
+}

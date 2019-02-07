@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { Icon, Link } from 'src/primitives'
+import { Icon, Link, ThemeToggle } from 'src/components'
 
 const Header = ({ siteTitle }) => (
 	<header>
@@ -13,6 +13,7 @@ const Header = ({ siteTitle }) => (
 			<Link to="https://www.linkedin.com/in/joetmcgrath/">
 				<Icon name="LinkedIn" />
 			</Link>
+			<ThemeToggle />
 		</h1>
 	</header>
 )

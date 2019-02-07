@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
+import 'minireset.css'
+import '../styles.css'
 
 import { Footer, Header } from 'src/components'
 
