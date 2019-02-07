@@ -1,10 +1,26 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import styled from 'styled-components'
 
 import { Icon, Link, ThemeToggle } from 'src/components'
 
+const HeaderElement = styled.header`
+	background: var(--background);
+	border-top: 2px solid var(--standard);
+	left: 0;
+	line-height: var(--header-height);
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 2;
+
+	h1 {
+		line-height: inherit;
+	}
+`
+
 const Header = ({ siteTitle }) => (
-	<header>
+	<HeaderElement>
 		<h1>
 			<Link to="/">{siteTitle}</Link>
 			<Link to="https://github.com/jtmcgrath">
@@ -15,7 +31,7 @@ const Header = ({ siteTitle }) => (
 			</Link>
 			<ThemeToggle />
 		</h1>
-	</header>
+	</HeaderElement>
 )
 
 Header.propTypes = {

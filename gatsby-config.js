@@ -5,6 +5,7 @@ module.exports = {
 		author: `@thisRaptori`,
 	},
 	plugins: [
+		`gatsby-plugin-styled-components`,
 		`gatsby-plugin-root-import`,
 		`gatsby-plugin-react-helmet`,
 		{

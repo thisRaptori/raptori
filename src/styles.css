@@ -6,6 +6,12 @@
 	--secondary: #7a61c1;
 	--light: #d3e0e8;
 	--dark: #15222b;
+	--header-height: 3.2rem;
+}
+
+body,
+header {
+	transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 html {
@@ -13,11 +19,10 @@ html {
 }
 
 body {
-	border-top: 2px solid var(--standard);
 	background-color: var(--background);
 	color: var(--text);
 	font-size: 1.8rem;
-	transition: color 0.2s ease, background-color 0.2s ease;
+	padding-top: calc(var(--header-height) + 2px);
 }
 
 body.light {
