@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Layout, Link, SEO } from '../components'
+import { Layout, Link, SEO } from 'src/components'
 
 const SecondPage = () => (
 	<Layout>
