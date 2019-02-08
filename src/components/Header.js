@@ -20,7 +20,7 @@ const HeaderElement = styled.header`
 `
 
 const Header = ({ siteTitle }) => (
-	<HeaderElement>
+	<HeaderElement className="site-header">
 		<h1>
 			<Link to="/">{siteTitle}</Link>
 			<Link to="https://github.com/jtmcgrath">
