@@ -1,5 +1,11 @@
-import React from 'react'
+import styled from 'styled-components'
 
-const Resume = ({ children }) => <>{children}</>
+export default styled.div`
+    ul {
+        list-style: disc;
 
-export default Resume
+        li {
+            margin-bottom: 10px;
+        }
+    }
+`

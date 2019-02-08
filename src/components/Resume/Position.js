@@ -1,22 +1,30 @@
 import React from 'react'
+import styled from 'styled-components'
 
-const createComponent = (header, root = 'section') => {
-	const Component = ({ children, end, name, start }) =>
-		React.createElement(
-			root,
-			null,
-			<>
-				<header>
-					{React.createElement(header, null, name)}
-					{start ? (
-						<p>
-							{start} - {end}
-						</p>
-					) : null}
-				</header>
-				{children}
-			</>
-		)
+const Section = styled.section`
+	margin-bottom: 20px;
+`
+
+const Header = styled.header`
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+`
+
+const createComponent = (title, root) => {
+	const Component = ({ children, end, name, start }) => (
+		<Section as={root}>
+			<Header>
+				{React.createElement(title, { children: name })}
+				{start ? (
+					<p>
+						{start} - {end}
+					</p>
+				) : null}
+			</Header>
+			{children}
+		</Section>
+	)
 
 	Component.defaultProps = {
 		end: 'present',

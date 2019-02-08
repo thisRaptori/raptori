@@ -1,5 +1,5 @@
-import React from 'react'
+import styled from 'styled-components'
 
-const Description = ({ children }) => <>{children}</>
-
-export default Description
+export default styled.div`
+    margin-bottom: 20px;
+`
