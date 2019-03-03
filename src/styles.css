@@ -1,11 +1,12 @@
 :root {
-	--primary-1: #51eae6;
-	--primary-2: #3fc4c0;
-	--primary-3: #1ea0b1;
-	--primary-4: #097482;
-	--secondary: #7a61c1;
-	--light: #d3e0e8;
-	--dark: #15222b;
+	--primary: #43B9B7;
+	--secondary-dark: #28597F;
+	--secondary-light: #8BF4A7;
+	--contrast-primary: #EF7432;
+	--contrast-secondary-light: #EFB94C;
+	--contrast-secondary-dark: #D1331B;
+	--light: #D5E2EB;
+	--dark: #2F3D4C;
 	--header-height: 3.2rem;
 }
 
@@ -28,15 +29,19 @@ body {
 body.light {
 	--background: var(--light);
 	--text: var(--dark);
-	--standard: var(--primary-4);
-	--highlight: var(--primary-3);
+	--standard: var(--primary);
+	--standard-highlight: var(--secondary-dark);
+	--contrast: var(--contrast-primary);
+	--contrast-highlight: var(--contrast-secondary-dark);
 }
 
 body.dark {
 	--background: var(--dark);
 	--text: var(--light);
-	--standard: var(--primary-2);
-	--highlight: var(--primary-1);
+	--standard: var(--primary);
+	--standard-highlight: var(--secondary-light);
+	--contrast: var(--contrast-primary);
+	--contrast-highlight: var(--contrast-secondary-light);
 }
 
 a,
@@ -45,9 +50,13 @@ a:link {
 }
 
 a:hover {
-	color: var(--highlight);
+	color: var(--standard-highlight);
 }
 
 a:visited {
-	color: var(--secondary);
+	color: var(--contrast);
+}
+
+a:visited:hover {
+	color: var(--contrast-highlight);
 }
