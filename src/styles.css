@@ -2,7 +2,7 @@
 	--primary: #43B9B7;
 	--secondary-dark: #28597F;
 	--secondary-light: #8BF4A7;
-	--contrast-primary: #EF7432;
+	--contrast: #EF7432;
 	--contrast-secondary-light: #EFB94C;
 	--contrast-secondary-dark: #D1331B;
 	--light: #D5E2EB;
@@ -29,28 +29,24 @@ body {
 body.light {
 	--background: var(--light);
 	--text: var(--dark);
-	--standard: var(--primary);
-	--standard-highlight: var(--secondary-dark);
-	--contrast: var(--contrast-primary);
-	--contrast-highlight: var(--contrast-secondary-dark);
+	--secondary: var(--secondary-dark);
+	--contrast-secondary: var(--contrast-secondary-dark);
 }
 
 body.dark {
 	--background: var(--dark);
 	--text: var(--light);
-	--standard: var(--primary);
-	--standard-highlight: var(--secondary-light);
-	--contrast: var(--contrast-primary);
-	--contrast-highlight: var(--contrast-secondary-light);
+	--secondary: var(--secondary-light);
+	--contrast-secondary: var(--contrast-secondary-light);
 }
 
 a,
 a:link {
-	color: var(--standard);
+	color: var(--primary);
 }
 
 a:hover {
-	color: var(--standard-highlight);
+	color: var(--secondary);
 }
 
 a:visited {
@@ -58,5 +54,5 @@ a:visited {
 }
 
 a:visited:hover {
-	color: var(--contrast-highlight);
+	color: var(--contrast-secondary);
 }

@@ -6,7 +6,7 @@ import { Icon, Link, ThemeToggle } from 'src/components'
 
 const HeaderElement = styled.header`
 	background: var(--background);
-	border-top: 2px solid var(--standard);
+	border-top: 2px solid var(--primary);
 	left: 0;
 	line-height: var(--header-height);
 	position: fixed;
