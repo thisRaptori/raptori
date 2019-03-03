@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:200,400,400i,700,700i');
+
 :root {
-	--primary: #43B9B7;
-	--secondary-dark: #28597F;
-	--secondary-light: #8BF4A7;
-	--contrast: #EF7432;
-	--contrast-secondary-light: #EFB94C;
-	--contrast-secondary-dark: #D1331B;
-	--light: #D5E2EB;
-	--dark: #2F3D4C;
+	--primary: #43b9b7;
+	--secondary-dark: #28597f;
+	--secondary-light: #8bf4a7;
+	--contrast: #ef7432;
+	--contrast-secondary-light: #efb94c;
+	--contrast-secondary-dark: #d1331b;
+	--light: #d5e2eb;
+	--dark: #2f3d4c;
 	--header-height: 3.2rem;
 }
 
@@ -17,6 +19,7 @@ body,
 
 html {
 	font-size: 62.5%;
+	font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -55,4 +58,37 @@ a:visited {
 
 a:visited:hover {
 	color: var(--contrast-secondary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 200;
+}
+
+h1 {
+	font-size: 3.6rem;
+}
+
+h2 {
+	font-size: 3.6rem;
+}
+
+h3 {
+	font-size: 3.2rem;
+}
+
+h4 {
+	font-size: 2.4rem;
+}
+
+h5 {
+	font-size: 2.2rem;
+}
+
+h6 {
+	font-size: 2rem;
 }
