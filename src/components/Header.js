@@ -15,14 +15,28 @@ const HeaderElement = styled.header`
 	z-index: 2;
 
 	h1 {
+		display: flex;
 		line-height: inherit;
+
+		> * {
+			padding: 6px;
+		}
+	}
+
+	.site-title {
+		color: var(--primary);
+		flex-grow: 1;
+		font-size: 22px;
+		text-decoration: none;
 	}
 `
 
 const Header = ({ siteTitle }) => (
 	<HeaderElement className="site-header">
 		<h1>
-			<Link to="/">{siteTitle}</Link>
+			<Link to="/" className="site-title">
+				{siteTitle}
+			</Link>
 			<Link to="https://github.com/jtmcgrath">
 				<Icon name="GitHub" />
 			</Link>
