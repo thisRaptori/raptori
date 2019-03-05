@@ -17,33 +17,45 @@ export default function HTML(props) {
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `
-              (function() {
-                var themeQuery = matchMedia('(prefers-color-scheme: dark)');
-                window.isCurrentThemeDark = false;
+							(function() {
+								var themeQuery = matchMedia('(prefers-color-scheme: dark)');
+								var isCurrentThemeDark = false;
 
-                function setTheme(isNextThemeDark) {
-                  window.isCurrentThemeDark = isNextThemeDark;
-                  document.body.className = window.isCurrentThemeDark ? 'dark' : 'light';
-                }
+								window.themeObservable = {
+									listeners: [],
+									subscribe: (listener) => {
+										window.themeObservable.listeners.push(listener)
+										return () => window.themeObservable.listeners.filter(l => l !== listener)
+									},
+									next: () => {
+										window.themeObservable.listeners.forEach(l => l(isCurrentThemeDark))
+									}
+								}
 
-                window.toggleRaptoriTheme = function() {
-                  isNextThemeDark = !window.isCurrentThemeDark;
-                  setTheme(isNextThemeDark);
-                  try {
-                    localStorage.setItem('isThemeDark', isNextThemeDark);
-                  } catch(err) {}
-                }
+								function setTheme(isNextThemeDark) {
+									isCurrentThemeDark = isNextThemeDark;
+									document.body.className = isCurrentThemeDark ? 'dark' : 'light';
+									themeObservable.next()
+								}
 
-                themeQuery.addListener(function(e) {
-                  setTheme(e.matches);
-                });
+								window.toggleRaptoriTheme = function() {
+									isNextThemeDark = !isCurrentThemeDark;
+									setTheme(isNextThemeDark);
+									try {
+										localStorage.setItem('isThemeDark', isNextThemeDark);
+									} catch(err) {}
+								}
 
-                try {
-                  isStoredThemeDark = localStorage.getItem('isThemeDark'); 
-                  setTheme(isStoredThemeDark);
-                } catch(err) {}
-              })();
-            `,
+								themeQuery.addListener(function(e) {
+									setTheme(e.matches);
+								});
+
+								try {
+									isStoredThemeDark = localStorage.getItem('isThemeDark');
+									setTheme(isStoredThemeDark);
+								} catch(err) {}
+							})();
+						`,
 					}}
 				/>
 				{props.preBodyComponents}
