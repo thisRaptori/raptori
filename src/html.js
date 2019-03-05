@@ -19,7 +19,7 @@ export default function HTML(props) {
 						__html: `
 							(function() {
 								var themeQuery = matchMedia('(prefers-color-scheme: dark)');
-								var isCurrentThemeDark = false;
+								window.isCurrentThemeDark = false;
 
 								window.themeObservable = {
 									listeners: [],
@@ -28,18 +28,18 @@ export default function HTML(props) {
 										return () => window.themeObservable.listeners.filter(l => l !== listener)
 									},
 									next: () => {
-										window.themeObservable.listeners.forEach(l => l(isCurrentThemeDark))
+										window.themeObservable.listeners.forEach(l => l(window.isCurrentThemeDark))
 									}
 								}
 
 								function setTheme(isNextThemeDark) {
-									isCurrentThemeDark = isNextThemeDark;
-									document.body.className = isCurrentThemeDark ? 'dark' : 'light';
+									window.isCurrentThemeDark = isNextThemeDark;
+									document.body.className = window.isCurrentThemeDark ? 'dark' : 'light';
 									themeObservable.next()
 								}
 
 								window.toggleRaptoriTheme = function() {
-									isNextThemeDark = !isCurrentThemeDark;
+									isNextThemeDark = !window.isCurrentThemeDark;
 									setTheme(isNextThemeDark);
 									try {
 										localStorage.setItem('isThemeDark', isNextThemeDark);
