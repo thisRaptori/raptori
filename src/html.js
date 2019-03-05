@@ -19,15 +19,15 @@ export default function HTML(props) {
 						__html: `
               (function() {
                 var themeQuery = matchMedia('(prefers-color-scheme: dark)');
-                var isCurrentThemeDark = false;
+                window.isCurrentThemeDark = false;
 
                 function setTheme(isNextThemeDark) {
-                  isCurrentThemeDark = isNextThemeDark;
-                  document.body.className = isCurrentThemeDark ? 'dark' : 'light';
+                  window.isCurrentThemeDark = isNextThemeDark;
+                  document.body.className = window.isCurrentThemeDark ? 'dark' : 'light';
                 }
 
                 window.toggleRaptoriTheme = function() {
-                  isNextThemeDark = !isCurrentThemeDark;
+                  isNextThemeDark = !window.isCurrentThemeDark;
                   setTheme(isNextThemeDark);
                   try {
                     localStorage.setItem('isThemeDark', isNextThemeDark);

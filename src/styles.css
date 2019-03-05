@@ -2,6 +2,7 @@
 
 :root {
 	--primary: #43b9b7;
+	--primary-transparent: #43b9b755;
 	--secondary-dark: #28597f;
 	--secondary-light: #8bf4a7;
 	--contrast: #ef7432;
@@ -12,11 +13,23 @@
 	--header-height: 3.2rem;
 }
 
+/* Transition Styles */
+body,
+button,
+.background {
+	transition: color 0.2s ease, background-color 0.2s ease;
+}
+
 body,
 .background {
 	background-color: var(--background);
-	transition: color 0.2s ease, background-color 0.2s ease;
 }
+
+body,
+button {
+	color: var(--text);
+}
+/* End Transition Styles */
 
 html {
 	font-size: 62.5%;
@@ -24,7 +37,6 @@ html {
 }
 
 body {
-	color: var(--text);
 	font-size: 1.8rem;
 	padding-top: calc(var(--header-height) + 2px);
 }
@@ -91,4 +103,14 @@ h5 {
 
 h6 {
 	font-size: 2rem;
+}
+
+button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+:focus {
+	outline: 2px solid var(--primary-transparent);
 }
