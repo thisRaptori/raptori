@@ -13,7 +13,8 @@
 }
 
 body,
-.site-header {
+.background {
+	background-color: var(--background);
 	transition: color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -23,7 +24,6 @@ html {
 }
 
 body {
-	background-color: var(--background);
 	color: var(--text);
 	font-size: 1.8rem;
 	padding-top: calc(var(--header-height) + 2px);

@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { Icon, Link, ThemeToggle } from 'src/components'
 
 const HeaderElement = styled.header`
-	background: var(--background);
 	border-top: 2px solid var(--primary);
 	left: 0;
 	line-height: var(--header-height);
@@ -32,7 +31,7 @@ const HeaderElement = styled.header`
 `
 
 const Header = ({ siteTitle }) => (
-	<HeaderElement className="site-header">
+	<HeaderElement className="background">
 		<h1>
 			<Link to="/" className="site-title">
 				{siteTitle}
