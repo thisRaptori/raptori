@@ -40,6 +40,9 @@ const Header = ({ siteTitle }) => (
 				{siteTitle}
 			</Link>
 			<Space />
+			<Link to="/resume/">
+				<Icon name="Info" />
+			</Link>
 			<Link to="https://github.com/jtmcgrath">
 				<Icon name="GitHub" />
 			</Link>
