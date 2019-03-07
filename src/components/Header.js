@@ -24,10 +24,13 @@ const HeaderElement = styled.header`
 
 	.site-title {
 		color: var(--primary);
-		flex-grow: 1;
 		font-size: 22px;
 		text-decoration: none;
 	}
+`
+
+const Space = styled.span`
+	flex-grow: 1;
 `
 
 const Header = ({ siteTitle }) => (
@@ -36,6 +39,7 @@ const Header = ({ siteTitle }) => (
 			<Link to="/" className="site-title">
 				{siteTitle}
 			</Link>
+			<Space />
 			<Link to="https://github.com/jtmcgrath">
 				<Icon name="GitHub" />
 			</Link>
