@@ -56,11 +56,13 @@ body.dark {
 }
 
 a,
-a:link {
+a:link,
+.primary-links a:visited {
 	color: var(--primary);
 }
 
-a:hover {
+a:hover,
+.primary-links a:visited:hover {
 	color: var(--secondary);
 }
 

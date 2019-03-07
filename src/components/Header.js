@@ -34,7 +34,7 @@ const Space = styled.span`
 `
 
 const Header = ({ siteTitle }) => (
-	<HeaderElement className="background">
+	<HeaderElement className="background primary-links">
 		<h1>
 			<Link to="/" className="site-title">
 				{siteTitle}
