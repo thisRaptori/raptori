@@ -25,17 +25,21 @@ const Links = ({ links }) => (
 	</>
 )
 
-export default function Template({ data }) {
-	const { markdownRemark } = data
-	const { frontmatter, html } = markdownRemark
-	const { date, published, title } = frontmatter
-
+export default function Template({
+	data: {
+		markdownRemark: {
+			fields: { readingTime },
+			frontmatter: { date, published, title },
+			html,
+		},
+	},
+}) {
 	return (
 		<Layout>
 			<SEO title={title} />
 			<h1>{title}</h1>
 			<h6>
-				{date}
+				{date} • {readingTime.text}
 				{published && published.length ? (
 					<>
 						&nbsp;•&nbsp;
@@ -57,6 +61,11 @@ export const pageQuery = graphql`
 				path
 				title
 				published
+			}
+			fields {
+				readingTime {
+					text
+				}
 			}
 		}
 	}

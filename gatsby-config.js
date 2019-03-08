@@ -8,6 +8,7 @@ module.exports = {
 		`gatsby-plugin-styled-components`,
 		`gatsby-plugin-root-import`,
 		`gatsby-plugin-react-helmet`,
+		`gatsby-remark-reading-time`,
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
