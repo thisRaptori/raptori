@@ -34,6 +34,7 @@ button {
 html {
 	font-size: 62.5%;
 	font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
+	min-width: 320px;
 }
 
 body {
@@ -83,6 +84,20 @@ h6 {
 	font-weight: 200;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin-top: 1em;
+}
+
+main :first-child {
+	margin-top: 0;
+}
+
 h1 {
 	font-size: 3.6rem;
 }
@@ -115,4 +130,8 @@ button {
 
 :focus {
 	outline: 2px solid var(--primary-transparent);
+}
+
+.gatsby-resp-image-wrapper {
+	margin: 0 -2rem !important;
 }

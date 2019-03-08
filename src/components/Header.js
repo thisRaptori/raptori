@@ -13,11 +13,13 @@ const HeaderElement = styled.header`
 	top: 0;
 	z-index: 2;
 
-	h1 {
-		display: flex;
+	nav {
 		line-height: inherit;
+		display: flex;
 
 		> * {
+			align-items: center;
+			display: flex;
 			padding: 6px;
 		}
 	}
@@ -35,7 +37,7 @@ const Space = styled.span`
 
 const Header = ({ siteTitle }) => (
 	<HeaderElement className="background primary-links">
-		<h1>
+		<nav>
 			<Link to="/" className="site-title">
 				{siteTitle}
 			</Link>
@@ -53,7 +55,7 @@ const Header = ({ siteTitle }) => (
 				<Icon name="LinkedIn" />
 			</Link>
 			<ThemeToggle />
-		</h1>
+		</nav>
 	</HeaderElement>
 )
 

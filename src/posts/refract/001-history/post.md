@@ -123,7 +123,3 @@ But that's best left to be explored another time.
 For now, if you want to find out more, [check out our documentation](https://refract.js.org/) and our numerous [live code examples](https://refract.js.org/examples)!
 
 Join us in our [**#refract** channel on the Reactiflux Discord server](https://discordapp.com/invite/fqk86GH) if you have any questions or feedback, or to just talk about how you'd like to use the library. We look forward to hearing from you!
-
-Refract - Documentation
-
-Harness the power of reactive programming to supercharge your componentsrefract.js.org
