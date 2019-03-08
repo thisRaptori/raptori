@@ -35,6 +35,7 @@ html {
 	font-size: 62.5%;
 	font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
 	min-width: 320px;
+	overflow-y: scroll;
 }
 
 body {
