@@ -62,7 +62,9 @@ a:link,
 	color: var(--primary);
 }
 
+a:focus,
 a:hover,
+.primary-links a:visited:focus,
 .primary-links a:visited:hover {
 	color: var(--secondary);
 }
@@ -71,6 +73,7 @@ a:visited {
 	color: var(--contrast);
 }
 
+a:visited:focus,
 a:visited:hover {
 	color: var(--contrast-secondary);
 }
@@ -91,10 +94,11 @@ h4,
 h5,
 h6,
 p {
-	margin-top: 1em;
+	line-height: 1.4;
+	margin-top: 1.4em;
 }
 
-main :first-child {
+main > :first-child {
 	margin-top: 0;
 }
 
