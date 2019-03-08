@@ -1,5 +1,5 @@
 ---
-path: '/posts/how-we-harnessed-the-power-of-reactive-programming-with-refract.md'
+path: '/posts/how-we-harnessed-the-power-of-reactive-programming-with-refract'
 date: '2019-01-15'
 title: 'How we harnessed the power of reactive programming with Refract'
 published: [
@@ -12,7 +12,7 @@ Have you ever wondered how open-source libraries built by companies come into ex
 
 I've always been curious about it. Do they start with the intention of creating an internal library? Is open-source the initial goal? If neither, how does it happen at all? Now that I've been lucky enough to see that through from start to finish, it feels worth sharing the story of how [Refract](https://refract.js.org) came to exist!
 
--   refract logo
+![](./refract-logo.jpg)
 
 One of the first things I did after accepting [FanDuel's](https://www.fanduel.com/careers) job offer was email the engineers who had interviewed me.
 
@@ -54,7 +54,7 @@ So where did the flaws come from? What battles had this code weathered before it
 
 It turns out that the code I first encountered was actually iteration number four. What were the earlier iterations, and how did they come to pass?
 
--   Photo by Atul Vinayak on Unsplash
+![Photo by Atul Vinayak on Unsplash](./globe-1.jpg)
 
 ## Many Eons Ago
 
@@ -82,7 +82,7 @@ The fourth iteration was a big leap. The ability to observe React props was intr
 
 This iteration was stable for over a year. It proved its value over time, and was considered a mature feature by the time I joined.
 
--   Photo by Nigel Tadyanehondo on Unsplash
+![Photo by Nigel Tadyanehondo on Unsplash](./globe-2.jpg)
 
 ## A New Idea
 
@@ -106,7 +106,7 @@ With the serious work out of the way, we could get on with the remaining details
 
 He extracted the existing code from the app, and tweaked it to match the new API design. We took the time to build some test projects, iterate on the details, and then write the documentation and examples. We pitched the idea to our CTO and other executives, gaining approval from a number of key stakeholders.
 
--   screenshot
+![](./code.jpg)
 
 So there you have it: at least in this case, our library has a much longer history than it may seem. It grew through many iterations before the first hints of open-source came to mind.
 

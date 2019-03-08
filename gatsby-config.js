@@ -26,6 +26,20 @@ module.exports = {
 		`gatsby-transformer-remark`,
 		`gatsby-plugin-sharp`,
 		{
+			resolve: `gatsby-transformer-remark`,
+			options: {
+				plugins: [
+					{
+						resolve: `gatsby-remark-images`,
+						options: {
+							maxWidth: 900,
+							linkImagesToOriginal: false,
+						},
+					},
+				],
+			},
+		},
+		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
 				name: `gatsby-starter-default`,
