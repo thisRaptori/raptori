@@ -97,7 +97,8 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+em {
 	font-weight: 200;
 	line-height: 1.4;
 	margin-top: 1.4em;
@@ -139,6 +140,29 @@ button {
 	background: transparent;
 	border: none;
 	cursor: pointer;
+}
+
+code {
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	font-size: 1.2em;
+	line-height: 1;
+	padding: 0 4px 2px;
+}
+
+blockquote,
+blockquote * {
+	font-style: italic;
+	line-height: 1.2;
+	margin: 0;
+}
+
+blockquote {
+	border-left: 2px solid var(--text);
+	display: block;
+	font-size: 1.6em;
+	margin-top: 2rem;
+	padding: 1rem 0 1rem 2rem;
 }
 
 :focus {
