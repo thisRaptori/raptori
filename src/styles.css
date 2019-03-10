@@ -16,11 +16,10 @@
 /* Transition Styles */
 body,
 button,
-.background {
+.transition {
 	transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-body,
 .background {
 	background-color: var(--background);
 }
@@ -29,9 +28,22 @@ body,
 button {
 	color: var(--text);
 }
+
+@keyframes move_wave {
+	0% {
+		transform: translateX(-50%) translateZ(0) scaleY(1);
+	}
+	50% {
+		transform: translateX(-25%) translateY(25%) translateZ(0) scaleY(0.5);
+	}
+	100% {
+		transform: translateX(0) translateZ(0) scaleY(1);
+	}
+}
 /* End Transition Styles */
 
 html {
+	background: var(--primary);
 	font-size: 62.5%;
 	font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
 	min-width: 320px;

@@ -1,19 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import 'minireset.css'
-import '../styles.css'
+import '../../styles.css'
 
 import { Footer, Header } from 'src/components'
+import Waves from './Waves'
+import { Main } from './styles'
 
-const Main = styled.main`
-	margin: 0 auto;
-	max-width: 600px;
-	padding: 20px;
-`
-
-const Layout = ({ children }) => (
+const Layout = ({ children, belowTheWaves }) => (
 	<StaticQuery
 		query={graphql`
 			query SiteTitleQuery {
@@ -27,7 +22,11 @@ const Layout = ({ children }) => (
 		render={data => (
 			<>
 				<Header siteTitle={data.site.siteMetadata.title} />
-				<Main>{children}</Main>
+				<div className="background transition">
+					<Main>{children}</Main>
+				</div>
+				<Waves />
+				{belowTheWaves}
 				<Footer />
 			</>
 		)}
