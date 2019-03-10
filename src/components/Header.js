@@ -51,6 +51,9 @@ const Header = ({ siteTitle }) => (
 			<Link to="https://github.com/jtmcgrath">
 				<Icon name="GitHub" />
 			</Link>
+			<Link to="https://twitter.com/thisRaptori">
+				<Icon name="Twitter" />
+			</Link>
 			<Link to="https://www.linkedin.com/in/joetmcgrath/">
 				<Icon name="LinkedIn" />
 			</Link>
