@@ -23,7 +23,7 @@ export const Waves = styled.div`
 `
 
 export const Wave = styled.div`
-	animation: move_wave ${props => 20 + 10 * props.speed}s linear infinite;
+	animation: move_wave ${props => 15 + 15 * props.speed}s linear infinite;
 	background-repeat: repeat-x;
 	background: ${createWave};
 	bottom: 0;
