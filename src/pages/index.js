@@ -1,8 +1,12 @@
 import React from 'react'
 
-import { Layout, Link, SEO } from 'src/components'
+import { Layout, Link, PostLink, SEO } from 'src/components'
 
-const IndexPage = () => (
+const IndexPage = ({
+	data: {
+		allMarkdownRemark: { edges },
+	},
+}) => (
 	<Layout
 		content={
 			<>
@@ -25,7 +29,38 @@ const IndexPage = () => (
 				</p>
 			</>
 		}
+		belowTheWaves={
+			<>
+				<h3>Latest Posts</h3>
+				{edges.map(edge => (
+					<PostLink key={edge.node.id} post={edge.node} />
+				))}
+			</>
+		}
 	/>
 )
 
 export default IndexPage
+
+export const pageQuery = graphql`
+	query {
+		allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+			edges {
+				node {
+					id
+					excerpt(pruneLength: 250)
+					frontmatter {
+						date(formatString: "MMMM DD, YYYY")
+						path
+						title
+					}
+					fields {
+						readingTime {
+							text
+						}
+					}
+				}
+			}
+		}
+	}
+`

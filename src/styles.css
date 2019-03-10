@@ -96,19 +96,15 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-	font-weight: 200;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
 h6,
 p {
+	font-weight: 200;
 	line-height: 1.4;
 	margin-top: 1.4em;
+}
+
+strong {
+	font-weight: 400;
 }
 
 main > :first-child {
