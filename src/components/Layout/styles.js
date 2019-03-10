@@ -8,6 +8,13 @@ export const Main = styled.main`
 	padding: 20px;
 `
 
+export const Below = styled.div`
+	color: var(--dark);
+	margin: 0 auto;
+	max-width: 600px;
+	padding: 20px;
+`
+
 export const Waves = styled.div`
 	height: 120px;
 	overflow: hidden;

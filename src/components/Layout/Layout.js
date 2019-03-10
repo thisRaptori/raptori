@@ -6,9 +6,9 @@ import '../../styles.css'
 
 import { Footer, Header } from 'src/components'
 import Waves from './Waves'
-import { Main } from './styles'
+import { Below, Main } from './styles'
 
-const Layout = ({ children, belowTheWaves }) => (
+const Layout = ({ belowTheWaves, children, content }) => (
 	<StaticQuery
 		query={graphql`
 			query SiteTitleQuery {
@@ -23,10 +23,13 @@ const Layout = ({ children, belowTheWaves }) => (
 			<>
 				<Header siteTitle={data.site.siteMetadata.title} />
 				<div className="background transition">
-					<Main>{children}</Main>
+					<Main>
+						{children}
+						{content}
+					</Main>
 				</div>
 				<Waves />
-				{belowTheWaves}
+				{belowTheWaves ? <Below>{belowTheWaves}</Below> : null}
 				<Footer />
 			</>
 		)}
