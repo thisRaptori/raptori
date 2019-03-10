@@ -40,6 +40,17 @@ button {
 		transform: translateX(0) translateZ(0) scaleY(1);
 	}
 }
+
+@keyframes jump {
+	20%,
+	80% {
+		transform: rotate(-10deg);
+	}
+
+	50% {
+		transform: scale(1.2) rotate(10deg);
+	}
+}
 /* End Transition Styles */
 
 html {
