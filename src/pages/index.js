@@ -8,7 +8,7 @@ const IndexPage = ({
 	},
 }) => (
 	<Layout
-		content={
+		children={
 			<>
 				<SEO
 					title="Home"
