@@ -10,7 +10,7 @@ export default function createWave(props) {
 
 	const svg = `
 		<svg ${svgProps.reduce((str, [key, value]) => `${str} ${key}="${value}"`, '')}>
-			<path d="M500,29 L500,100 L0,100 L0,29 C150,128 350,-70 500,29 Z"></path>
+			<path d="M500,29 L500,100 L0,100 L0,29 C150,78 300,-30 500,29 Z"></path>
 		</svg>
 	`
 
