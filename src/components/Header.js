@@ -20,7 +20,7 @@ const HeaderElement = styled.header`
 		> * {
 			align-items: center;
 			display: flex;
-			padding: 6px;
+			padding: 1.4rem;
 		}
 	}
 
