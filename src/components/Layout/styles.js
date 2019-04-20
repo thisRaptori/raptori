@@ -11,7 +11,7 @@ export const Main = styled.main`
 export const Below = styled.div`
 	color: var(--dark);
 	margin: 0 auto;
-	max-width: 600px;
+	max-width: 680px;
 	padding: 20px;
 `
 

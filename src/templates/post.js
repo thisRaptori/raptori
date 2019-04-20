@@ -47,6 +47,7 @@ export default function Template({
 					</>
 				) : null}
 			</h6>
+			<hr />
 			<div dangerouslySetInnerHTML={{ __html: html }} />
 		</Layout>
 	)
