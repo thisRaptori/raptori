@@ -18,7 +18,7 @@ const Links = ({ links }) => (
 				}
 				components.push(separator)
 			}
-			components.push(<Link to={url}>{source}</Link>)
+			components.push(<Link key={url} to={url}>{source}</Link>)
 			return components
 		}, [])}
 		.
