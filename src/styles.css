@@ -11,6 +11,7 @@
 	--light: #d5e2eb;
 	--dark: #2f3d4c;
 	--header-height: 3.2rem;
+	--header-padding: 1.4rem;
 }
 
 /* Transition Styles */
@@ -63,7 +64,7 @@ html {
 
 body {
 	font-size: 1.8rem;
-	padding-top: calc(var(--header-height) + 2px);
+	padding-top: calc(var(--header-height) + (var(--header-padding) * 2) + 2px);
 }
 
 body.light {

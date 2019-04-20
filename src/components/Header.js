@@ -20,7 +20,7 @@ const HeaderElement = styled.header`
 		> * {
 			align-items: center;
 			display: flex;
-			padding: 1.4rem;
+			padding: var(--header-padding);
 		}
 	}
 
@@ -33,6 +33,7 @@ const HeaderElement = styled.header`
 
 const Space = styled.span`
 	flex-grow: 1;
+	padding: 0 !important;
 `
 
 const Header = ({ siteTitle }) => (
