@@ -21,7 +21,7 @@ export default function useIsVisible() {
 			window.removeEventListener('scroll', handler)
 			window.removeEventListener('resize', handler)
 		}
-	})
+	}, [])
 
 	return [ref, isVisible]
 }
