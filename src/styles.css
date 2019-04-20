@@ -110,13 +110,13 @@ h5,
 h6,
 p,
 em {
-	font-weight: 200;
-	line-height: 1.4;
+	font-weight: normal;
+	line-height: 1.8;
 	margin-top: 1.4em;
 }
 
 strong {
-	font-weight: 400;
+	font-weight: 600;
 }
 
 main > :first-child {
@@ -182,4 +182,39 @@ blockquote {
 
 .gatsby-resp-image-wrapper {
 	margin: 0 -2rem !important;
+}
+
+@media (max-width:1000px) {
+	body {
+		font-size: 1.8rem;
+		font-size: calc(1.4rem + 0.4vw);
+	}
+
+	h1 {
+		font-size: calc(1.4rem + 2.2vw);
+	}
+
+	h2 {
+		font-size: calc(1rem + 2.6vw);
+	}
+
+	h3 {
+		font-size: calc(1rem + 2.2vw);
+	}
+
+	h4 {
+		font-size: calc(1rem + 1.4vw);
+	}
+
+	h5 {
+		font-size: calc(1rem + 1.2vw);
+	}
+
+	h6 {
+		font-size: calc(1.4rem + 0.6vw);
+	}
+
+	blockquote {
+		font-size: calc(1.4rem + 1.4vw);
+	}
 }
