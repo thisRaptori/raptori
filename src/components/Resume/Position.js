@@ -29,7 +29,14 @@ const Header = styled.header`
 	> p {
 		font-size: 1.6rem;
 		font-weight: 100;
-		margin-bottom: 0.4rem;
+		line-height: 1.4;
+		margin-left: 0.4rem;
+		text-align: right;
+		white-space: nowrap;
+
+		@media (max-width: 1000px) {
+			font-size: calc(1.4rem + 0.2vw);
+		}
 	}
 `
 

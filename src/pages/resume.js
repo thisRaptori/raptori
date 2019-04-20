@@ -6,25 +6,8 @@ const ResumePage = () => (
 	<Layout>
 		<SEO title="Joe McGrath Resume" />
 		<Resume>
-			<Resume.Position name="FanDuel" branding="#1493ff">
-				<Resume.Role
-					name="Senior Software Engineer"
-					start="July 2018"
-				/>
-				<Resume.Role
-					name="Software Engineer"
-					start="December 2017"
-					end="July 2018"
-				/>
-				<Resume.Description>
-					<p>
-						UI engineer building a daily fantasy sports app
-						which serves millions of users. Includes line
-						management, partnering with stakeholders across the
-						company, and working with multiple teams to drive
-						innovation in the company's customer-facing web app.
-					</p>
-				</Resume.Description>
+			<Resume.Position name="Webflow" branding="#4353ff">
+				<Resume.Role name="Senior Software Engineer" start="May 2019" />
 			</Resume.Position>
 			<Resume.Position name="Refract" branding="#50B979">
 				<Resume.Description>
@@ -35,10 +18,32 @@ const ResumePage = () => (
 					</p>
 				</Resume.Description>
 			</Resume.Position>
+			<Resume.Position name="FanDuel" branding="#1493ff">
+				<Resume.Role
+					name="Senior Software Engineer"
+					start="July 2018"
+					end="May 2019"
+				/>
+				<Resume.Role
+					name="Software Engineer"
+					start="December 2017"
+					end="July 2018"
+				/>
+				<Resume.Description>
+					<p>
+						UI engineer building a daily fantasy sports app which
+						serves millions of users. Includes line management,
+						partnering with stakeholders across the company, and
+						working with multiple teams to drive innovation in the
+						company's customer-facing web app.
+					</p>
+				</Resume.Description>
+			</Resume.Position>
 			<Resume.Position name="Brainnwave" branding="#e74d30">
 				<Resume.Role
 					name="Senior Software Engineer"
 					start="October 2018"
+					end="May 2019"
 				/>
 				<Resume.Description>
 					<p>
