@@ -51,26 +51,41 @@ const MobileNav = styled.div`
 		display: flex;
 		padding: var(--header-padding);
 	}
+
+	${props =>
+		props.footerIsVisible &&
+		`
+		background: var(--primary) !important;
+
+		* {
+			color: var(--dark);
+		}
+	`}
 `
 
-const SubNav = ({ children }) => {
+const SubNav = ({ children, footerIsVisible }) => {
 	const isMobile = useIsMobile()
 
 	return isMobile ? (
-		<MobileNav className="background transition">{children}</MobileNav>
+		<MobileNav
+			className="background transition"
+			footerIsVisible={footerIsVisible}
+		>
+			{children}
+		</MobileNav>
 	) : (
 		children
 	)
 }
 
-const Header = ({ siteTitle }) => (
+const Header = ({ footerIsVisible, siteTitle }) => (
 	<HeaderElement className="background transition primary-links">
 		<nav>
 			<Link to="/" className="site-title">
 				{siteTitle}
 			</Link>
 			<Space />
-			<SubNav>
+			<SubNav footerIsVisible={footerIsVisible}>
 				<Link to="/blog/">
 					<Icon name="Speech" />
 				</Link>

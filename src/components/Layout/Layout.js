@@ -5,33 +5,41 @@ import 'minireset.css'
 import '../../styles.css'
 
 import { Footer, Header } from 'src/components'
+import { useIsVisible } from 'src/hooks'
 import Waves from './Waves'
 import { Below, Main } from './styles'
 
-const Layout = ({ belowTheWaves, children }) => (
-	<StaticQuery
-		query={graphql`
-			query SiteTitleQuery {
-				site {
-					siteMetadata {
-						title
+const Layout = ({ belowTheWaves, children }) => {
+	const [footerRef, footerIsVisible] = useIsVisible()
+
+	return (
+		<StaticQuery
+			query={graphql`
+				query SiteTitleQuery {
+					site {
+						siteMetadata {
+							title
+						}
 					}
 				}
-			}
-		`}
-		render={data => (
-			<>
-				<Header siteTitle={data.site.siteMetadata.title} />
-				<div className="background transition">
-					<Main>{children}</Main>
-				</div>
-				<Waves />
-				{belowTheWaves ? <Below>{belowTheWaves}</Below> : null}
-				<Footer />
-			</>
-		)}
-	/>
-)
+			`}
+			render={data => (
+				<>
+					<Header
+						footerIsVisible={footerIsVisible}
+						siteTitle={data.site.siteMetadata.title}
+					/>
+					<div className="background transition">
+						<Main>{children}</Main>
+					</div>
+					<Waves />
+					{belowTheWaves ? <Below>{belowTheWaves}</Below> : null}
+					<Footer ref={footerRef} />
+				</>
+			)}
+		/>
+	)
+}
 
 Layout.propTypes = {
 	children: PropTypes.node.isRequired,
