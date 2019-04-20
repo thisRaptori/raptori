@@ -4,7 +4,6 @@ import useWindowWidth from './useWindowWidth'
 
 export default function useIsVisible() {
 	const ref = React.useRef()
-	const width = useWindowWidth()
 	const [isVisible, setIsVisible] = React.useState()
 
 	React.useEffect(() => {
@@ -14,9 +13,15 @@ export default function useIsVisible() {
 					ref.current.getBoundingClientRect().top < window.innerHeight
 			)
 
+		handler()
 		window.addEventListener('scroll', handler)
-		return () => window.removeEventListener('scroll', handler)
-	}, [width])
+		window.addEventListener('resize', handler)
+
+		return () => {
+			window.removeEventListener('scroll', handler)
+			window.removeEventListener('resize', handler)
+		}
+	})
 
 	return [ref, isVisible]
 }
