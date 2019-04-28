@@ -4,6 +4,7 @@ exports.createPages = ({ actions, graphql }) => {
 	const { createPage } = actions
 
 	const blogPostTemplate = path.resolve(`src/templates/post.js`)
+	const blogListTemplate = path.resolve(`src/templates/blog.js`)
 
 	return graphql(`
 		{
@@ -25,10 +26,27 @@ exports.createPages = ({ actions, graphql }) => {
 			return Promise.reject(result.errors)
 		}
 
-		result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+		const posts = result.data.allMarkdownRemark.edges
+		const postsPerPage = 20
+		const pageCount = Math.ceil(posts.length / postsPerPage)
+
+		posts.forEach(({ node }) => {
 			createPage({
 				path: node.frontmatter.path,
 				component: blogPostTemplate,
+			})
+		})
+
+		Array.from({ length: pageCount }).forEach((_, i) => {
+			createPage({
+				path: i === 0 ? '/blog' : `/blog/${i}`,
+				component: blogListTemplate,
+				context: {
+					limit: postsPerPage,
+					skip: i * postsPerPage,
+					pageCount,
+					currentPage: i + 1,
+				},
 			})
 		})
 	})

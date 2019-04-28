@@ -30,7 +30,7 @@ const IndexPage = ({
 			<>
 				<h3>Latest Posts</h3>
 				{edges.map(edge => (
-					<PostLink key={edge.node.id} post={edge.node} />
+					<PostLink key={edge.node.id} post={edge.node} inFooter />
 				))}
 			</>
 		}
@@ -41,7 +41,10 @@ export default IndexPage
 
 export const pageQuery = graphql`
 	query {
-		allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+		allMarkdownRemark(
+			sort: { order: DESC, fields: [frontmatter___date] }
+			limit: 3
+		) {
 			edges {
 				node {
 					id
