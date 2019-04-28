@@ -9,9 +9,9 @@ const Waves = () => {
 	return (
 		<Wrapper className="background transition">
 			<Gradient />
-			<Wave fill={primary} speed={1} size={1.2} />
-			<Wave fill={primary} speed={2} size={1} />
-			<Wave fill={primary} speed={3} size={0.8} />
+			<Wave fill={primary} speed={0.8} size={1.1} />
+			<Wave fill={primary} speed={1.2} size={1} />
+			<Wave fill={primary} speed={1.6} size={0.9} />
 		</Wrapper>
 	)
 }
