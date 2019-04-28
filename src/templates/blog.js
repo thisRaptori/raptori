@@ -1,12 +1,13 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import { Layout, PostLink, SEO } from 'src/components'
+import { Layout, Pagination, PostLink, SEO } from 'src/components'
 
 const BlogPage = ({
 	data: {
 		allMarkdownRemark: { edges },
 	},
+	pageContext: { currentPage, pageCount },
 }) => (
 	<Layout>
 		<SEO title="Blog" />
@@ -14,6 +15,7 @@ const BlogPage = ({
 		{edges.map(edge => (
 			<PostLink key={edge.node.id} post={edge.node} />
 		))}
+		<Pagination currentPage={currentPage} pageCount={pageCount} />
 	</Layout>
 )
 
