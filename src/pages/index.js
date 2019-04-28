@@ -10,10 +10,7 @@ const IndexPage = ({
 	<Layout
 		children={
 			<>
-				<SEO
-					title="Home"
-					keywords={[`gatsby`, `application`, `react`]}
-				/>
+				<SEO title="Home" />
 				<h1>Hello!</h1>
 				<p>
 					I'm Joe McGrath, a senior software engineer with a
