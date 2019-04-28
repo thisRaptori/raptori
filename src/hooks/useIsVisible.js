@@ -1,7 +1,5 @@
 import React from 'react'
 
-import useWindowWidth from './useWindowWidth'
-
 export default function useIsVisible() {
 	const ref = React.useRef()
 	const [isVisible, setIsVisible] = React.useState()
