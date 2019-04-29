@@ -19,6 +19,10 @@ const Section = styled.div`
             }
         }
 		`}
+
+	main &:first-child {
+		margin-top: -6rem;
+	}
 `
 
 const Content = styled.div`
@@ -34,6 +38,12 @@ const Content = styled.div`
 	> :first-child,
 	> * > :first-child {
 		margin-top: 0;
+	}
+
+	a {
+		--background: var(--source);
+		--primary: var(--dark);
+		--secondary: var(--secondary-dark);
 	}
 `
 
