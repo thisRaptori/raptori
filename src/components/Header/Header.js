@@ -9,6 +9,7 @@ const Header = ({ footerIsVisible, siteTitle }) => (
 	<HeaderElement className="background transition primary-links">
 		<nav>
 			<Link to="/" className="site-title">
+				<Icon name="Icon" fill={null} />
 				{siteTitle}
 			</Link>
 			<Space />

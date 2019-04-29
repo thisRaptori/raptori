@@ -5,14 +5,14 @@ import createWave from './wave'
 export const Main = styled.main`
 	margin: 0 auto;
 	max-width: 680px;
-	padding: 20px;
+	padding: 2rem;
 `
 
 export const Below = styled.div`
 	color: var(--dark);
 	margin: 0 auto;
 	max-width: 680px;
-	padding: 20px;
+	padding: 2rem;
 `
 
 export const Waves = styled.div`

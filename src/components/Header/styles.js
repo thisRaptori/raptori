@@ -24,12 +24,23 @@ export const HeaderElement = styled.header`
 		color: var(--primary);
 		font-size: 22px;
 		text-decoration: none;
+
+		svg {
+			border: 1px solid var(--primary);
+			border-radius: 50%;
+			fill: var(--primary);
+			margin-right: 1rem;
+		}
 	}
 `
 
 export const Space = styled.span`
 	flex-grow: 1;
 	padding: 0 !important;
+
+	a & {
+		min-width: 1rem;
+	}
 `
 
 export const MobileNav = styled.div`
