@@ -20,7 +20,7 @@ const Header = ({ footerIsVisible, siteTitle }) => (
 				<Link to="/resume/">
 					<Icon name="Info" />
 				</Link>
-				<Link to="https://github.com/jtmcgrath">
+				<Link to="https://github.com/thisRaptori">
 					<Icon name="GitHub" />
 				</Link>
 				<Link to="https://twitter.com/thisRaptori">
