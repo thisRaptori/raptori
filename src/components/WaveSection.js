@@ -18,7 +18,7 @@ const Section = styled.div`
                 width: ${props.width}px;
             }
         }
-        `}
+		`}
 `
 
 const Content = styled.div`
@@ -29,6 +29,11 @@ const Content = styled.div`
 		& {
 			margin: 0 auto;
 		}
+	}
+
+	> :first-child,
+	> * > :first-child {
+		margin-top: 0;
 	}
 `
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import { Layout, Link, SEO } from 'src/components'
+import { Layout, Link, SEO, WaveSection } from 'src/components'
 
 const Links = ({ links }) => (
 	<>
@@ -18,7 +18,11 @@ const Links = ({ links }) => (
 				}
 				components.push(separator)
 			}
-			components.push(<Link key={url} to={url}>{source}</Link>)
+			components.push(
+				<Link key={url} to={url}>
+					{source}
+				</Link>
+			)
 			return components
 		}, [])}
 		.
@@ -34,6 +38,16 @@ export default function Template({
 		},
 	},
 }) {
+	const content = html.split('<waves>').map((chunk, i) =>
+		i % 2 ? (
+			<WaveSection key={i}>
+				<div dangerouslySetInnerHTML={{ __html: chunk }} />
+			</WaveSection>
+		) : (
+			<div key={i} dangerouslySetInnerHTML={{ __html: chunk }} />
+		)
+	)
+
 	return (
 		<Layout>
 			<SEO title={title} />
@@ -48,7 +62,7 @@ export default function Template({
 				) : null}
 			</h6>
 			<hr />
-			<div dangerouslySetInnerHTML={{ __html: html }} />
+			{content}
 		</Layout>
 	)
 }
