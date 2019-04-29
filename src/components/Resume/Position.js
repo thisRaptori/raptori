@@ -23,7 +23,21 @@ const Header = styled.header`
 	${props => (props.branding ? `color: ${props.branding};` : '')}
 
 	> h3 {
-		margin-right: 1rem;
+		line-height: 1.2;
+	}
+
+	> h4 {
+		line-height: 1.3;
+	}
+
+	@media (min-width: 800px) {
+		> h3 {
+			line-height: 1;
+		}
+
+		> h4 {
+			line-height: 1.2;
+		}
 	}
 
 	> p {
