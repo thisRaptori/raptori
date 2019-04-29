@@ -44,6 +44,14 @@ const Content = styled.div`
 		--background: var(--source);
 		--primary: var(--dark);
 		--secondary: var(--secondary-dark);
+
+		&:link, &:visited {
+			color: var(--primary);
+		}
+
+		&:link:hover, &:visited:hover {
+			color: var(--secondary);
+		}
 	}
 `
 
