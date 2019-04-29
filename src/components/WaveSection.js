@@ -11,7 +11,7 @@ const Section = styled.div`
 	${props => `
         margin: 0 -2rem;
 
-        @media (min-width: 680px) {
+        @media (min-width: 700px) {
             & {
                 margin: 0;
                 transform: translateX(calc((640px - ${props.width}px) / 2));
