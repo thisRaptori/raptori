@@ -47,16 +47,16 @@ const ResumePage = () => (
 				/>
 				<Resume.Description>
 					<p>
-						Senior software engineer building a business
-						intelligence and analysis platform. Part-time position
-						alongside full-time job at FanDuel.
+						UI engineer building a business intelligence and
+						analysis platform. Part-time position alongside
+						full-time job at FanDuel.
 					</p>
 				</Resume.Description>
 			</Resume.Position>
 			<Resume.Position name="Beezer" branding="#b0cf2f">
 				<Resume.Role
 					name="Frontend Developer"
-					start="July 2018"
+					start="July 2017"
 					end="June 2018"
 				/>
 				<Resume.Description>
