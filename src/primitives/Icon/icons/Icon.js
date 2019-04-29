@@ -1,8 +1,6 @@
 import React from 'react'
 
-import JumpSvg from '../Jump'
-
-const GitHub = props => (
+const Icon = props => (
 	<svg {...props}>
 		<defs>
 			<linearGradient x1="50%" y1="100%" x2="50%" y2="75%" id="gradient">
@@ -43,4 +41,4 @@ const GitHub = props => (
 	</svg>
 )
 
-export default GitHub
+export default Icon
