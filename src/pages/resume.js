@@ -7,8 +7,8 @@ const ResumePage = () => (
 		<SEO title="Joe McGrath Resume" />
 		<Resume>
 			<WaveSection>Testing!</WaveSection>
-			<Resume.Position name="Webflow" branding="#4353ff">
-				<Resume.Role name="Senior Software Engineer" start="May 2019" />
+			<Resume.Position name="Webflow" branding="#4353ff" start="May 2019">
+				<Resume.Role name="Senior Software Engineer" />
 			</Resume.Position>
 			<Resume.Position name="Refract" branding="#50B979">
 				<Resume.Description>
@@ -19,7 +19,12 @@ const ResumePage = () => (
 					</p>
 				</Resume.Description>
 			</Resume.Position>
-			<Resume.Position name="FanDuel" branding="#1493ff">
+			<Resume.Position
+				name="FanDuel"
+				branding="#1493ff"
+				start="December 2017"
+				end="May 2019"
+			>
 				<Resume.Role
 					name="Senior Software Engineer"
 					start="July 2018"
@@ -40,12 +45,13 @@ const ResumePage = () => (
 					</p>
 				</Resume.Description>
 			</Resume.Position>
-			<Resume.Position name="Brainnwave" branding="#e74d30">
-				<Resume.Role
-					name="Senior Software Engineer"
-					start="October 2018"
-					end="May 2019"
-				/>
+			<Resume.Position
+				name="Brainnwave"
+				branding="#e74d30"
+				start="October 2018"
+				end="May 2019"
+			>
+				<Resume.Role name="Senior Software Engineer" />
 				<Resume.Description>
 					<p>
 						UI engineer building a business intelligence and
@@ -54,12 +60,13 @@ const ResumePage = () => (
 					</p>
 				</Resume.Description>
 			</Resume.Position>
-			<Resume.Position name="Beezer" branding="#b0cf2f">
-				<Resume.Role
-					name="Frontend Developer"
-					start="July 2017"
-					end="June 2018"
-				/>
+			<Resume.Position
+				name="Beezer"
+				branding="#b0cf2f"
+				start="July 2017"
+				end="June 2018"
+			>
+				<Resume.Role name="Frontend Developer" />
 				<Resume.Description>
 					<p>
 						Frontend Developer​ at a SaaS startup building an
@@ -68,7 +75,12 @@ const ResumePage = () => (
 					</p>
 				</Resume.Description>
 			</Resume.Position>
-			<Resume.Position name="Untitled" branding="#f18c00">
+			<Resume.Position
+				name="Untitled"
+				branding="#f18c00"
+				start="October 2009"
+				end="July 2017"
+			>
 				<Resume.Role
 					name="Lead Web Developer"
 					start="July 2012"
