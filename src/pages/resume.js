@@ -1,11 +1,12 @@
 import React from 'react'
 
-import { Layout, Resume, SEO } from 'src/components'
+import { Layout, Resume, SEO, WaveSection } from 'src/components'
 
 const ResumePage = () => (
 	<Layout>
 		<SEO title="Joe McGrath Resume" />
 		<Resume>
+			<WaveSection>Testing!</WaveSection>
 			<Resume.Position name="Webflow" branding="#4353ff">
 				<Resume.Role name="Senior Software Engineer" start="May 2019" />
 			</Resume.Position>

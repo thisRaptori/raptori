@@ -7,6 +7,12 @@ export const Waves = styled.div`
 	overflow: hidden;
 	position: relative;
 	width: 100%;
+
+	${props =>
+		props.invert &&
+		`
+		transform: scaleY(-1);
+	`}
 `
 
 export const Wave = styled.div`
@@ -18,6 +24,12 @@ export const Wave = styled.div`
 	opacity: 0.5;
 	position: absolute;
 	width: ${props => props.size * 400 * 20}px;
+
+	${props =>
+		props.offset &&
+		`
+		animation-delay: -8s;
+	`}
 `
 
 export const Gradient = styled.div`
