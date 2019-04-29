@@ -12,10 +12,10 @@ const Text = styled.p`
 
 const year = new Date().getFullYear()
 
-const Footer = React.forwardRef((props, ref) => (
-	<Wrapper ref={ref}>
+const Footer = () => (
+	<Wrapper>
 		<Text>Copyright {year} Joe McGrath</Text>
 	</Wrapper>
-))
+)
 
 export default Footer

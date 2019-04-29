@@ -33,8 +33,9 @@ const Layout = ({ belowTheWaves, children }) => {
 						<Main>{children}</Main>
 					</div>
 					<Waves />
+					<div ref={footerRef} />
 					{belowTheWaves ? <Below>{belowTheWaves}</Below> : null}
-					<Footer ref={footerRef} />
+					<Footer />
 				</>
 			)}
 		/>
