@@ -4,9 +4,8 @@ import { StaticQuery, graphql } from 'gatsby'
 import 'minireset.css'
 import '../../styles.css'
 
-import { Footer, Header } from 'src/components'
+import { Footer, Header, Waves } from 'src/components'
 import { useIsVisible } from 'src/hooks'
-import Waves from './Waves'
 import { Below, Main } from './styles'
 
 const Layout = ({ belowTheWaves, children }) => {
