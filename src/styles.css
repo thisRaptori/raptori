@@ -2,7 +2,7 @@
 
 :root {
 	--source: #43b9b7;
-	--primary: #43b9b7;
+	--primary: var(--source);
 	--primary-transparent: #43b9b755;
 	--secondary-dark: #28597f;
 	--secondary-light: #8bf4a7;
