@@ -51,7 +51,7 @@ export default function HTML(props) {
 								});
 
 								try {
-									isStoredThemeDark = localStorage.getItem('isThemeDark');
+									var isStoredThemeDark = localStorage.getItem('isThemeDark') === 'true';
 									setTheme(isStoredThemeDark);
 								} catch(err) {}
 							})();
