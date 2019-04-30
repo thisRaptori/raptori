@@ -71,7 +71,7 @@ body {
 	padding-top: var(--menu-height);
 }
 
-@media (max-width: 560px) {
+@media (max-width: 580px) {
 	body {
 		padding-bottom: var(--menu-height);
 	}
