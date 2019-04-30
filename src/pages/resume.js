@@ -7,10 +7,19 @@ const ResumePage = () => (
 		<SEO title="Joe McGrath Resume" />
 		<Resume>
 			<WaveSection>Testing!</WaveSection>
-			<Resume.Position name="Webflow" branding="#4353ff" start="May 2019">
+			<Resume.Position
+				name="Webflow"
+				link="https://webflow.com"
+				branding="#4353ff"
+				start="May 2019"
+			>
 				<Resume.Role name="Senior Software Engineer" />
 			</Resume.Position>
-			<Resume.Position name="Refract" branding="#50B979">
+			<Resume.Position
+				name="Refract"
+				link="https://refract.js.org"
+				branding="#50B979"
+			>
 				<Resume.Description>
 					<p>
 						Maintainer​ of ​Refract​, a library which combines
@@ -21,6 +30,7 @@ const ResumePage = () => (
 			</Resume.Position>
 			<Resume.Position
 				name="FanDuel"
+				link="https://www.fanduel.com"
 				branding="#1493ff"
 				start="December 2017"
 				end="May 2019"
@@ -47,6 +57,7 @@ const ResumePage = () => (
 			</Resume.Position>
 			<Resume.Position
 				name="Brainnwave"
+				link="https://www.brainnwave.com"
 				branding="#e74d30"
 				start="October 2018"
 				end="May 2019"
@@ -62,6 +73,7 @@ const ResumePage = () => (
 			</Resume.Position>
 			<Resume.Position
 				name="Beezer"
+				link="https://www.beezer.com"
 				branding="#b0cf2f"
 				start="July 2017"
 				end="June 2018"
@@ -77,6 +89,7 @@ const ResumePage = () => (
 			</Resume.Position>
 			<Resume.Position
 				name="Untitled"
+				link="https://www.untitledtm.com"
 				branding="#f18c00"
 				start="October 2009"
 				end="July 2017"

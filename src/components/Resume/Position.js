@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { Link } from 'src/components'
+
 const Section = styled.section`
 	margin-bottom: 2rem;
 
@@ -22,20 +24,25 @@ const Header = styled.header`
 
 	${props => (props.branding ? `color: ${props.branding};` : '')}
 
-	> h3 {
+	a {
+		color: inherit !important;
+		text-decoration: none;
+	}
+
+	h3 {
 		line-height: 1.2;
 	}
 
-	> h4 {
+	h4 {
 		line-height: 1.3;
 	}
 
 	@media (min-width: 800px) {
-		> h3 {
+		h3 {
 			line-height: 1;
 		}
 
-		> h4 {
+		h4 {
 			line-height: 1.2;
 		}
 	}
@@ -55,19 +62,27 @@ const Header = styled.header`
 `
 
 const createComponent = (title, root) => {
-	const Component = ({ branding, children, end, name, start }) => (
-		<Section as={root}>
-			<Header branding={branding}>
-				{React.createElement(title, { children: name })}
-				{start ? (
-					<p>
-						{start} - {end}
-					</p>
-				) : null}
-			</Header>
-			{children}
-		</Section>
-	)
+	const Component = ({ branding, children, end, link, name, start }) => {
+		const titleContent = React.createElement(title, { children: name })
+
+		return (
+			<Section as={root}>
+				<Header branding={branding}>
+					{link ? (
+						<Link to={link}>{titleContent}</Link>
+					) : (
+						titleContent
+					)}
+					{start ? (
+						<p>
+							{start} - {end}
+						</p>
+					) : null}
+				</Header>
+				{children}
+			</Section>
+		)
+	}
 
 	Component.defaultProps = {
 		end: 'present',
