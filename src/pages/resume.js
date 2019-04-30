@@ -14,6 +14,16 @@ const ResumePage = () => (
 				start="May 2019"
 			>
 				<Resume.Role name="Senior Software Engineer" />
+				<Resume.Description>
+					<p>
+						Software engineer contributing to a visual website
+						design and development platform with over a million
+						customers. Part of the Collaboration team - focused on
+						building collaboration features such as deep linking,
+						site version control, and real-time webRTC multi-user
+						editing functionality.
+					</p>
+				</Resume.Description>
 			</Resume.Position>
 			<Resume.Position
 				name="Refract"
