@@ -1,20 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'src/components'
+
+import { Link, MetaText } from 'src/components'
 
 const StyledLink = styled(Link)`
-	${props => props.inFooter && 'color: var(--dark) !important;'}
+	color: var(${props => (props.inFooter ? '--dark' : '--text')}) !important;
 	display: block;
 	margin: 1rem -1rem -1rem;
 	padding: 1rem;
 	text-decoration: none;
 
-	> h6 {
-		font-weight: 400;
+	& + & {
+		margin-top: 4rem;
+	}
+
+	> h4 {
+		color: var(--primary);
 	}
 
 	> * {
 		margin: 0;
+	}
+
+	> ${MetaText} {
+		margin-top: 1rem;
 	}
 `
 
@@ -26,11 +35,11 @@ const PostLink = ({
 	inFooter,
 }) => (
 	<StyledLink to={path} inFooter={inFooter}>
-		<h6>{title}</h6>
-		<p>
+		<h4>{title}</h4>
+		<MetaText italic>
 			{date} • {readingTime.text}
-		</p>
-		{subtitle ? <p>{subtitle}</p> : null}
+		</MetaText>
+		{subtitle ? <MetaText>{subtitle}</MetaText> : null}
 	</StyledLink>
 )
 

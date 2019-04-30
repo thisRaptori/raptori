@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import { Layout, Link, SEO, WaveSection } from 'src/components'
+import { Layout, Link, MetaText, SEO, WaveSection } from 'src/components'
 
 const Links = ({ links }) => (
 	<>
@@ -52,7 +52,7 @@ export default function Template({
 		<Layout>
 			<SEO title={title} />
 			<h1>{title}</h1>
-			<h6>
+			<MetaText as="h6" italic>
 				{date} • {readingTime.text}
 				{published && published.length ? (
 					<>
@@ -60,7 +60,7 @@ export default function Template({
 						<Links links={published} />
 					</>
 				) : null}
-			</h6>
+			</MetaText>
 			<hr />
 			{content}
 		</Layout>
