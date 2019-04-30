@@ -18,24 +18,25 @@ export default function HTML(props) {
 					dangerouslySetInnerHTML={{
 						__html: `
 							(function() {
+								var listeners = [];
+								var next = () => {
+									listeners.forEach(l => l(window.isCurrentThemeDark))
+								}
+
 								var themeQuery = matchMedia('(prefers-color-scheme: dark)');
 								window.isCurrentThemeDark = false;
 
 								window.themeObservable = {
-									listeners: [],
 									subscribe: (listener) => {
-										window.themeObservable.listeners.push(listener)
-										return () => window.themeObservable.listeners.filter(l => l !== listener)
+										listeners.push(listener)
+										return () => listeners.filter(l => l !== listener)
 									},
-									next: () => {
-										window.themeObservable.listeners.forEach(l => l(window.isCurrentThemeDark))
-									}
 								}
 
 								function setTheme(isNextThemeDark) {
 									window.isCurrentThemeDark = isNextThemeDark;
 									document.body.className = window.isCurrentThemeDark ? 'dark' : 'light';
-									themeObservable.next()
+									next()
 								}
 
 								window.toggleRaptoriTheme = function() {
