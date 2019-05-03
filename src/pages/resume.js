@@ -1,15 +1,27 @@
 import React from 'react'
 
-import { Layout, Link, Resume, SEO, WaveSection } from 'src/components'
+import { Icon, Layout, Link, Resume, SEO, WaveSection } from 'src/components'
+import { github } from 'src/links'
 
 const ResumePage = () => (
 	<Layout>
 		<SEO title="Joe McGrath Resume" />
 		<Resume>
 			<WaveSection>
-				<p>Add some headline text here...</p>
 				<p>
-					<Link to="/" button>Download PDF</Link>
+					Here's an overview of some of the things I've worked on
+					since I started building software for the web way back in
+					2009. For more details, downlod my resume as a PDF, or check
+					out some of my code on GitHub!
+				</p>
+				<p>
+					<Link to="/" button>
+						Download PDF
+					</Link>
+					&nbsp;
+					<Link to={github} secondary button>
+						<Icon name="GitHub" /> Visit GitHub
+					</Link>
 				</p>
 			</WaveSection>
 			<Resume.Position

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { Icon, Link, ThemeToggle } from 'src/components'
+import { github, twitter, linkedin } from 'src/links'
 import { HeaderElement, Space } from './styles'
 import SubNav from './SubNav'
 
@@ -20,13 +21,13 @@ const Header = ({ footerIsVisible, siteTitle }) => (
 				<Link to="/resume/">
 					<Icon name="Info" />
 				</Link>
-				<Link to="https://github.com/thisRaptori">
+				<Link to={github}>
 					<Icon name="GitHub" />
 				</Link>
-				<Link to="https://twitter.com/thisRaptori">
+				<Link to={twitter}>
 					<Icon name="Twitter" />
 				</Link>
-				<Link to="https://www.linkedin.com/in/joetmcgrath/">
+				<Link to={linkedin}>
 					<Icon name="LinkedIn" />
 				</Link>
 			</SubNav>

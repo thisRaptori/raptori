@@ -30,6 +30,11 @@ const getButtonStyles = props => {
 		background: var(--secondary);
 		${hoverStyles}
 	}
+
+	svg {
+		margin: -1px 4px 1px -4px;
+		vertical-align: middle;
+	}
 	`
 }
 
