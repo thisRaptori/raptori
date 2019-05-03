@@ -22,6 +22,11 @@ const Header = styled.header`
 	line-height: 1;
 	margin-bottom: 2rem;
 
+	svg {
+		height: 1em;
+		vertical-align: middle;
+	}
+
 	${props => (props.branding ? `color: ${props.branding};` : '')}
 
 	a {
