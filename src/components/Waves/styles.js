@@ -25,11 +25,7 @@ export const Wave = styled.div`
 	position: absolute;
 	width: ${props => props.size * 400 * 20}px;
 
-	${props =>
-		props.offset &&
-		`
-		animation-delay: -8s;
-	`}
+	${props => props.offset && 'animation-delay: -8s;'}
 `
 
 export const Gradient = styled.div`
