@@ -7,7 +7,7 @@ export default styled.div`
 	h4,
 	h5,
 	h6,
-	p {
+	p:first-of-type {
 		margin: 0;
 	}
 
