@@ -1,7 +1,52 @@
 import React from 'react'
+import styled from 'styled-components'
 import { graphql } from 'gatsby'
 
 import { Layout, Link, MetaText, SEO, WaveSection } from 'src/components'
+
+const PostHeader = styled.header`
+	${MetaText} {
+		color: var(--primary);
+	}
+
+	@media (min-width: 1110px) {
+		position: relative;
+
+		& + hr {
+			display: none;
+		}
+
+		${MetaText} {
+			border-right: 1px solid;
+			font-size: 0;
+			margin: 3rem 2rem 0 0;
+			padding-right: 2rem;
+			position: absolute;
+			right: 100%;
+			text-align: right;
+			top: 100%;
+			width: 210px;
+		}
+
+		${MetaText} a {
+			color: inherit;
+		}
+
+		${MetaText} a:hover,
+		${MetaText} a:focus {
+			color: var(--text);
+		}
+
+		${MetaText} span {
+			display: block;
+			font-size: 1.6rem;
+		}
+
+		${MetaText} span:not(:last-child) {
+			margin-bottom: 2rem;
+		}
+	}
+`
 
 const Links = ({ links }) => (
 	<>
@@ -51,16 +96,18 @@ export default function Template({
 	return (
 		<Layout>
 			<SEO title={title} />
-			<h1>{title}</h1>
-			<MetaText as="h6" italic>
-				{date} • {readingTime.text}
-				{published && published.length ? (
-					<>
-						&nbsp;•&nbsp;
-						<Links links={published} />
-					</>
-				) : null}
-			</MetaText>
+			<PostHeader>
+				<h1>{title}</h1>
+				<MetaText as="h6" italic>
+					<span>{date}</span> • <span>{readingTime.text}</span>
+					{published && published.length ? (
+						<>
+							&nbsp;•&nbsp;
+							<span><Links links={published} /></span>
+						</>
+					) : null}
+				</MetaText>
+			</PostHeader>
 			<hr />
 			{content}
 		</Layout>

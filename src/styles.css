@@ -136,7 +136,7 @@ h6 {
 }
 
 hr {
-	border: 1px dashed currentColor;
+	border: 1px solid var(--primary);
 	margin-top: 1.4em;
 	opacity: 0.5;
 }
