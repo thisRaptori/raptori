@@ -9,6 +9,15 @@ const PostHeader = styled.header`
 		color: var(--primary);
 	}
 
+	${MetaText} a {
+		color: inherit;
+	}
+
+	${MetaText} a:hover,
+	${MetaText} a:focus {
+		color: var(--text);
+	}
+
 	@media (min-width: 1110px) {
 		position: relative;
 
@@ -26,15 +35,6 @@ const PostHeader = styled.header`
 			text-align: right;
 			top: 100%;
 			width: 210px;
-		}
-
-		${MetaText} a {
-			color: inherit;
-		}
-
-		${MetaText} a:hover,
-		${MetaText} a:focus {
-			color: var(--text);
 		}
 
 		${MetaText} span {
