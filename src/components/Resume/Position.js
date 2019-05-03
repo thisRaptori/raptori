@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Link } from 'src/components'
+import { Icon, Link } from 'src/components'
 
 const Section = styled.section`
 	margin-bottom: 2rem;
@@ -63,7 +63,16 @@ const Header = styled.header`
 
 const createComponent = (title, root) => {
 	const Component = ({ branding, children, end, link, name, start }) => {
-		const titleContent = React.createElement(title, { children: name })
+		const titleContent = React.createElement(title, {
+			children: (
+				<>
+					{name}&nbsp;
+					{link ? (
+						<Icon name="External" width={12} height={12} />
+					) : null}
+				</>
+			),
+		})
 
 		return (
 			<Section as={root}>

@@ -1,3 +1,4 @@
+export { default as External } from './External'
 export { default as GitHub } from './GitHub'
 export { default as Icon } from './Icon'
 export { default as Info } from './Info'
