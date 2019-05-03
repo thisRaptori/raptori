@@ -71,6 +71,12 @@ body {
 	padding-top: var(--menu-height);
 }
 
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
 @media (max-width: 580px) {
 	body {
 		padding-bottom: var(--menu-height);

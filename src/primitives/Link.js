@@ -2,23 +2,40 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link as InternalLink } from 'gatsby'
 
-const StyledLink = styled.a`
-	${props =>
-		props.button
-			? `
-	background: var(--primary);
+const getButtonStyles = props => {
+	const colour = props.secondary ? 'var(--primary)' : 'var(--background)'
+	const yPadding = props.secondary ? 0 : 2
+
+	const mainStyles = props.secondary
+		? 'border: 2px solid var(--primary);'
+		: 'background: var(--primary);'
+
+	const hoverStyles = props.secondary
+		? `&:hover {
+		border-color: var(--secondary);
+		color: var(--background) !important;
+	}`
+		: ``
+
+	return `
 	border-radius: 4px;
-	color: var(--background) !important;
+	color: ${colour} !important;
 	display: inline-block;
-	padding: 4px 12px;
+	line-height: 34px;
+	padding: ${yPadding}px 12px;
 	text-decoration: none;
+	${mainStyles}
 
 	&:hover {
 		background: var(--secondary);
+		${hoverStyles}
 	}
 	`
-			: null}
-`
+}
+
+const StyledLink = styled.a(props =>
+	props.button ? getButtonStyles(props) : null
+)
 
 const StyledInternalLink = StyledLink.withComponent(InternalLink)
 
