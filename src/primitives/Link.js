@@ -22,6 +22,7 @@ const getButtonStyles = props => {
 	color: ${colour} !important;
 	display: inline-block;
 	line-height: 34px;
+	margin: 2px 0 !important;
 	padding: ${yPadding}px 12px;
 	text-decoration: none;
 	${mainStyles}
