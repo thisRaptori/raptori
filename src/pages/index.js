@@ -1,6 +1,11 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import { Layout, Link, PostLink, SEO, WaveSection } from 'src/components'
+
+const H3 = styled.h3`
+	margin-top: 0;
+`
 
 const IndexPage = ({
 	data: {
@@ -19,12 +24,16 @@ const IndexPage = ({
 				in my spare time!
 			</p>
 			<p>
-				<Link to="/resume/" button>
-					View Resume
+				<Link to="/blog/" button>
+					All Posts
+				</Link>
+				&nbsp;
+				<Link to="/resume/" secondary button>
+					Resume
 				</Link>
 			</p>
 		</WaveSection>
-		<h3>Latest Posts</h3>
+		<H3>Latest Posts</H3>
 		{edges.map(edge => (
 			<PostLink key={edge.node.id} post={edge.node} />
 		))}
