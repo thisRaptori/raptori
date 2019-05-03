@@ -16,7 +16,7 @@ const ResumePage = () => (
 				</p>
 				<p>
 					<Link to="/" button>
-						Download PDF
+						Download Resume
 					</Link>
 					&nbsp;
 					<Link to={github} secondary button>
