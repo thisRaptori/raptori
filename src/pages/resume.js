@@ -103,6 +103,19 @@ const ResumePage = () => (
 				</Resume.Description>
 			</Resume.Position>
 			<Resume.Position
+				name="Midnight Sun"
+				start="August 2013"
+				end="April 2015"
+			>
+				<Resume.Description>
+					<p>
+						Working with my partner in our spare time - we developed
+						a real-time multiplayer online game and managed the
+						community which grew around it.
+					</p>
+				</Resume.Description>
+			</Resume.Position>
+			<Resume.Position
 				name="Untitled"
 				link="https://www.untitledtm.com"
 				branding="#f18c00"
