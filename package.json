@@ -35,7 +35,7 @@
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -43,5 +43,11 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "devDependencies": {
+    "babel-jest": "^24.7.1",
+    "babel-preset-gatsby": "^0.1.11",
+    "jest": "^24.7.1",
+    "react-test-renderer": "^16.8.6"
   }
 }
