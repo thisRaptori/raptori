@@ -27,6 +27,10 @@ const IndexPage = ({ data }) => {
 						All Posts
 					</Link>
 					&nbsp;
+					<Link to="/projects/" secondary button>
+						Projects
+					</Link>
+					&nbsp;
 					<Link to="/resume/" secondary button>
 						Resume
 					</Link>
