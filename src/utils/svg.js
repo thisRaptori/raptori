@@ -1,19 +1,19 @@
 import { compose } from './general'
 
-const replaceQuotes = str => str.replace(/"/g, "'")
+export const collapseGapsBetweenTags = str => str.replace(/>\s{1,}</g, '><')
 
-const replaceWhitespace = str => str.replace(/>\s{1,}</g, '><')
+export const collapseWhitespace = str => str.replace(/\s{2,}/g, ' ')
 
-const replaceNewlines = str => str.replace(/\s{2,}/g, ' ')
+export const encodeSymbols = str =>
+	str.replace(/[\r\n"%#<>?[\\\]^`{|}]/g, encodeURIComponent)
 
-const replaceSymbols = str =>
-	str.replace(/[\r\n"%#()<>?[\\\]^`{|}]/g, encodeURIComponent)
+export const replaceQuotes = str => str.replace(/"/g, "'")
 
-const cleanSvg = compose(
+export const cleanSvg = compose(
 	replaceQuotes,
-	replaceWhitespace,
-	replaceNewlines,
-	replaceSymbols
+	collapseGapsBetweenTags,
+	collapseWhitespace,
+	encodeSymbols
 )
 
 export const encodeSvg = svg => `url("data:image/svg+xml,${cleanSvg(svg)}")`
