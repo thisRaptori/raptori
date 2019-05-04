@@ -18,6 +18,9 @@ const Header = ({ footerIsVisible, siteTitle }) => (
 				<Link to="/blog/">
 					<Icon name="Speech" />
 				</Link>
+				<Link to="/projects/">
+					<Icon name="Rocket" />
+				</Link>
 				<Link to="/resume/">
 					<Icon name="Info" />
 				</Link>

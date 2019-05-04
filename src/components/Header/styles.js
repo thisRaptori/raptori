@@ -32,6 +32,12 @@ export const HeaderElement = styled.header`
 			margin-right: 1rem;
 		}
 	}
+
+	@media (max-width: 440px) {
+		a[href*='linkedin'] {
+			display: none;
+		}
+	}
 `
 
 export const Space = styled.span`
