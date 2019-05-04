@@ -21,7 +21,7 @@ export const Wave = styled.div`
 	background: ${createWave};
 	bottom: 0;
 	height: ${props => props.size * 100}px;
-	opacity: 0.5;
+	opacity: 0.3;
 	position: absolute;
 	width: ${props => props.size * 400 * 20}px;
 
