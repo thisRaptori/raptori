@@ -2,6 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link as InternalLink } from 'gatsby'
 
+const svgPosition = (margin) => `
+	svg {
+		margin: ${margin};
+		vertical-align: middle;
+	}`
+
 const getButtonStyles = props => {
 	const colour = props.secondary ? 'var(--primary)' : 'var(--background)'
 	const yPadding = props.secondary ? 0 : 2
@@ -32,15 +38,12 @@ const getButtonStyles = props => {
 		${hoverStyles}
 	}
 
-	svg {
-		margin: -1px 4px 1px -4px;
-		vertical-align: middle;
-	}
+	${svgPosition('-1px 4px 1px -4px')}
 	`
 }
 
 const StyledLink = styled.a(props =>
-	props.button ? getButtonStyles(props) : null
+	props.button ? getButtonStyles(props) : svgPosition('-2px 0 2px 0')
 )
 
 const StyledInternalLink = StyledLink.withComponent(InternalLink)
