@@ -2,6 +2,8 @@ import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
+import { get } from 'src/utils'
+
 const Image = ({ name, ...props }) => (
 	<StaticQuery
 		query={graphql`
@@ -22,12 +24,16 @@ const Image = ({ name, ...props }) => (
 			}
 		`}
 		render={data => {
-			const image = data.images.edges.find(({ node }) => {
+			const images = get(data, 'images', 'edges') || []
+			const image = images.find(({ node }) => {
 				return node.name === name || node.relativePath.includes(name)
 			})
 
 			return image ? (
-				<Img fluid={image.node.childImageSharp.fluid} {...props} />
+				<Img
+					fluid={get(image, 'node', 'childImageSharp', 'fluid')}
+					{...props}
+				/>
 			) : null
 		}}
 	/>
