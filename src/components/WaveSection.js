@@ -55,11 +55,11 @@ const Content = styled.div`
 	}
 `
 
-const WaveSection = ({ children }) => {
+const WaveSection = ({ as, children }) => {
 	const width = useWindowWidth()
 
 	return (
-		<Section width={width}>
+		<Section width={width} as={as}>
 			<Waves />
 			<Content>{children}</Content>
 			<Waves invert offset />
