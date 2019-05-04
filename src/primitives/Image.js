@@ -4,7 +4,7 @@ import Img from 'gatsby-image'
 
 import { get } from 'src/utils'
 
-const Image = ({ name, ...props }) => (
+const Image = ({ height, name, width, ...props }) => (
 	<StaticQuery
 		query={graphql`
 			query {
@@ -29,9 +29,18 @@ const Image = ({ name, ...props }) => (
 				return node.name === name || node.relativePath.includes(name)
 			})
 
+			const style = {}
+			if (width) {
+				style.width = width
+			}
+			if (height) {
+				style.height = height
+			}
+
 			return image ? (
 				<Img
 					fluid={get(image, 'node', 'childImageSharp', 'fluid')}
+					style={style}
 					{...props}
 				/>
 			) : null
