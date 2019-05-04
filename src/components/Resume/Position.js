@@ -67,7 +67,15 @@ const Header = styled.header`
 `
 
 const createComponent = (title, root) => {
-	const Component = ({ branding, children, end, link, name, start }) => {
+	const Component = ({
+		branding,
+		children,
+		end,
+		link,
+		name,
+		start,
+		subtext,
+	}) => {
 		const titleContent = React.createElement(title, {
 			children: (
 				<>
@@ -91,6 +99,8 @@ const createComponent = (title, root) => {
 						<p>
 							{start} - {end}
 						</p>
+					) : subtext ? (
+						<p>{subtext}</p>
 					) : null}
 				</Header>
 				{children}

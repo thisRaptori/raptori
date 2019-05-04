@@ -159,6 +159,18 @@ const ResumePage = () => (
 					</p>
 				</Resume.Description>
 			</Resume.Position>
+			<Resume.Position name="Education" subtext="Mid Cheshire College">
+				<Resume.Role
+					name="FdA Graphic Design"
+					start="September 2010"
+					end="June 2012"
+				/>
+				<Resume.Role
+					name="ND Graphic Design"
+					start="September 2008"
+					end="June 2010"
+				/>
+			</Resume.Position>
 		</Resume>
 	</Layout>
 )
