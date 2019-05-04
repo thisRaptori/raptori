@@ -1,4 +1,59 @@
-import { get } from './general'
+import { compose, get } from './general'
+
+describe('compose', () => {
+	it('should compose an arbitrary number of functions into one', () => {
+		let exampleFunction
+		const exampleNumbers = [10, 100, -100, 1e10, 28734623432]
+
+		const double = n => n * 2
+		const triple = n => n * 3
+		const quadruple = n => n * 4
+		const square = n => n * n
+		const cube = n => n * n * n
+
+		exampleFunction = compose(cube)
+
+		exampleNumbers.forEach(number => {
+			expect(exampleFunction(number)).toEqual(cube(number))
+		})
+
+		exampleFunction = compose(
+			double,
+			square
+		)
+
+		exampleNumbers.forEach(number => {
+			expect(exampleFunction(number)).toEqual(double(square(number)))
+		})
+
+		exampleFunction = compose(
+			double,
+			square,
+			cube,
+			quadruple
+		)
+
+		exampleNumbers.forEach(number => {
+			expect(exampleFunction(number)).toEqual(
+				double(square(cube(quadruple(number))))
+			)
+		})
+
+		exampleFunction = compose(
+			double,
+			triple,
+			quadruple,
+			square,
+			cube
+		)
+
+		exampleNumbers.forEach(number => {
+			expect(exampleFunction(number)).toEqual(
+				double(triple(quadruple(square(cube(number)))))
+			)
+		})
+	})
+})
 
 describe('get', () => {
 	describe('when no arguments are passed', () => {
