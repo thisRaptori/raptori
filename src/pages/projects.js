@@ -80,11 +80,11 @@ const ProjectsPage = () => (
 				<h3>
 					<Image
 						name="harmony"
-						width={64}
 						style={{
 							display: 'inline-block',
-							verticalAlign: 'middle',
 							marginRight: '10px',
+							verticalAlign: 'middle',
+							width: 64,
 						}}
 					/>{' '}
 					Harmony

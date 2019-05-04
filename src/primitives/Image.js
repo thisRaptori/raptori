@@ -31,10 +31,10 @@ const Image = ({ height, name, width, style = {}, ...props }) => (
 
 			const combinedStyles = { ...style }
 			if (width) {
-				combinedStyles.width = width
+				combinedStyles.maxWidth = width
 			}
 			if (height) {
-				combinedStyles.height = height
+				combinedStyles.maxHeight = height
 			}
 
 			return image ? (
