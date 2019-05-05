@@ -10,4 +10,4 @@
   </a>
 </h1>
 
-Powered by [Gatsby](https://www.gatsbyjs.org/)
+<p align="center">Powered by [Gatsby](https://www.gatsbyjs.org/)</p>
