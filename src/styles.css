@@ -126,7 +126,8 @@ h4,
 h5,
 h6,
 p,
-em {
+em,
+li {
 	font-weight: normal;
 	line-height: 1.8;
 	margin-top: 1.4em;

@@ -4,6 +4,12 @@ import { graphql } from 'gatsby'
 
 import { Layout, Link, MetaText, SEO, WaveSection } from 'src/components'
 
+const Content = styled.div`
+	&:not(:first-of-type) *:first-child {
+		margin-top: 0;
+	}
+`
+
 const PostHeader = styled.header`
 	${MetaText} {
 		color: var(--primary);
@@ -46,6 +52,8 @@ const PostHeader = styled.header`
 			margin-bottom: 2rem;
 		}
 	}
+
+	${props => (props.isArchived ? 'h1 { margin-top: 0 }' : '')}
 `
 
 const Links = ({ links }) => (
@@ -78,32 +86,55 @@ export default function Template({
 	data: {
 		markdownRemark: {
 			fields: { readingTime },
-			frontmatter: { date, published, title },
+			frontmatter: { date, published, subtitle, title },
 			html,
 		},
 	},
 }) {
+	const isArchived = subtitle.startsWith('Archive')
 	const content = html.split('<waves>').map((chunk, i) =>
 		i % 2 ? (
 			<WaveSection key={i}>
-				<div dangerouslySetInnerHTML={{ __html: chunk }} />
+				<Content
+					dangerouslySetInnerHTML={{
+						__html: chunk,
+					}}
+				/>
 			</WaveSection>
 		) : (
-			<div key={i} dangerouslySetInnerHTML={{ __html: chunk }} />
+			<Content
+				key={i}
+				dangerouslySetInnerHTML={{
+					__html: chunk,
+				}}
+			/>
 		)
 	)
 
 	return (
 		<Layout>
 			<SEO title={title} />
-			<PostHeader>
+			<PostHeader isArchived={isArchived}>
+				{isArchived ? (
+					<WaveSection>
+						<p>
+							<strong>From the archives.</strong> This post is one
+							of several brief overviews of projects I've designed
+							or built in the past which I'm including in my new
+							site. Bear in mind that both the work and the
+							write-up in these are up to a decade old now!
+						</p>
+					</WaveSection>
+				) : null}
 				<h1>{title}</h1>
 				<MetaText as="h6" italic>
 					<span>{date}</span> • <span>{readingTime.text}</span>
 					{published && published.length ? (
 						<>
 							&nbsp;•&nbsp;
-							<span><Links links={published} /></span>
+							<span>
+								<Links links={published} />
+							</span>
 						</>
 					) : null}
 				</MetaText>
@@ -122,6 +153,7 @@ export const pageQuery = graphql`
 				date(formatString: "MMMM DD, YYYY")
 				path
 				title
+				subtitle
 				published
 			}
 			fields {
