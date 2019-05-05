@@ -13,6 +13,6 @@ One of the most iconic cultural places in Knutsford is Tatton Park, a stately ho
 
 I used Illustrator to create the logo, combining a clean and simple shield shape with the club's initials and the stag icon. After discussion with the client, we concluded that the shield itself should be black and white only, with the pink accent colour brought in elsewhere in the branding. The simplicity of the logo means it is instantly recognisable, and works perfectly on clothing prints such as those shown on <a href="http://www.knutsfordtriclub.co.uk/" target="_blank">their website</a>.
 
-<!--- ktc stationery --->
+![](./stationery.jpg)
 
 Finally, I created some stationery which fit with the modern image the club wanted to portray, and prominently featured their trademark pink colour.
