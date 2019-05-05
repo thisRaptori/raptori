@@ -56,7 +56,7 @@ const ProjectsPage = () => (
 				</p>
 				<Small>
 					<Link
-						to="/posts/how-we-harnessed-the-power-of-reactive-programming-with-refract"
+						to="/blog/how-we-harnessed-the-power-of-reactive-programming-with-refract"
 						button
 					>
 						Find Out More

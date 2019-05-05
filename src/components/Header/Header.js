@@ -15,13 +15,13 @@ const Header = ({ footerIsVisible, siteTitle }) => (
 			</Link>
 			<Space />
 			<SubNav footerIsVisible={footerIsVisible}>
-				<Link to="/blog/">
+				<Link to="/blog">
 					<Icon name="Speech" />
 				</Link>
-				<Link to="/projects/">
+				<Link to="/projects">
 					<Icon name="Rocket" />
 				</Link>
-				<Link to="/resume/">
+				<Link to="/resume">
 					<Icon name="Info" />
 				</Link>
 				<Link to={github}>

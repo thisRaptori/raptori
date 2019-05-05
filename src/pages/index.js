@@ -23,15 +23,15 @@ const IndexPage = ({ data }) => {
 					write fiction in my spare time!
 				</p>
 				<p>
-					<Link to="/blog/" button>
+					<Link to="/blog" button>
 						All Posts
 					</Link>
 					&nbsp;
-					<Link to="/projects/" secondary button>
+					<Link to="/projects" secondary button>
 						Projects
 					</Link>
 					&nbsp;
-					<Link to="/resume/" secondary button>
+					<Link to="/resume" secondary button>
 						Resume
 					</Link>
 				</p>

@@ -1,5 +1,5 @@
 ---
-path: '/posts/how-we-harnessed-the-power-of-reactive-programming-with-refract'
+path: '/blog/how-we-harnessed-the-power-of-reactive-programming-with-refract'
 date: '2019-01-15'
 title: 'How we harnessed the power of reactive programming with Refract'
 subtitle: 'Have you ever wondered how open-source libraries built by companies come into existence?'
