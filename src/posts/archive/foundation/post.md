@@ -15,11 +15,15 @@ The first step was to analyse the book in depth, noting any significant events, 
 
 In addition to representing the book itself, it was important to ensure that the covers evoked the science-fiction genre, and ideally reflect the meticulous, historical style of narration employed by the author.
 
-<!-- explicit -->
+<p class="centered">
+  <img src="./explicit.jpg" />
+</p>
 
 <strong>Explicit:</strong> <br />The explicit poster is a typographic representation of the overall concept of the book. The Empire in the middle of the galaxy has the appearance of might, solidity and power, but is rotting away at the edges. The Foundation at the tip of the galaxy is fresh and vital, and is expanding inwards. The caption is a quote from the protagonist which encapsulates the book's underlying idea.
 
-<!-- implicit -->
+<p class="centered">
+  <img src="./implicit.jpg" />
+</p>
 
 <strong>Implicit:</strong> <br />The implicit poster is a digital illustration of an event which takes place in one of the book's sequels, far in the future of the book itself: the sacking of the city planet Trantor, capital of the Galactic Empire. This choice represents the book on a number of levels:
 

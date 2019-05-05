@@ -217,6 +217,10 @@ blockquote {
 	margin: 0 -2rem !important;
 }
 
+.centered .gatsby-resp-image-wrapper {
+	margin: 0 auto !important;
+}
+
 @media (max-width: 1000px) {
 	body {
 		font-size: 1.8rem;
