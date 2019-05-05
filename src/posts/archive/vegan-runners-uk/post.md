@@ -11,6 +11,6 @@ Vegan Runners UK wanted an identity design to help make their brand attract more
 
 The solution was obvious: the tread of a running shoe, with a V representing veganism worked into the print. I also replaced part of the tread with a leaf silhouette, and used a sans-serif typeface to give the logo a modern feel. The leaf, the V, and the UK were all perfect opportunities to add the colour to the logo. I used Illustrator to create the logo, ensuring that it would work well at a wide variety of sizes in many different applications.
 
-<!-- vruk stationery -->
+![](./stationery.jpg)
 
 Finally, I created some stationery which fit with the professional yet playful brand of the club.
