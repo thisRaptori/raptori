@@ -11,7 +11,7 @@ CRUW is a small charity based in Wellington, New Zealand, dedicated to the care 
 
 The logo I created includes silhouettes of two birds: a sparrow and a kaka. Sparrows are a species introduced to New Zealand by Europeans, whereas kaka are native to the country, so the two combined are a great representation of the inclusive nature of the charity. I used Illustrator to create the logo, combining a clean and crisp silhouette with a textured background to add a little more character.
 
-<!-- cruw stationery -->
+![Stationery](./stationery.jpg)
 
 I also developed a set of stationery using elements from the logo.
 
