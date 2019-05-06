@@ -16,22 +16,22 @@ const Header = ({ footerIsVisible, siteTitle }) => (
 			<Space />
 			<SubNav footerIsVisible={footerIsVisible}>
 				<Link to="/blog">
-					<Icon name="Speech" />
+					<Icon name="Speech" aria-label="Blog" />
 				</Link>
 				<Link to="/projects">
-					<Icon name="Rocket" />
+					<Icon name="Rocket" aria-label="Projects" />
 				</Link>
 				<Link to="/resume">
-					<Icon name="Info" />
+					<Icon name="Info" aria-label="Resume" />
 				</Link>
 				<Link to={github}>
-					<Icon name="GitHub" />
+					<Icon name="GitHub" aria-label="GitHub" />
 				</Link>
 				<Link to={twitter}>
-					<Icon name="Twitter" />
+					<Icon name="Twitter" aria-label="Twitter" />
 				</Link>
 				<Link to={linkedin}>
-					<Icon name="LinkedIn" />
+					<Icon name="LinkedIn" aria-label="LinkedIn" />
 				</Link>
 			</SubNav>
 			<ThemeToggle />
