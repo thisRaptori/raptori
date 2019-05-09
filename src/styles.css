@@ -38,8 +38,14 @@ button {
 	0% {
 		transform: translateX(-50%) translateY(10%) translateZ(0) scaleY(0.8);
 	}
+	25% {
+		transform: translateX(-37.5%) translateY(17.5%) translateZ(0) scaleY(0.6);
+	}
 	50% {
-		transform: translateX(-25%) translateY(25%) translateZ(0) scaleY(0.5);
+		transform: translateX(-25%) translateY(25%) translateZ(0) scaleY(0.8);
+	}
+	75% {
+		transform: translateX(-12.5%) translateY(17.5%) translateZ(0) scaleY(0.6);
 	}
 	100% {
 		transform: translateX(0) translateY(10%) translateZ(0) scaleY(0.8);
