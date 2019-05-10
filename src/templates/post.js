@@ -11,6 +11,10 @@ const Content = styled.div`
 `
 
 const PostHeader = styled.header`
+	h1 {
+		margin-top: 0;
+	}
+
 	${MetaText} {
 		color: var(--primary);
 	}
