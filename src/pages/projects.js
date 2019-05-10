@@ -95,7 +95,7 @@ const ProjectsPage = () => (
 				</p>
 				<p>
 					Discord is a chat application (primarily aimed at gamers)
-					which is used by some major subsections of the React
+					which is used by some major subsections of the programming
 					community. I'm an active member of several of these servers
 					- most notably{' '}
 					<Link to="https://www.reactiflux.com">Reactiflux</Link> -
