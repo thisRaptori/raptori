@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "raptori",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "1.13.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "A gatsby portfolio and blog",
+  "version": "1.0.0",
+  "author": "Joe McGrath <joe@raptori.dev>",
   "dependencies": {
     "babel-plugin-styled-components": "~1.10.0",
     "gatsby": "^2.0.117",
