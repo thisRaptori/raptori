@@ -1,12 +1,14 @@
 import React from 'react'
 
+const documentGlobal = typeof document !== 'undefined' && document
+
 const defaults = {
 	'--primary': '#43b9b7',
 }
 
 const getValue = name =>
-	document
-		? getComputedStyle(document.body)
+	documentGlobal
+		? getComputedStyle(documentGlobal.body)
 				.getPropertyValue(name)
 				.trim()
 		: defaults[name]

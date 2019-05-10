@@ -1,9 +1,13 @@
 import React from 'react'
 
+const windowGlobal = typeof window !== 'undefined' ? window : {}
+
 export default function useRaptoriTheme() {
-	const [isThemeDark, setTheme] = React.useState(window.isCurrentThemeDark)
+	const [isThemeDark, setTheme] = React.useState(
+		windowGlobal.isCurrentThemeDark
+	)
 
-	React.useEffect(() => window.themeObservable.subscribe(setTheme), [])
+	React.useEffect(() => windowGlobal.themeObservable.subscribe(setTheme), [])
 
-	return [isThemeDark, window.toggleRaptoriTheme]
+	return [isThemeDark, windowGlobal.toggleRaptoriTheme]
 }
