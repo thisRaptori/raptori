@@ -1,17 +1,41 @@
 import React from 'react'
 
-const documentGlobal = typeof document !== 'undefined' && document
+let documentGlobal
+
+const getDocumentGlobal = () => {
+	documentGlobal = typeof document !== 'undefined' && document
+	return documentGlobal
+}
+
+getDocumentGlobal()
 
 const getOffsetWidth = () =>
-	documentGlobal ? documentGlobal.body.offsetWidth : 300
+	documentGlobal ? documentGlobal.body.offsetWidth : 320
 
 export default function useWindowWidth() {
 	const [width, setWidth] = React.useState(getOffsetWidth())
 
 	React.useEffect(() => {
+		let checkForClientLoadInterval
 		const handleResize = () => setWidth(getOffsetWidth())
+
+		const checkForClientLoad = () => {
+			if (getDocumentGlobal()) {
+				clearInterval(checkForClientLoadInterval)
+
+				// offsetWidth - 1 is used here to ensure the state
+				// changes and React re-renders
+				setWidth(getOffsetWidth() - 1)
+			}
+		}
+
 		window.addEventListener('resize', handleResize)
-		return () => window.removeEventListener('resize', handleResize)
+		checkForClientLoadInterval = setInterval(checkForClientLoad, 1)
+
+		return () => {
+			window.removeEventListener('resize', handleResize)
+			clearInterval(checkForClientLoadInterval)
+		}
 	}, [])
 
 	return width
