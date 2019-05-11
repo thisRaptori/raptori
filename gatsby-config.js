@@ -43,11 +43,11 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: `gatsby-starter-default`,
-				short_name: `starter`,
+				name: `Raptori`,
+				short_name: `Raptori`,
 				start_url: `/`,
-				background_color: `#663399`,
-				theme_color: `#663399`,
+				background_color: `#43b9b7`,
+				theme_color: `#43b9b7`,
 				display: `minimal-ui`,
 				icon: `src/images/icon.png`,
 			},
