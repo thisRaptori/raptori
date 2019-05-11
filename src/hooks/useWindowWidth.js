@@ -9,8 +9,7 @@ const getDocumentGlobal = () => {
 
 getDocumentGlobal()
 
-const getOffsetWidth = () =>
-	documentGlobal ? documentGlobal.body.offsetWidth : 320
+const getOffsetWidth = () => documentGlobal && documentGlobal.body.offsetWidth
 
 export default function useWindowWidth() {
 	const [width, setWidth] = React.useState(getOffsetWidth())

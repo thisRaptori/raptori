@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { Waves } from 'src/components'
 import { useWindowWidth } from 'src/hooks'
 
+const getSectionWidth = props => (props.width ? `${props.width}px` : '100vw')
+
 const Section = styled.div`
 	background: var(--primary);
 	color: var(--dark);
@@ -14,8 +16,10 @@ const Section = styled.div`
         @media (min-width: 700px) {
             & {
                 margin: 0;
-                transform: translateX(calc((640px - ${props.width}px) / 2));
-                width: ${props.width}px;
+                transform: translateX(calc((640px - ${getSectionWidth(
+					props
+				)}) / 2));
+                width: ${getSectionWidth(props)};
             }
         }
 		`}
@@ -45,11 +49,13 @@ const Content = styled.div`
 		--primary: var(--dark);
 		--secondary: var(--secondary-dark);
 
-		&:link, &:visited {
+		&:link,
+		&:visited {
 			color: var(--primary);
 		}
 
-		&:link:hover, &:visited:hover {
+		&:link:hover,
+		&:visited:hover {
 			color: var(--secondary);
 		}
 	}
