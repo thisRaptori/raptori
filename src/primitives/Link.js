@@ -48,8 +48,8 @@ const StyledLink = styled.a(props =>
 
 const StyledInternalLink = StyledLink.withComponent(InternalLink)
 
-const Link = ({ children, newTab, to, ...props }) =>
-	to.startsWith('/') ? (
+const Link = ({ children, external, newTab, to, ...props }) =>
+	!external && to.startsWith('/') ? (
 		<StyledInternalLink to={to} {...props}>
 			{children}
 		</StyledInternalLink>

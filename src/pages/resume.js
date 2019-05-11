@@ -15,7 +15,7 @@ const ResumePage = () => (
 					out some of my code on GitHub!
 				</p>
 				<p>
-					<Link to="/" button>
+					<Link to="/joe-mcgrath-resume.pdf" external button>
 						Download Resume
 					</Link>
 					&nbsp;
