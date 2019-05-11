@@ -89,7 +89,7 @@ body {
 	}
 }
 
-body.light {
+body {
 	--background: var(--light);
 	--text: var(--dark);
 	--secondary: var(--secondary-dark);
