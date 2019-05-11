@@ -10,4 +10,8 @@
   </a>
 </h1>
 
-<p align="center">Powered by <a href="https://www.gatsbyjs.org/">Gatsby</a></p>
+<p align="center">Powered by <a href="https://www.gatsbyjs.org/">Gatsby</a> & hosted on <a href="http://netlify.com">Netlify</a></p>
+
+<p align="center">
+  <img src="https://api.netlify.com/api/v1/badges/4ce0121c-03ca-4c71-9acc-7109a9bb96aa/deploy-status" />
+</p>
