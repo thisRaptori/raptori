@@ -279,6 +279,10 @@ blockquote {
 }
 
 @media (max-width: 740px) {
+	.add-mobile-spacing {
+		padding: 0 1rem;
+	}
+
 	.mockup {
 		overflow: hidden;
 	}
