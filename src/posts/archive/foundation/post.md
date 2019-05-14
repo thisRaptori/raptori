@@ -37,6 +37,6 @@ Again, the text is a quote from a main character which is highly relevant to the
 
 Both posters fulfil the brief - the explicit poster shows exactly what to expect from the book, while the implicit poster reveals nothing while successfully implying what type of story it is. They also successfully evoke the correct genre, and hint at the detached, historical style of the writing.
 
-<!-- covers -->
+![Covers](./covers.jpg)
 
 Finally, I designed book covers based on the posters, and created mock-ups of the finished books. Each cover includes all of the elements from the poster, but with a more appropriate layout for the purpose.
