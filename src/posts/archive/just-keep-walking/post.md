@@ -13,7 +13,7 @@ It was a perfect opportunity to use some tech that I had been learning; <strong>
 
 It's a simple walk tracking app, built using <a href="https://facebook.github.io/react/" target="_blank">React</a>, with an IndexedDB database interacted with via <a href="http://dexie.org/" target="_blank">Dexie</a>.
 
-<!-- screenshots -->
+![Screenshots](./screenshots.png)
 
 The features so far are a stopwatch-style counter on the homepage, tap to start/end a walk, and a log page listing previous walks, including a delete walk function. I've also configured the webpack offline-plugin so that the app is available when disconnected from the internet as a progressive web app.
 
