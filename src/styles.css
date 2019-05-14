@@ -264,8 +264,9 @@ blockquote {
 	}
 }
 
-.logo {
-	padding: 0 2rem;
+.logo > * {
+	margin-left: auto !important;
+	margin-right: auto !important;
 }
 
 .mockup {
