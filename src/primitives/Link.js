@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link as InternalLink } from 'gatsby'
 
-const svgPosition = (margin) => `
+const svgPosition = margin => `
 	svg {
 		margin: ${margin};
 		vertical-align: middle;
@@ -42,8 +42,19 @@ const getButtonStyles = props => {
 	`
 }
 
+const getLinkStyles = props => {
+	const textDecoration = props.disableUnderline
+		? 'text-decoration: none;'
+		: ''
+
+	return `
+		${textDecoration}
+		${svgPosition('-2px 0 2px 0')}
+	`
+}
+
 const StyledLink = styled.a(props =>
-	props.button ? getButtonStyles(props) : svgPosition('-2px 0 2px 0')
+	props.button ? getButtonStyles(props) : getLinkStyles(props)
 )
 
 const StyledInternalLink = StyledLink.withComponent(InternalLink)

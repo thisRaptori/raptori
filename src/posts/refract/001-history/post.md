@@ -8,6 +8,8 @@ published: [
     ['FreeCodeCamp', 'https://medium.freecodecamp.org/how-we-harnessed-the-power-of-reactive-programming-with-refract-87f269ac779e'],
     ['FanDuel Life', 'https://medium.com/fanduel-life/how-we-harnessed-the-power-of-reactive-programming-with-refract-a9e6568281e1']
 ]
+link: 'https://refract.js.org'
+repo: 'https://github.com/fanduel-oss/refract'
 ---
 
 Have you ever wondered how open-source libraries built by companies come into existence?

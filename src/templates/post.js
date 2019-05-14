@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
 
-import { Layout, Link, MetaText, SEO, WaveSection } from 'src/components'
+import { Icon, Layout, Link, MetaText, SEO, WaveSection } from 'src/components'
 
 const Content = styled.div`
 	&:not(:first-of-type) *:first-child {
@@ -90,7 +90,7 @@ export default function Template({
 	data: {
 		markdownRemark: {
 			fields: { readingTime },
-			frontmatter: { date, published, subtitle, title },
+			frontmatter: { date, link, published, repo, subtitle, title },
 			html,
 		},
 	},
@@ -115,6 +115,38 @@ export default function Template({
 		)
 	)
 
+	const mainLinks =
+		published && published.length ? (
+			<>
+				&nbsp;•&nbsp;
+				<span>
+					<Links links={published} />
+				</span>
+			</>
+		) : null
+
+	const extraLinks =
+		link || repo ? (
+			<>
+				&nbsp;•&nbsp;
+				<span>
+					{link ? (
+						<Link to={link} disableUnderline>
+							Open&nbsp;
+							<Icon name="External" width={8} height={8} />
+						</Link>
+					) : null}
+					{link && repo ? <>&nbsp;•&nbsp;</> : null}
+					{repo ? (
+						<Link to={repo} disableUnderline>
+							Code&nbsp;
+							<Icon name="GitHub" width={16} height={16} />
+						</Link>
+					) : null}
+				</span>
+			</>
+		) : null
+
 	return (
 		<Layout>
 			<SEO title={title} />
@@ -133,14 +165,8 @@ export default function Template({
 				<h1>{title}</h1>
 				<MetaText as="h6" italic>
 					<span>{date}</span> • <span>{readingTime.text}</span>
-					{published && published.length ? (
-						<>
-							&nbsp;•&nbsp;
-							<span>
-								<Links links={published} />
-							</span>
-						</>
-					) : null}
+					{mainLinks}
+					{extraLinks}
 				</MetaText>
 			</PostHeader>
 			<hr />
@@ -155,10 +181,12 @@ export const pageQuery = graphql`
 			html
 			frontmatter {
 				date(formatString: "MMMM DD, YYYY")
+				link
 				path
-				title
-				subtitle
 				published
+				repo
+				subtitle
+				title
 			}
 			fields {
 				readingTime {
