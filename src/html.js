@@ -59,50 +59,6 @@ export default function HTML(props) {
 						`,
 					}}
 				/>
-				<div id="particles-js" />
-				<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" />
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-							particlesJS('particles-js', {
-								particles: {
-									number: { value: 600 },
-									color: { value: ['#43b9b7', '#2f3d4c', '#d5e2eb'] },
-									shape: {
-										type: 'star',
-									},
-									opacity: {
-										value: 1,
-										anim: {
-											enable: true,
-											speed: 2,
-											opacity_min: 0,
-										},
-									},
-									size: {
-										value: 1,
-										random: true,
-										anim: { enable: false, speed: 4, size_min: 0.2, sync: false },
-									},
-									line_linked: {
-										enable: false,
-									},
-									move: {
-										enable: true,
-										speed: 6,
-										direction: 'right',
-									},
-								},
-								interactivity: {
-									events: {
-										onhover: { enable: false },
-										resize: true,
-									},
-								},
-								retina_detect: true,
-						})`,
-					}}
-				/>
 				{props.preBodyComponents}
 				<noscript key="noscript" id="gatsby-noscript">
 					This app works best with JavaScript enabled.
