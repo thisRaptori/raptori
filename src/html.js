@@ -60,7 +60,7 @@ export default function HTML(props) {
 					}}
 				/>
 				<div id="particles-js" />
-				<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" />
+				<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" />
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `
