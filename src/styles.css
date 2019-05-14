@@ -221,8 +221,21 @@ blockquote {
 	outline: 2px solid var(--primary-transparent);
 }
 
+#particles-js {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	opacity: 0.6;
+	z-index: 4;
+	pointer-events: none;
+}
+
 .gatsby-resp-image-wrapper {
 	margin: 0 -2rem !important;
+	position: absolute;
+	z-index: 5;
 }
 
 .centered .gatsby-resp-image-wrapper {
