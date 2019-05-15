@@ -26,6 +26,7 @@ const getButtonStyles = props => {
 	return `
 	border-radius: 4px;
 	color: ${colour} !important;
+	cursor: pointer;
 	display: inline-block;
 	line-height: 34px;
 	margin: 2px 0 !important;
@@ -53,7 +54,7 @@ const getLinkStyles = props => {
 	`
 }
 
-const StyledLink = styled.a(props =>
+export const StyledLink = styled.a(props =>
 	props.button ? getButtonStyles(props) : getLinkStyles(props)
 )
 

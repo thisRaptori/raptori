@@ -8,6 +8,7 @@ import {
 	Layout,
 	Link,
 	MetaText,
+	NewsletterSignup,
 	SEO,
 	WaveSection,
 } from 'src/components'
@@ -180,49 +181,57 @@ export default function Template({
 		) : null
 
 	return (
-		<Layout>
-			<SEO title={title} />
-			<PostHeader isArchived={isArchived}>
-				{isArchived ? (
-					<WaveSection>
-						<p>
-							<strong>From the archives.</strong> This post is one
-							of several brief overviews of projects I've designed
-							or built in the past which I'm including in my new
-							site. Bear in mind that both the work and the
-							write-up in these are up to a decade old now!
-						</p>
-					</WaveSection>
-				) : null}
-				<h1>{title}</h1>
-				<MetaText as="h6" italic>
-					<span>{date}</span> • <span>{readingTime.text}</span>
-					{mainLinks}
-					{extraLinks}
-				</MetaText>
-			</PostHeader>
-			<Hr />
-			{content}
-			<Hr margin={6} />
-			<NextPrevLinks>
-				{next ? (
-					<Link to={next.path} secondary button>
-						<span>←</span>&nbsp;
-						<span class="text">{next.title}</span>
-					</Link>
-				) : (
-					<span />
-				)}
-				{previous ? (
-					<Link to={previous.path} secondary button>
-						<span class="text">{previous.title}</span>&nbsp;
-						<span>→</span>
-					</Link>
-				) : (
-					<span />
-				)}
-			</NextPrevLinks>
-		</Layout>
+		<Layout
+			children={
+				<>
+					<SEO title={title} />
+					<PostHeader isArchived={isArchived}>
+						{isArchived ? (
+							<WaveSection>
+								<p>
+									<strong>From the archives.</strong> This
+									post is one of several brief overviews of
+									projects I've designed or built in the past
+									which I'm including in my new site. Bear in
+									mind that both the work and the write-up in
+									these are up to a decade old now!
+								</p>
+							</WaveSection>
+						) : null}
+						<h1>{title}</h1>
+						<MetaText as="h6" italic>
+							<span>{date}</span> •{' '}
+							<span>{readingTime.text}</span>
+							{mainLinks}
+							{extraLinks}
+						</MetaText>
+					</PostHeader>
+					<Hr />
+					{content}
+					<Hr margin={6} />
+					<NextPrevLinks>
+						{next ? (
+							<Link to={next.path} secondary button>
+								<span>←</span>&nbsp;
+								<span class="text">{next.title}</span>
+							</Link>
+						) : (
+							<span />
+						)}
+						{previous ? (
+							<Link to={previous.path} secondary button>
+								<span class="text">{previous.title}</span>
+								&nbsp;
+								<span>→</span>
+							</Link>
+						) : (
+							<span />
+						)}
+					</NextPrevLinks>
+				</>
+			}
+			belowTheWaves={<NewsletterSignup />}
+		/>
 	)
 }
 
