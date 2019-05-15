@@ -14,10 +14,6 @@ const StyledLink = styled(Link)`
 		margin-top: 4rem;
 	}
 
-	> h4 {
-		color: var(--primary);
-	}
-
 	> * {
 		margin: 0;
 	}

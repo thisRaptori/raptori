@@ -24,10 +24,6 @@ const PostHeader = styled.header`
 		margin-top: 0;
 	}
 
-	${MetaText} {
-		color: var(--primary);
-	}
-
 	${MetaText} a {
 		color: inherit;
 	}
