@@ -85,6 +85,10 @@ const NextPrevLinks = styled.p`
 	> :not(:first-child) {
 		margin-left: 2rem !important;
 	}
+
+	.text {
+		flex: 1 1 100%;
+	}
 `
 
 const Links = ({ links }) => (
@@ -203,14 +207,16 @@ export default function Template({
 			<NextPrevLinks>
 				{next ? (
 					<Link to={next.path} secondary button>
-						<span>←</span>&nbsp;<span>{next.title}</span>
+						<span>←</span>&nbsp;
+						<span class="text">{next.title}</span>
 					</Link>
 				) : (
 					<span />
 				)}
 				{previous ? (
 					<Link to={previous.path} secondary button>
-						<span>{previous.title}</span>&nbsp;<span>→</span>
+						<span class="text">{previous.title}</span>&nbsp;
+						<span>→</span>
 					</Link>
 				) : (
 					<span />
