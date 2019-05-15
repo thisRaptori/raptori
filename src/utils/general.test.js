@@ -1,4 +1,4 @@
-import { compose, get } from './general'
+import { compose, encode, get, isPrimitive } from './general'
 
 describe('compose', () => {
 	it('should compose an arbitrary number of functions into one', () => {
@@ -51,6 +51,43 @@ describe('compose', () => {
 			expect(exampleFunction(number)).toEqual(
 				double(triple(quadruple(square(cube(number)))))
 			)
+		})
+	})
+})
+
+describe('encode', () => {
+	describe('when an empty object is passed', () => {
+		it('should return an empty string', () => {
+			expect(encode({})).toBe('')
+		})
+	})
+
+	describe('when an object containing primitive data types is passed', () => {
+		it('should return an encoded string', () => {
+			expect(
+				encode({
+					a: 'string',
+					b: 123456789,
+					c: true,
+					d: null,
+					e: undefined,
+				})
+			).toBe('a=string&b=123456789&c=true&d=null&e=undefined')
+		})
+	})
+
+	describe('when an object containing complex data types is passed', () => {
+		it('should throw an error', () => {
+			expect(() =>
+				encode({
+					a: {},
+				})
+			).toThrowError()
+			expect(() =>
+				encode({
+					a: [],
+				})
+			).toThrowError()
 		})
 	})
 })
@@ -165,6 +202,25 @@ describe('get', () => {
 			it('should return undefined', () => {
 				expect(get(source)).toBe(undefined)
 			})
+		})
+	})
+})
+
+describe('isPrimitive', () => {
+	describe('when the value is a primitive data type', () => {
+		it('should return true', () => {
+			expect(isPrimitive('string')).toBe(true)
+			expect(isPrimitive(123456789)).toBe(true)
+			expect(isPrimitive(true)).toBe(true)
+			expect(isPrimitive(null)).toBe(true)
+			expect(isPrimitive(undefined)).toBe(true)
+		})
+	})
+
+	describe('when the value is not a primitive data type', () => {
+		it('should return false', () => {
+			expect(isPrimitive({})).toBe(false)
+			expect(isPrimitive([])).toBe(false)
 		})
 	})
 })

@@ -2,20 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Form } from 'src/components'
+import { encode } from 'src/utils'
 
 const NewsletterStyles = styled.div`
 	--background: var(--source);
 	--primary: var(--dark);
 	--secondary: var(--secondary-dark);
 `
-
-function encode(data) {
-	return Object.keys(data)
-		.map(
-			key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
-		)
-		.join('&')
-}
 
 const fields = [
 	{
