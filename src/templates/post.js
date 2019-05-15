@@ -2,7 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
 
-import { Icon, Layout, Link, MetaText, SEO, WaveSection } from 'src/components'
+import {
+	Hr,
+	Icon,
+	Layout,
+	Link,
+	MetaText,
+	SEO,
+	WaveSection,
+} from 'src/components'
 
 const Content = styled.div`
 	&:not(:first-of-type) *:first-child {
@@ -60,6 +68,25 @@ const PostHeader = styled.header`
 	${props => (props.isArchived ? 'h1 { margin-top: 0 }' : '')}
 `
 
+const NextPrevLinks = styled.p`
+	display: flex;
+	justify-content: space-between;
+
+	> * {
+		align-items: center;
+		display: flex;
+		flex: 0 1 50%;
+		justify-content: center;
+		line-height: 1;
+		padding: 1rem 12px;
+		text-align: center;
+	}
+
+	> :not(:first-child) {
+		margin-left: 2rem !important;
+	}
+`
+
 const Links = ({ links }) => (
 	<>
 		Also published at&nbsp;
@@ -94,6 +121,7 @@ export default function Template({
 			html,
 		},
 	},
+	pageContext: { next, previous },
 }) {
 	const isArchived = subtitle.startsWith('Archive')
 	const content = html.split('<waves>').map((chunk, i) =>
@@ -169,8 +197,25 @@ export default function Template({
 					{extraLinks}
 				</MetaText>
 			</PostHeader>
-			<hr />
+			<Hr />
 			{content}
+			<Hr margin={6} />
+			<NextPrevLinks>
+				{next ? (
+					<Link to={next.path} secondary button>
+						<span>←</span>&nbsp;<span>{next.title}</span>
+					</Link>
+				) : (
+					<span />
+				)}
+				{previous ? (
+					<Link to={previous.path} secondary button>
+						<span>{previous.title}</span>&nbsp;<span>→</span>
+					</Link>
+				) : (
+					<span />
+				)}
+			</NextPrevLinks>
 		</Layout>
 	)
 }

@@ -18,6 +18,18 @@ exports.createPages = ({ actions, graphql }) => {
 							path
 						}
 					}
+					next {
+						frontmatter {
+							title
+							path
+						}
+					}
+					previous {
+						frontmatter {
+							title
+							path
+						}
+					}
 				}
 			}
 		}
@@ -30,10 +42,14 @@ exports.createPages = ({ actions, graphql }) => {
 		const postsPerPage = 20
 		const pageCount = Math.ceil(posts.length / postsPerPage)
 
-		posts.forEach(({ node }) => {
+		posts.forEach(({ node, next, previous }) => {
 			createPage({
 				path: node.frontmatter.path,
 				component: blogPostTemplate,
+				context: {
+					next: next && next.frontmatter,
+					previous: previous && previous.frontmatter,
+				},
 			})
 		})
 
