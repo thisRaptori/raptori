@@ -1,6 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import theme from '!raw-loader!./scripts/theme.js'
+
+const themeScript = (
+	<script
+		dangerouslySetInnerHTML={{
+			__html: theme,
+		}}
+	/>
+)
+
 export default function HTML(props) {
 	return (
 		<html {...props.htmlAttributes}>
@@ -14,51 +24,7 @@ export default function HTML(props) {
 				{props.headComponents}
 			</head>
 			<body {...props.bodyAttributes}>
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-							(function() {
-								var listeners = [];
-								var next = () => {
-									listeners.forEach(l => l(window.isCurrentThemeDark))
-								}
-
-								var themeQuery = matchMedia('(prefers-color-scheme: dark)');
-								window.isCurrentThemeDark = false;
-
-								window.themeObservable = {
-									subscribe: (listener) => {
-										listeners.push(listener)
-										return () => listeners.filter(l => l !== listener)
-									},
-								}
-
-								function setTheme(isNextThemeDark) {
-									window.isCurrentThemeDark = isNextThemeDark;
-									document.body.className = window.isCurrentThemeDark ? 'dark' : 'light';
-									next()
-								}
-
-								window.toggleRaptoriTheme = function() {
-									isNextThemeDark = !window.isCurrentThemeDark;
-									setTheme(isNextThemeDark);
-									try {
-										localStorage.setItem('isThemeDark', isNextThemeDark);
-									} catch(err) {}
-								}
-
-								themeQuery.addListener(function(e) {
-									setTheme(e.matches);
-								});
-
-								try {
-									var isStoredThemeDark = localStorage.getItem('isThemeDark') === 'true';
-									setTheme(isStoredThemeDark);
-								} catch(err) {}
-							})();
-						`,
-					}}
-				/>
+				{themeScript}
 				{props.preBodyComponents}
 				<noscript key="noscript" id="gatsby-noscript">
 					This app works best with JavaScript enabled.
