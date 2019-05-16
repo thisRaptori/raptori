@@ -2,11 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import theme from '!raw-loader!./scripts/theme.js'
+import tilt from '!raw-loader!./scripts/tilt.js'
 
 const themeScript = (
 	<script
 		dangerouslySetInnerHTML={{
 			__html: theme,
+		}}
+	/>
+)
+
+const tiltScript = (
+	<script
+		dangerouslySetInnerHTML={{
+			__html: tilt,
 		}}
 	/>
 )
@@ -25,6 +34,7 @@ export default function HTML(props) {
 			</head>
 			<body {...props.bodyAttributes}>
 				{themeScript}
+				{tiltScript}
 				{props.preBodyComponents}
 				<noscript key="noscript" id="gatsby-noscript">
 					This app works best with JavaScript enabled.

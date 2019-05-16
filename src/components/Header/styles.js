@@ -7,7 +7,18 @@ export const HeaderElement = styled.header`
 	position: fixed;
 	right: 0;
 	top: 0;
-	z-index: 2;
+	z-index: 3;
+
+	:before {
+		background: var(--background);
+		bottom: 100%;
+		content: '';
+		height: 100vh;
+		left: 0;
+		position: fixed;
+		right: 0;
+		z-index: -1;
+	}
 
 	nav {
 		line-height: inherit;

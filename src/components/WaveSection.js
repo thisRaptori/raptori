@@ -6,6 +6,12 @@ import { useWindowWidth } from 'src/hooks'
 
 const getSectionWidth = props => (props.width ? `${props.width}px` : '100vw')
 
+const Skew = styled.div`
+	transform: skew(0, var(--skew));
+	position: relative;
+	z-index: ${props => (props.increaseZIndex ? 2 : -1)};
+`
+
 const Section = styled.div`
 	background: var(--primary);
 	color: var(--dark);
@@ -32,6 +38,9 @@ const Section = styled.div`
 const Content = styled.div`
 	margin: 0 2rem;
 	max-width: 640px;
+	position: relative;
+	transform: skew(0, calc(0deg - var(--skew)));
+	z-index: 2;
 
 	@media (min-width: 680px) {
 		& {
@@ -61,15 +70,17 @@ const Content = styled.div`
 	}
 `
 
-const WaveSection = ({ as, children }) => {
+const WaveSection = ({ as, children, topOnly }) => {
 	const width = useWindowWidth()
 
 	return (
-		<Section width={width} as={as}>
-			<Waves />
-			<Content>{children}</Content>
-			<Waves invert offset />
-		</Section>
+		<Skew increaseZIndex={topOnly}>
+			<Section width={width} as={as}>
+				<Waves />
+				<Content>{children}</Content>
+				{topOnly ? null : <Waves invert offset />}
+			</Section>
+		</Skew>
 	)
 }
 
