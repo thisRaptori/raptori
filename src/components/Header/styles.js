@@ -65,7 +65,7 @@ export const MobileNav = styled.div`
 	display: flex;
 	justify-content: space-around;
 	left: 0;
-	padding: 0 !important;
+	padding: 0 0 env(safe-area-inset-left) 0 !important;
 	position: fixed;
 	right: 0;
 
