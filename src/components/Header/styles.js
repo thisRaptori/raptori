@@ -18,6 +18,21 @@ export const HeaderElement = styled.header`
 			display: flex;
 			padding: var(--header-padding);
 		}
+
+		a:not(.site-title) {
+			flex-direction: column;
+			padding: 0;
+			position: relative;
+			text-decoration: none;
+			justify-content: center;
+			width: calc(3 * var(--header-padding));
+
+			span {
+				line-height: 1;
+				font-size: 12px;
+				padding-top: calc(var(--header-padding) / 4);
+			}
+		}
 	}
 
 	.site-title {
@@ -51,7 +66,9 @@ export const Space = styled.span`
 
 export const MobileNav = styled.div`
 	bottom: 0;
+	box-sizing: content-box;
 	display: flex;
+	height: calc(24px + var(--header-padding) + var(--header-padding));
 	justify-content: space-around;
 	left: 0;
 	padding: 0 0 env(safe-area-inset-left) 0 !important;
