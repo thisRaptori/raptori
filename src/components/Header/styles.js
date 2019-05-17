@@ -21,15 +21,16 @@ export const HeaderElement = styled.header`
 
 		a:not(.site-title) {
 			flex-direction: column;
+			height: 100%;
+			justify-content: center;
 			padding: 0;
 			position: relative;
 			text-decoration: none;
-			justify-content: center;
 			width: calc(3 * var(--header-padding));
 
 			span {
-				line-height: 1;
 				font-size: 12px;
+				line-height: 1;
 				padding-top: calc(var(--header-padding) / 4);
 			}
 		}
