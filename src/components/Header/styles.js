@@ -21,7 +21,6 @@ export const HeaderElement = styled.header`
 
 		a:not(.site-title) {
 			flex-direction: column;
-			height: 100%;
 			justify-content: center;
 			padding: 0;
 			position: relative;
@@ -79,6 +78,7 @@ export const MobileNav = styled.div`
 	> * {
 		align-items: center;
 		display: flex;
+		height: 100%;
 		padding: var(--header-padding);
 	}
 
