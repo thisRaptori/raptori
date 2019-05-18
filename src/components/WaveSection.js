@@ -6,9 +6,23 @@ import { useWindowWidth } from 'src/hooks'
 
 const getSectionWidth = props => (props.width ? `${props.width}px` : '100vw')
 
+const Wrapper = styled.div`
+	${props => (props.disableTopMargin ? 'margin-top: -6rem;' : '')}
+	main > &:first-child {
+		margin-top: -6rem;
+	}
+
+	@media (max-width: 699px) {
+		${props => (props.footer ? '' : 'margin-left: -2rem;')}
+		padding: 0 2rem;
+		width: ${getSectionWidth};
+		overflow: hidden;
+	}
+`
+
 const Skew = styled.div`
-	transform: skew(0, var(--skew));
 	position: relative;
+	transform: skew(0, var(--skew));
 
 	&:not(:first-child) {
 		${props => (props.footer ? '' : 'z-index: -1;')}
@@ -42,10 +56,6 @@ const Section = styled.div`
         }
 		`}
 
-	main &:first-child {
-		margin-top: -6rem;
-	}
-
 	${props =>
 		props.footer
 			? `
@@ -57,6 +67,11 @@ const Section = styled.div`
 			position: absolute;
 			right: 0;
 			top: 100%;
+
+			@media (max-width: 699px) {
+				left: -2rem;
+				right: -2rem;
+			}
 		}
 	`
 			: ''}
@@ -97,17 +112,23 @@ const Content = styled.div`
 	}
 `
 
-const WaveSection = ({ as, children, footer }) => {
+const WaveSection = ({ as, children, disableTopMargin, footer }) => {
 	const width = useWindowWidth()
 
 	return (
-		<Skew footer={footer}>
-			<Section width={width} as={as} footer={footer}>
-				<Waves />
-				<Content>{children}</Content>
-				{footer ? null : <Waves invert offset />}
-			</Section>
-		</Skew>
+		<Wrapper
+			disableTopMargin={disableTopMargin}
+			footer={footer}
+			width={width}
+		>
+			<Skew footer={footer}>
+				<Section width={width} as={as} footer={footer}>
+					<Waves />
+					<Content>{children}</Content>
+					{footer ? null : <Waves invert offset />}
+				</Section>
+			</Skew>
+		</Wrapper>
 	)
 }
 

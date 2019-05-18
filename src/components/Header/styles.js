@@ -10,7 +10,7 @@ export const HeaderElement = styled.header`
 	z-index: 3;
 
 	:before {
-		background: var(--background);
+		background: var(--primary);
 		bottom: 100%;
 		content: '';
 		height: 100vh;

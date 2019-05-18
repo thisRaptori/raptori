@@ -186,7 +186,7 @@ export default function Template({
 					<SEO title={title} />
 					<PostHeader isArchived={isArchived}>
 						{isArchived ? (
-							<WaveSection>
+							<WaveSection disableTopMargin>
 								<p>
 									<strong>From the archives.</strong> This
 									post is one of several brief overviews of

@@ -86,7 +86,7 @@ body {
 	box-sizing: border-box;
 }
 
-@media (max-width: 580px) {
+@media (max-width: 615px) {
 	body {
 		padding-bottom: var(--menu-height);
 	}
