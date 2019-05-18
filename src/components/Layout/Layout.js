@@ -8,7 +8,7 @@ import { Footer, Header, WaveSection } from 'src/components'
 import { useIsVisible } from 'src/hooks'
 import { Below, Main, Wrapper } from './styles'
 
-const Layout = ({ belowTheWaves, children }) => {
+const Layout = ({ activePage, belowTheWaves, children }) => {
 	const [footerRef, footerIsVisible] = useIsVisible()
 
 	return (
@@ -25,6 +25,7 @@ const Layout = ({ belowTheWaves, children }) => {
 			render={data => (
 				<>
 					<Header
+						activePage={activePage}
 						footerIsVisible={footerIsVisible}
 						siteTitle={data.site.siteMetadata.title}
 					/>

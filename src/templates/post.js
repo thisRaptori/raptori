@@ -181,6 +181,7 @@ export default function Template({
 
 	return (
 		<Layout
+			activePage="blog"
 			children={
 				<>
 					<SEO title={title} />
