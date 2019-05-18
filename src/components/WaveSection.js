@@ -17,6 +17,10 @@ const Wrapper = styled.div`
 		z-index: 2;
 	}
 
+	& ~ & {
+		z-index: 1;
+	}
+
 	@media (max-width: 699px) {
 		${props => (props.footer ? '' : 'margin-left: -2rem;')}
 		padding: 0 2rem;
