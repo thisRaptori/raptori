@@ -34,7 +34,6 @@ export default function HTML(props) {
 			</head>
 			<body {...props.bodyAttributes}>
 				{themeScript}
-				{tiltScript}
 				{props.preBodyComponents}
 				<noscript key="noscript" id="gatsby-noscript">
 					This app works best with JavaScript enabled.
@@ -44,6 +43,7 @@ export default function HTML(props) {
 					id="___gatsby"
 					dangerouslySetInnerHTML={{ __html: props.body }}
 				/>
+				{tiltScript}
 				{props.postBodyComponents}
 			</body>
 		</html>
