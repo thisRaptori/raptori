@@ -23,7 +23,7 @@ export const Wave = styled.div`
 `
 
 export const Gradient = styled.div`
-	background-image: linear-gradient(transparent, var(--primary));
+	background-image: linear-gradient(transparent, var(--primary) 90%);
 	bottom: -4px;
 	height: 40px;
 	left: 0;
