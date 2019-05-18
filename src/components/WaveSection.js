@@ -12,6 +12,11 @@ const Wrapper = styled.div`
 		margin-top: -6rem;
 	}
 
+	& ~ * {
+		position: relative;
+		z-index: 2;
+	}
+
 	@media (max-width: 699px) {
 		${props => (props.footer ? '' : 'margin-left: -2rem;')}
 		padding: 0 2rem;
@@ -27,7 +32,7 @@ const Skew = styled.div`
 		${props => (props.footer ? '' : 'z-index: -1;')}
 	}
 
-	& + * {
+	& ~ * {
 		position: relative;
 		z-index: 2;
 	}
