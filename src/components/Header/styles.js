@@ -29,6 +29,21 @@ export const HeaderElement = styled.header`
 			display: flex;
 			padding: var(--header-padding);
 		}
+
+		a:not(.site-title) {
+			flex-direction: column;
+			justify-content: center;
+			padding: 0;
+			position: relative;
+			text-decoration: none;
+			width: calc(3 * var(--header-padding));
+
+			span {
+				font-size: 12px;
+				line-height: 1;
+				padding-top: calc(var(--header-padding) / 4);
+			}
+		}
 	}
 
 	.site-title {
@@ -62,7 +77,9 @@ export const Space = styled.span`
 
 export const MobileNav = styled.div`
 	bottom: 0;
+	box-sizing: content-box;
 	display: flex;
+	height: calc(24px + var(--header-padding) + var(--header-padding));
 	justify-content: space-around;
 	left: 0;
 	padding: 0 0 env(safe-area-inset-left) 0 !important;
@@ -72,6 +89,7 @@ export const MobileNav = styled.div`
 	> * {
 		align-items: center;
 		display: flex;
+		height: 100%;
 		padding: var(--header-padding);
 	}
 
