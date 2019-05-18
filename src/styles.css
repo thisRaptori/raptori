@@ -203,6 +203,11 @@ code {
 	padding: 0 4px 2px;
 }
 
+section {
+	position: relative;
+	z-index: 2;
+}
+
 blockquote,
 blockquote * {
 	font-style: italic;

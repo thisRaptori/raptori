@@ -70,7 +70,7 @@ const Section = styled.div`
 			left: 0;
 			position: absolute;
 			right: 0;
-			top: 100%;
+			top: 80%;
 
 			@media (max-width: 699px) {
 				left: -2rem;
