@@ -14,6 +14,9 @@ import {
 } from 'src/components'
 
 const Content = styled.div`
+	position: relative;
+	z-index: 1;
+
 	&:not(:first-of-type) *:first-child {
 		margin-top: 0;
 	}

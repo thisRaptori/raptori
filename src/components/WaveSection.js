@@ -9,7 +9,15 @@ const getSectionWidth = props => (props.width ? `${props.width}px` : '100vw')
 const Skew = styled.div`
 	transform: skew(0, var(--skew));
 	position: relative;
-	z-index: ${props => (props.increaseZIndex ? 2 : -1)};
+
+	&:not(:first-child) {
+		${props => (props.footer ? '' : 'z-index: -1;')}
+	}
+
+	& + * {
+		position: relative;
+		z-index: 2;
+	}
 `
 
 const Section = styled.div`
@@ -22,9 +30,13 @@ const Section = styled.div`
         @media (min-width: 700px) {
             & {
                 margin: 0;
-                transform: translateX(calc((640px - ${getSectionWidth(
-					props
-				)}) / 2));
+                ${
+					props.footer
+						? ''
+						: `transform: translateX(calc((640px - ${getSectionWidth(
+								props
+						  )}) / 2));`
+				}
                 width: ${getSectionWidth(props)};
             }
         }
@@ -33,6 +45,21 @@ const Section = styled.div`
 	main &:first-child {
 		margin-top: -6rem;
 	}
+
+	${props =>
+		props.footer
+			? `
+		&:after {
+			background: var(--primary);
+			content: '';
+			height: 100vh;
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 100%;
+		}
+	`
+			: ''}
 `
 
 const Content = styled.div`
@@ -70,15 +97,15 @@ const Content = styled.div`
 	}
 `
 
-const WaveSection = ({ as, children, topOnly }) => {
+const WaveSection = ({ as, children, footer }) => {
 	const width = useWindowWidth()
 
 	return (
-		<Skew increaseZIndex={topOnly}>
-			<Section width={width} as={as}>
+		<Skew footer={footer}>
+			<Section width={width} as={as} footer={footer}>
 				<Waves />
 				<Content>{children}</Content>
-				{topOnly ? null : <Waves invert offset />}
+				{footer ? null : <Waves invert offset />}
 			</Section>
 		</Skew>
 	)

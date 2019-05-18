@@ -5,12 +5,11 @@ import 'minireset.css'
 import '../../styles.css'
 
 import { Footer, Header, WaveSection } from 'src/components'
-import { useIsVisible, useWindowWidth } from 'src/hooks'
-import { Below, Footer as FooterStyles, Main, Wrapper } from './styles'
+import { useIsVisible } from 'src/hooks'
+import { Below, Main, Wrapper } from './styles'
 
 const Layout = ({ belowTheWaves, children }) => {
 	const [footerRef, footerIsVisible] = useIsVisible()
-	const width = useWindowWidth()
 
 	return (
 		<StaticQuery
@@ -31,15 +30,13 @@ const Layout = ({ belowTheWaves, children }) => {
 					/>
 					<Wrapper className="background transition">
 						<Main>{children}</Main>
-						<FooterStyles as="div" width={width}>
-							<WaveSection topOnly>
-								<div ref={footerRef} />
-								{belowTheWaves ? (
-									<Below>{belowTheWaves}</Below>
-								) : null}
-								<Footer />
-							</WaveSection>
-						</FooterStyles>
+						<WaveSection footer>
+							<div ref={footerRef} />
+							{belowTheWaves ? (
+								<Below>{belowTheWaves}</Below>
+							) : null}
+							<Footer />
+						</WaveSection>
 					</Wrapper>
 				</>
 			)}
