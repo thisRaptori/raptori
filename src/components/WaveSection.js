@@ -16,7 +16,6 @@ const Wrapper = styled.div`
 		${props => (props.footer ? '' : 'margin-left: -2rem;')}
 		padding: 0 2rem;
 		width: ${getSectionWidth};
-		overflow: hidden;
 	}
 `
 
