@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { Link } from 'src/components'
+
 export const HeaderElement = styled.header`
 	border-top: 2px solid var(--primary);
 	left: 0;
@@ -29,21 +31,6 @@ export const HeaderElement = styled.header`
 			display: flex;
 			padding: var(--header-padding);
 		}
-
-		a:not(.site-title) {
-			flex-direction: column;
-			justify-content: center;
-			padding: 0;
-			position: relative;
-			text-decoration: none;
-			width: calc(3 * var(--header-padding));
-
-			span {
-				font-size: 12px;
-				line-height: 1;
-				padding-top: calc(var(--header-padding) / 4);
-			}
-		}
 	}
 
 	.site-title {
@@ -63,6 +50,23 @@ export const HeaderElement = styled.header`
 		a[href*='linkedin'] {
 			display: none;
 		}
+	}
+`
+
+export const NavLink = styled(Link)`
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 !important;
+	position: relative;
+	text-decoration: none;
+	width: calc(3 * var(--header-padding));
+
+	${props => (props.active ? 'color: var(--secondary) !important;' : '')}
+
+	span {
+		font-size: 12px;
+		line-height: 1;
+		padding-top: calc(var(--header-padding) / 4);
 	}
 `
 
@@ -96,10 +100,8 @@ export const MobileNav = styled.div`
 	${props =>
 		props.footerIsVisible &&
 		`
-		background: var(--primary) !important;
-
-		* {
-			color: var(--dark);
-		}
+		background: var(--source) !important;
+		--primary: var(--dark);
+		--secondary: var(--secondary-dark);
 	`}
 `

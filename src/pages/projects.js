@@ -18,7 +18,7 @@ const Projects = styled.div`
 `
 
 const ProjectsPage = () => (
-	<Layout>
+	<Layout activePage="projects">
 		<SEO title="Projects" />
 		<WaveSection>
 			<p>

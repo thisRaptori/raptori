@@ -7,7 +7,7 @@ import { get } from 'src/utils'
 const BlogPage = ({ data, pageContext: { currentPage, pageCount } }) => {
 	const edges = get(data, 'allMarkdownRemark', 'edges') || []
 	return (
-		<Layout>
+		<Layout activePage="blog">
 			<SEO title="Blog" />
 			<h1>Latest Posts</h1>
 			{edges.map(edge => (

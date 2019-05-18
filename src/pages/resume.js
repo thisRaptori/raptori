@@ -4,7 +4,7 @@ import { Icon, Layout, Link, Resume, SEO, WaveSection } from 'src/components'
 import { github } from 'src/links'
 
 const ResumePage = () => (
-	<Layout>
+	<Layout activePage="resume">
 		<SEO title="Joe McGrath Resume" />
 		<Resume>
 			<WaveSection disableTopMargin>

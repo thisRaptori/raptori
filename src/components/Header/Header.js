@@ -3,10 +3,10 @@ import React from 'react'
 
 import { Icon, Link, ThemeToggle } from 'src/components'
 import { github, twitter, linkedin } from 'src/links'
-import { HeaderElement, Space } from './styles'
+import { HeaderElement, NavLink, Space } from './styles'
 import SubNav from './SubNav'
 
-const Header = ({ footerIsVisible, siteTitle }) => (
+const Header = ({ activePage, footerIsVisible, siteTitle }) => (
 	<HeaderElement className="background transition primary-links">
 		<nav>
 			<Link to="/" className="site-title">
@@ -15,30 +15,30 @@ const Header = ({ footerIsVisible, siteTitle }) => (
 			</Link>
 			<Space />
 			<SubNav footerIsVisible={footerIsVisible}>
-				<Link to="/blog">
+				<NavLink active={activePage === 'blog'} to="/blog">
 					<Icon name="Speech" />
 					<span>Blog</span>
-				</Link>
-				<Link to="/projects">
+				</NavLink>
+				<NavLink active={activePage === 'projects'} to="/projects">
 					<Icon name="Rocket" />
 					<span>Projects</span>
-				</Link>
-				<Link to="/resume">
+				</NavLink>
+				<NavLink active={activePage === 'resume'} to="/resume">
 					<Icon name="Info" />
 					<span>Resume</span>
-				</Link>
-				<Link to={github}>
+				</NavLink>
+				<NavLink to={github}>
 					<Icon name="GitHub" />
 					<span>GitHub</span>
-				</Link>
-				<Link to={twitter}>
+				</NavLink>
+				<NavLink to={twitter}>
 					<Icon name="Twitter" />
 					<span>Twitter</span>
-				</Link>
-				<Link to={linkedin}>
+				</NavLink>
+				<NavLink to={linkedin}>
 					<Icon name="LinkedIn" />
 					<span>LinkedIn</span>
-				</Link>
+				</NavLink>
 			</SubNav>
 			<ThemeToggle />
 		</nav>
