@@ -14,6 +14,9 @@ import {
 } from 'src/components'
 
 const Content = styled.div`
+	position: relative;
+	z-index: 1;
+
 	&:not(:first-of-type) *:first-child {
 		margin-top: 0;
 	}
@@ -183,7 +186,7 @@ export default function Template({
 					<SEO title={title} />
 					<PostHeader isArchived={isArchived}>
 						{isArchived ? (
-							<WaveSection>
+							<WaveSection disableTopMargin>
 								<p>
 									<strong>From the archives.</strong> This
 									post is one of several brief overviews of

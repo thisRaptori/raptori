@@ -7,7 +7,7 @@ const ResumePage = () => (
 	<Layout>
 		<SEO title="Joe McGrath Resume" />
 		<Resume>
-			<WaveSection>
+			<WaveSection disableTopMargin>
 				<p>
 					Here's an overview of some of the things I've worked on
 					since I started building software for the web way back in

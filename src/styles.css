@@ -16,6 +16,7 @@
 	--menu-height: calc(
 		var(--header-height) + (var(--header-padding) * 2) + 2px
 	);
+	--skew: 0deg;
 }
 
 /* Transition Styles */
@@ -85,7 +86,7 @@ body {
 	box-sizing: border-box;
 }
 
-@media (max-width: 580px) {
+@media (max-width: 615px) {
 	body {
 		padding-bottom: var(--menu-height);
 	}

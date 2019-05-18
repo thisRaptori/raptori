@@ -4,15 +4,9 @@ import createWave from './wave'
 
 export const Waves = styled.div`
 	height: 120px;
-	overflow: hidden;
 	position: relative;
 	width: 100%;
-
-	${props =>
-		props.invert &&
-		`
-		transform: scaleY(-1);
-	`}
+	${props => props.invert && 'transform: scaleY(-1);'}
 `
 
 export const Wave = styled.div`
@@ -30,9 +24,20 @@ export const Wave = styled.div`
 
 export const Gradient = styled.div`
 	background-image: linear-gradient(transparent, var(--primary));
-	bottom: 0;
+	bottom: -4px;
 	height: 40px;
 	left: 0;
 	position: absolute;
 	right: 0;
+	z-index: 2;
+`
+
+export const Clip = styled.div`
+	bottom: -2px;
+	left: 0;
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	top: -2px;
+	z-index: 1;
 `

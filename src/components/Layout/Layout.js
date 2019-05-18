@@ -4,9 +4,9 @@ import { StaticQuery, graphql } from 'gatsby'
 import 'minireset.css'
 import '../../styles.css'
 
-import { Footer, Header, Waves } from 'src/components'
+import { Footer, Header, WaveSection } from 'src/components'
 import { useIsVisible } from 'src/hooks'
-import { Below, Main } from './styles'
+import { Below, Main, Wrapper } from './styles'
 
 const Layout = ({ belowTheWaves, children }) => {
 	const [footerRef, footerIsVisible] = useIsVisible()
@@ -28,13 +28,16 @@ const Layout = ({ belowTheWaves, children }) => {
 						footerIsVisible={footerIsVisible}
 						siteTitle={data.site.siteMetadata.title}
 					/>
-					<div className="background transition">
+					<Wrapper className="background transition">
 						<Main>{children}</Main>
-					</div>
-					<Waves />
-					<div ref={footerRef} />
-					{belowTheWaves ? <Below>{belowTheWaves}</Below> : null}
-					<Footer />
+						<WaveSection footer>
+							<div ref={footerRef} />
+							{belowTheWaves ? (
+								<Below>{belowTheWaves}</Below>
+							) : null}
+							<Footer />
+						</WaveSection>
+					</Wrapper>
 				</>
 			)}
 		/>
