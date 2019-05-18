@@ -1,9 +1,10 @@
 ;(function() {
 	const gatsbyRoot = document.getElementById('___gatsby')
 	const rotationHandler = event => {
-		gatsbyRoot.style.setProperty('--skew', `${-event.gamma / 4}deg`)
-		console.log(event)
+		gatsbyRoot.style.setProperty(
+			'--skew',
+			`${-Math.min(event.gamma, 30)}deg`
+		)
 	}
-	rotationHandler({ gamma: 90 })
 	window.addEventListener('deviceorientation', rotationHandler, true)
 })()
