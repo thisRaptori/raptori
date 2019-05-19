@@ -15,11 +15,16 @@ const P = styled.p`
 		flex: 1 1 100%;
 		font-size: 0.8em;
 		margin: 0;
+		opacity: 0.5;
 		padding: 0.5em 0;
 
 		::placeholder {
 			color: inherit;
-			opacity: 0.5;
+		}
+
+		&:focus {
+			box-shadow: 0 -1px 0 currentColor inset;
+			opacity: 1;
 		}
 	}
 `

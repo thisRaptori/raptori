@@ -14,7 +14,7 @@ const ThemeToggle = () => {
 	const [isDark, toggleTheme] = useRaptoriTheme()
 
 	return (
-		<Button onClick={toggleTheme}>
+		<Button onClick={toggleTheme} aria-label="visual theme toggle">
 			<Icon name={isDark ? 'Sun' : 'Moon'} />
 		</Button>
 	)

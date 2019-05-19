@@ -7,7 +7,7 @@ const Section = styled.section`
 	margin-bottom: 2rem;
 
 	& + & {
-		margin-top: 6rem;
+		margin-top: calc(6rem + 1vw);
 	}
 
 	& > & {
@@ -81,7 +81,7 @@ const createComponent = (title, root) => {
 				<>
 					{name}&nbsp;
 					{link ? (
-						<Icon name="External" width={12} height={12} />
+						<Icon name="External" size={12} />
 					) : null}
 				</>
 			),

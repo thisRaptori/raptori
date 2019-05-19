@@ -86,7 +86,7 @@ export const MobileNav = styled.div`
 	height: calc(24px + var(--header-padding) + var(--header-padding));
 	justify-content: space-around;
 	left: 0;
-	padding: 0 0 env(safe-area-inset-left) 0 !important;
+	padding: 0 0 env(safe-area-inset-bottom) 0 !important;
 	position: fixed;
 	right: 0;
 

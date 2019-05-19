@@ -78,7 +78,11 @@ const Form = ({
 						<Input key={field.name} {...field} />
 					))}
 					<p>
-						<StyledLink onClick={onSubmitCallback} button>
+						<StyledLink
+							as="button"
+							onClick={onSubmitCallback}
+							button
+						>
 							Submit
 						</StyledLink>
 					</p>
