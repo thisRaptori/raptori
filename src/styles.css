@@ -3,7 +3,8 @@
 :root {
 	--source: #43b9b7;
 	--primary: var(--source);
-	--primary-transparent: #43b9b755;
+	--primary-faded: #43b9b755;
+	--primary-transparent: #43b9b700;
 	--secondary-dark: #28597f;
 	--secondary-light: #8bf4a7;
 	--contrast: #ef7432;
@@ -225,7 +226,7 @@ blockquote {
 }
 
 :focus {
-	outline: 2px solid var(--primary-transparent);
+	outline: 2px solid var(--primary-faded);
 }
 
 .gatsby-resp-image-wrapper {
