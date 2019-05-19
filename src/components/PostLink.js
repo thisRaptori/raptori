@@ -11,7 +11,7 @@ const StyledLink = styled(Link)`
 	text-decoration: none;
 
 	& + & {
-		margin-top: 4rem;
+		margin-top: calc(4rem + 1vw);
 	}
 
 	> * {
