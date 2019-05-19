@@ -88,6 +88,7 @@ const Section = styled.div`
 const Content = styled.div`
 	margin: 0 2rem;
 	max-width: 640px;
+	padding: calc(2rem + 1vw) 0;
 	position: relative;
 	transform: skew(0, calc(0deg - var(--skew)));
 	z-index: 2;
