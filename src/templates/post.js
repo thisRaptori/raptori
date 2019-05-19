@@ -165,14 +165,14 @@ export default function Template({
 					{link ? (
 						<Link to={link} disableUnderline>
 							Open&nbsp;
-							<Icon name="External" width={8} height={8} />
+							<Icon name="External" size={8} />
 						</Link>
 					) : null}
 					{link && repo ? <>&nbsp;•&nbsp;</> : null}
 					{repo ? (
 						<Link to={repo} disableUnderline>
 							Code&nbsp;
-							<Icon name="GitHub" width={16} height={16} />
+							<Icon name="GitHub" size={16} />
 						</Link>
 					) : null}
 				</span>

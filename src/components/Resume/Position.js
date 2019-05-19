@@ -81,7 +81,7 @@ const createComponent = (title, root) => {
 				<>
 					{name}&nbsp;
 					{link ? (
-						<Icon name="External" width={12} height={12} />
+						<Icon name="External" size={12} />
 					) : null}
 				</>
 			),
