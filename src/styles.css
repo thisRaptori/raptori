@@ -89,7 +89,7 @@ body {
 
 @media (max-width: 615px) {
 	body {
-		padding-bottom: var(--menu-height);
+		padding-bottom: calc(var(--menu-height) + env(safe-area-inset-bottom));
 	}
 }
 
