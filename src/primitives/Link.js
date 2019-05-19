@@ -28,13 +28,15 @@ const getButtonStyles = props => {
 	color: ${colour} !important;
 	cursor: pointer;
 	display: inline-block;
+	font-size: inherit;
 	line-height: 34px;
 	margin: 2px 0 !important;
 	padding: ${yPadding}px 12px;
 	text-decoration: none;
 	${mainStyles}
 
-	&:hover {
+	&:hover,
+	&:focus {
 		background: var(--secondary);
 		${hoverStyles}
 	}
