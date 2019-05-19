@@ -7,7 +7,7 @@ const Section = styled.section`
 	margin-bottom: 2rem;
 
 	& + & {
-		margin-top: 6rem;
+		margin-top: calc(6rem + 1vw);
 	}
 
 	& > & {
