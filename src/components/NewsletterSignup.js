@@ -4,6 +4,10 @@ import styled from 'styled-components'
 import { Form, StyledLink } from 'src/components'
 import { encode } from 'src/utils'
 
+const H3 = styled.h3`
+	margin-top: 0;
+`
+
 const NewsletterForm = styled.div`
 	background: var(--dark);
 	border-radius: 6px;
@@ -105,17 +109,17 @@ const NewsletterSignup = () => (
 		)}
 		headline={
 			<>
-				<h3>Want more?</h3>
+				<H3>Want more?</H3>
 				<p>
 					Subscribe to get my latest content via email. I won’t send
 					you spam, and you can unsubscribe at any time.
 				</p>
 			</>
 		}
-		submitting={<h3>Subscribing...</h3>}
+		submitting={<H3>Subscribing...</H3>}
 		success={
 			<>
-				<h3>Success!</h3>
+				<H3>Success!</H3>
 				<p>
 					Thanks for signing up! Remember, you can unsubscribe at any
 					time.
