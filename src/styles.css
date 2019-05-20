@@ -171,6 +171,12 @@ h1 {
 	font-size: 3.6rem;
 }
 
+h1.intro-title {
+	font-size: 6rem;
+	line-height: 1;
+	margin-bottom: -1rem;
+}
+
 h2 {
 	font-size: 3.6rem;
 }
@@ -245,6 +251,10 @@ blockquote {
 
 	h1 {
 		font-size: calc(1.4rem + 2.2vw);
+	}
+
+	h1.intro-title {
+		font-size: calc(3.8rem + 2.2vw);
 	}
 
 	h2 {

@@ -14,7 +14,7 @@ const IndexPage = ({ data }) => {
 		<Layout>
 			<SEO title="Home" />
 			<WaveSection>
-				<h1>Hello!</h1>
+				<h1 className="intro-title">Hello!</h1>
 				<p>
 					I'm Joe McGrath, a software engineer with a background in
 					design, currently working at{' '}
@@ -22,6 +22,7 @@ const IndexPage = ({ data }) => {
 					highly scaleable web apps, contribute to open source, and
 					write fiction in my spare time!
 				</p>
+				<br />
 				<p>
 					<Link to="/blog" button>
 						All Posts
