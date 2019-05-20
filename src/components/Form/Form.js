@@ -11,6 +11,7 @@ const ERROR = 'ERROR'
 const Form = ({
 	error,
 	fields,
+	form,
 	headline,
 	onSubmit,
 	submitting,
@@ -74,21 +75,29 @@ const Form = ({
 						label="If you're not a robot, leave this field blank!"
 						name="bot-field"
 					/>
-					{fieldState.map(field => (
-						<Input key={field.name} {...field} />
-					))}
-					<p>
-						<StyledLink
-							as="button"
-							onClick={onSubmitCallback}
-							button
-						>
-							Submit
-						</StyledLink>
-					</p>
+					{form(fieldState, onSubmitCallback)}
 				</form>
 			)
 	}
 }
+
+const renderForm = (fieldState, onSubmit) => (
+	<>
+		{fieldState.map(field => (
+			<Input key={field.name} {...field} />
+		))}
+		<p>
+			<StyledLink as="button" onClick={onSubmit} button>
+				Submit
+			</StyledLink>
+		</p>
+	</>
+)
+
+Form.defaultProps = {
+	form: renderForm,
+}
+
+Form.Input = Input
 
 export default Form
