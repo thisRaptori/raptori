@@ -9,7 +9,10 @@ const svgPosition = margin => `
 	}`
 
 const getButtonStyles = props => {
-	const colour = props.secondary ? 'var(--primary)' : 'var(--background)'
+	const colour =
+		props.colour ||
+		(props.secondary ? 'var(--primary)' : 'var(--background)')
+	const opacity = props.disabled ? 'opacity: 0.6;' : ''
 	const yPadding = props.secondary ? 0 : 2
 
 	const mainStyles = props.secondary
@@ -30,9 +33,10 @@ const getButtonStyles = props => {
 	display: inline-block;
 	font-size: inherit;
 	line-height: 34px;
-	margin: 2px 0 !important;
+	margin: ${props.margin || '2px'} 0 !important;
 	padding: ${yPadding}px 12px;
 	text-decoration: none;
+	${opacity}
 	${mainStyles}
 
 	&:hover,
