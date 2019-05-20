@@ -24,7 +24,7 @@ And, as mentioned before, in reality most people blend the two approaches togeth
 
 ![](./explorer.jpg)
 
-It should be clear how that applies to software.
+So how does that apply to software?
 
 Generally speaking, engineers are given a set of requirements or a problem statement (or freedom to find their own), and asked to build something which works.
 
