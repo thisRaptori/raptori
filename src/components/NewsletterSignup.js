@@ -22,6 +22,7 @@ const NewsletterForm = styled.div`
 		flex: 1 1 100%;
 		flex-direction: column-reverse;
 		justify-content: space-between;
+		padding: 4px;
 	}
 
 	label * {
