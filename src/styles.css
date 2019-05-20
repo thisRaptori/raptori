@@ -77,8 +77,12 @@ html {
 }
 
 body {
-	font-size: 1.8rem;
 	padding-top: var(--menu-height);
+}
+
+body,
+input {
+	font-size: 1.8rem;
 }
 
 *,
@@ -244,7 +248,8 @@ blockquote {
 }
 
 @media (max-width: 1000px) {
-	body {
+	body,
+	input {
 		font-size: 1.8rem;
 		font-size: calc(1.4rem + 0.4vw);
 	}

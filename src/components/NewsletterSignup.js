@@ -1,13 +1,61 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Form } from 'src/components'
+import { Form, StyledLink } from 'src/components'
 import { encode } from 'src/utils'
 
-const NewsletterStyles = styled.div`
-	--background: var(--source);
-	--primary: var(--dark);
-	--secondary: var(--secondary-dark);
+const NewsletterForm = styled.div`
+	background: var(--dark);
+	border-radius: 6px;
+	color: var(--light);
+	cursor: pointer;
+	display: flex;
+	margin: 2rem 0;
+	padding: 4px;
+
+	* {
+		cursor: pointer;
+	}
+
+	label {
+		display: flex;
+		flex: 1 1 100%;
+		flex-direction: column-reverse;
+		justify-content: space-between;
+	}
+
+	label * {
+		transition: all 0.4s ease;
+	}
+
+	input {
+		background: transparent;
+		border: none;
+		color: inherit;
+		outline: none !important;
+	}
+
+	input[value='']:not(:focus) {
+		font-size: 1rem;
+	}
+
+	input::placeholder {
+		color: inherit;
+		opacity: 0.6;
+	}
+
+	input:focus {
+		border: none;
+	}
+
+	input:focus::placeholder {
+		opacity: 1;
+	}
+
+	input:not([value='']) + span,
+	input:focus + span {
+		font-size: 1rem;
+	}
 `
 
 const fields = [
@@ -31,32 +79,48 @@ const onSubmit = fieldState =>
 	})
 
 const NewsletterSignup = () => (
-	<NewsletterStyles>
-		<Form
-			fields={fields}
-			name="newsletter"
-			onSubmit={onSubmit}
-			headline={
-				<>
-					<h3>Want more?</h3>
-					<p>
-						Subscribe to get my latest content via email. I won’t
-						send you spam, and you can unsubscribe at any time.
-					</p>
-				</>
-			}
-			submitting={<h3>Subscribing...</h3>}
-			success={
-				<>
-					<h3>Success!</h3>
-					<p>
-						Thanks for signing up! Remember, you can unsubscribe at
-						any time.
-					</p>
-				</>
-			}
-		/>
-	</NewsletterStyles>
+	<Form
+		fields={fields}
+		name="newsletter"
+		onSubmit={onSubmit}
+		form={([{ label, ...emailProps }], onSubmit) => (
+			<NewsletterForm>
+				<label>
+					<input {...emailProps} type="email" />
+					<span>{label}</span>
+				</label>
+				<StyledLink
+					disabled={!emailProps.value.length}
+					as="button"
+					onClick={onSubmit}
+					colour="var(--dark)"
+					margin="0"
+					button
+				>
+					Subscribe
+				</StyledLink>
+			</NewsletterForm>
+		)}
+		headline={
+			<>
+				<h3>Want more?</h3>
+				<p>
+					Subscribe to get my latest content via email. I won’t send
+					you spam, and you can unsubscribe at any time.
+				</p>
+			</>
+		}
+		submitting={<h3>Subscribing...</h3>}
+		success={
+			<>
+				<h3>Success!</h3>
+				<p>
+					Thanks for signing up! Remember, you can unsubscribe at any
+					time.
+				</p>
+			</>
+		}
+	/>
 )
 
 export default NewsletterSignup
