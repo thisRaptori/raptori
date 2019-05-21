@@ -15,17 +15,15 @@ A couple of years ago, I had a portfolio website which felt pretty decent. It wa
 
 However, that skillset did not fit the path I wanted to take. It was suited for working at a web agency, building websites for small to medium companies. As much as I had enjoyed that work, it didn't capture my imagination any more. I wanted to work on larger, more complex products instead - and that required some different skills.
 
-After trying out a couple of frameworks and libraries, it was clear that React was the right tech for me to learn. It felt natural to work with, was increasingly popular, and seemed perfect for the kind of project I wanted to aim to work on.
+After trying out a couple of frameworks and libraries, it was clear that React was the right tech for me to learn. It felt natural to work with, was increasingly popular, and seemed perfect for the kind of project I wanted to work on.
 
-As a learning exercise, I rebuilt my portfolio using React. This worked really well, as it helped me get comfortable with the library while also giving an honest representation of how well I could use it.
+As a learning exercise, I rebuilt my portfolio using React. This turned out to be a great idea, as it helped me get comfortable with the library while also giving an honest representation of how well I could use it.
 
-Within a few weeks I had just the kind of offer I had been hoping for. I would be working on a SaaS product - and I would get to use React and the surrounding ecosystem every day.
+Within a few weeks I had the job offer I had been hoping for. I would be joining a startup working on an interesting SaaS product - and I would get to use React and the surrounding ecosystem every day.
 
-It's funny that doing things correctly without thinking can mean you don't even realise what it was that you did right.
+Fast forward a couple of years, and my portfolio site had become an increasingly awkward memento.
 
-Fast forward a couple of years, and that site had turned into an increasingly awkward memento. I had spent those years working full-time on complex products built using React, learning and growing at a ridiculous rate.
-
-Yet my first React project was still the first thing many people saw of my code. When they asked me what I would change about the project (which happened more than once), the honest answer was "every single line".
+I had spent those years working full-time on complex products built using React, learning and growing at a ridiculous rate, yet the project I used to first try out React was still the first thing many people saw of my code. When they asked me what I would change about the project (which happened more than once), the honest answer was "every single line".
 
 ![](./fiery-sky.jpg)
 
@@ -45,17 +43,17 @@ By the time the site was getting close to the finish line, I was preparing to sw
 
 At the start of this time off, one of the first things I did was build the site outside of developer mode for the first time ...and everything promptly broke.
 
-It had completely slipped my mind that I should probably test the server-side rendering of the app, even though that's more or less the entire selling point of the tech. I'd got it so wrong that the site wouldn't even compile!
+It had completely slipped my mind that I should probably test the server-side rendering aspect of the app, even though that's arguably the main selling point of the tech. I'd got it so wrong that the site wouldn't even compile!
 
 By following the error messages and digging through the code, I discovered what I had done wrong. I had created several hooks which used the `document` or `window` global variables to gain contextual information about the browser, neither of which exist at all when rendering outside the browser environment.
 
-Those issues were easy to fix - I just made the hooks fall back to sane values when server rendering - but then I saw a much more confusing problem.
+Those issues were easy to fix: I just made the hooks fall back to sane values when server rendering. But then I saw a much more confusing problem.
 
 ![](./new-site-light.png)
 
-One feature I had really wanted to include was a light/dark mode toggle similar to the one on [Dan Abramov's site](https://overreacted.io/). I prefer dark mode, but not everyone feels the same, so it's really nice to provide the option to switch.
+One feature I had really wanted to include was a light/dark mode toggle similar to the one on [Dan Abramov's site](https://overreacted.io/). I prefer dark mode, but not everyone feels the same, and it's really nice to provide the option to switch.
 
-The feature itself worked fine. The toggle icon, however, was broken - _sometimes_. It worked most of the time, but not always. That's never a good sign.
+The feature itself worked fine. The toggle icon itself, however, was broken - _sometimes_. It looked correct most of the time, but not always - and it wasn't clear at first how to replicate the issue, which is always a bad sign.
 
 The svg icons are implemented as two separate components - a `Sun` and a `Moon` - which are both exposed as part of a generic `Icon` component. The `ThemeToggle` component uses a `useRaptoriTheme` hook to switch between the two depending on the selected theme.
 
@@ -137,28 +135,28 @@ The only place which actually showed anything out of place was the rendered DOM 
 <!-- actual -->
 ```
 
-The properties on the `svg` element were incorrect, and the first `path` child element was wrong as well. Instead, the `svg` props were what I'd expect for the _light theme's_ icon; the incorrect `path` was the one used for the Moon icon.
+The properties on the `svg` element were incorrect, and the first `path` child element was wrong as well. Instead, the `svg` props were what I'd expect for the _light theme's_ Moon icon; the incorrect `path` was the one created for the Moon icon as well. React was rendering a weird mix of the two different icons.
 
 So what was going on? I'm still not entirely sure, but as best as I can tell:
 
 1.  Gatsby server-side-rendered the site, defaulting to light mode (rendering the Moon icon).
 
-    This meant that Gatsby rendered the react code to a HTML string. Focusing on the component we care about, its output would have been the raw `svg` DOM.
+    This meant that Gatsby rendered the react code to an HTML string. For the component we care about, this output would have been the raw `svg` DOM.
 
 1.  This HTML was served to the user. Once the page loaded, React initialised, and took over the pre-rendered DOM.
 
     It re-rendered the app, diffing against the existing DOM instead of rendering from scratch like it would without the SSR.
 
 1.  The stored theme setting is retrieved from local storage - it's possible that this happened while React was in the middle of hydrating.
-1.  React re-rendered the icon, but failed to diff the original and new DOM correctly, resulting in the weird mix of the two icons.
+1.  React re-rendered the icon, but failed to correctly diff the original and new DOM, resulting in the mixed icons.
 
     I'm actually not sure whether this was caused by my code, something in Gatsby, or something in React. Hopefully I'll have some time to dig into this at some point!
 
 ![](./lightbulb.jpg)
 
-That felt like a bug which could take a while to investigate - not something I wanted to look into at that point. But I didn't want to publish the site with a broken icon...
+It felt like a bug which could take a while to investigate - not something I wanted to look into at that point. But I didn't want to publish the site with a broken icon...
 
-So I tried something stupid! Based on the assumption that the problem was that React was diffing the DOM and failing to fully realise which props it should change, I changed the DOM structure of one of the icons slightly: I added a `div` around the `svg`.
+So I tried something stupid. If the problem was that React failed to correctly resolve which properties it should change when diffing the DOM, perhaps making the DOM _more_ different would make it do the right thing! I changed the DOM structure of one of the icons slightly: I added a `div` around the `svg`.
 
 Amazingly, that actually worked.
 
@@ -166,4 +164,4 @@ While it's nice that it worked in the end, all of this would have been much easi
 
 Lesson learned: try to look for different contexts you're unaware of, aim to understand the constraints those different contexts place on the code you write, and ensure your code runs under those constraints well before you're getting ready to ship.
 
-And make sure you use Gatsby, because it really is brilliant.
+And make sure you try out Gatsby, because it really is brilliant.
