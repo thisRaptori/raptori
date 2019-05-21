@@ -3,6 +3,7 @@ path: '/blog/foundation'
 date: '2011-01-01'
 title: 'Foundation Book Covers'
 subtitle: 'Archive - University design project: book covers'
+featuredImage: './explicit.jpg'
 ---
 
 The brief was to create two poster advertisements for a book which was released in 1960 or earlier. The adverts had to be in some way representative of the book, and one had to be explicit and the other implicit. I also decided to mock up book covers based on the poster designs.

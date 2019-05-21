@@ -3,6 +3,7 @@ path: '/blog/just-keep-walking'
 date: '2017-04-30'
 title: 'Just Keep Walking'
 subtitle: 'Archive - A React-powered progressive web app'
+featueredImage: './screenshots.png'
 ---
 
 My wife tries to keep track of how much time we spend walking our dog - we have a husky, so it's a <em>lot</em> of walking - but the apps available never quite fit what she wants.

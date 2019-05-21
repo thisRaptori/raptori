@@ -3,6 +3,7 @@ module.exports = {
 		title: `Raptori`,
 		description: `Joe McGrath - Portfolio`,
 		author: `@thisRaptori`,
+		url: `https://raptori.dev`
 	},
 	plugins: [
 		`gatsby-plugin-styled-components`,

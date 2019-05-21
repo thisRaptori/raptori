@@ -3,6 +3,7 @@ path: '/blog/stamps'
 date: '2010-10-01'
 title: 'Sustainability Stamps'
 subtitle: 'Archive - University graphic design project: postage stamps'
+featuredImage: './large.png'
 ---
 
 The brief was to create a set of six stamps which encourage people to make small changes in their own lives which would help the environment. They had to work equally well as individual stamps and as a set of six, and must also work well both at a large size and at the actual size of a stamp.

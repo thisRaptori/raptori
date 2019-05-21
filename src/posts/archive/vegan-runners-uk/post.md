@@ -3,6 +3,7 @@ path: '/blog/vegan-runners-uk'
 date: '2013-08-01'
 title: 'Vegan Runners UK'
 subtitle: 'Archive - Identity design for a nationwide running club'
+featuredImage: './stationery.jpg'
 ---
 
 Vegan Runners UK wanted an identity design to help make their brand attract more notice and look both professional and playful. Their ideal logo would incorporate imagery related to both running and veganism. They wanted something that felt modern, and wanted to retain their existing black and green colour scheme.
