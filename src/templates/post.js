@@ -21,6 +21,15 @@ const Content = styled.div`
 	&:not(:first-of-type) *:first-child {
 		margin-top: 0;
 	}
+
+	ul {
+		list-style: disc;
+		margin-left: 1em;
+	}
+
+	ol {
+		margin-left: 1em;
+	}
 `
 
 const PostHeader = styled.header`
@@ -227,14 +236,14 @@ export default function Template({
 						{next ? (
 							<Link to={next.path} secondary button>
 								<span>←</span>&nbsp;
-								<span class="text">{next.title}</span>
+								<span className="text">{next.title}</span>
 							</Link>
 						) : (
 							<span />
 						)}
 						{previous ? (
 							<Link to={previous.path} secondary button>
-								<span class="text">{previous.title}</span>
+								<span className="text">{previous.title}</span>
 								&nbsp;
 								<span>→</span>
 							</Link>
