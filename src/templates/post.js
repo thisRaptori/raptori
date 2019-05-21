@@ -12,6 +12,7 @@ import {
 	SEO,
 	WaveSection,
 } from 'src/components'
+import { get } from 'src/utils'
 
 const Content = styled.div`
 	position: relative;
@@ -121,12 +122,25 @@ export default function Template({
 	data: {
 		markdownRemark: {
 			fields: { readingTime },
-			frontmatter: { date, link, published, repo, subtitle, title },
+			frontmatter: {
+				date,
+				featuredImage,
+				link,
+				published,
+				repo,
+				subtitle,
+				title,
+			},
 			html,
+		},
+		site: {
+			siteMetadata: { url: siteUrl },
 		},
 	},
 	pageContext: { next, previous },
 }) {
+	const imagePath = get(featuredImage, 'childImageSharp', 'fluid', 'src')
+	const image = imagePath && `${siteUrl}${imagePath}`
 	const isArchived = subtitle.startsWith('Archive')
 	const content = html.split('<waves>').map((chunk, i) =>
 		i % 2 ? (
@@ -184,7 +198,7 @@ export default function Template({
 			activePage="blog"
 			children={
 				<>
-					<SEO title={title} />
+					<SEO description={subtitle} title={title} image={image} />
 					<PostHeader isArchived={isArchived}>
 						{isArchived ? (
 							<WaveSection disableTopMargin>
@@ -237,6 +251,11 @@ export default function Template({
 
 export const pageQuery = graphql`
 	query($path: String!) {
+		site {
+			siteMetadata {
+				url
+			}
+		}
 		markdownRemark(frontmatter: { path: { eq: $path } }) {
 			html
 			frontmatter {
@@ -247,6 +266,13 @@ export const pageQuery = graphql`
 				repo
 				subtitle
 				title
+				featuredImage {
+					childImageSharp {
+						fluid {
+							src
+						}
+					}
+				}
 			}
 			fields {
 				readingTime {

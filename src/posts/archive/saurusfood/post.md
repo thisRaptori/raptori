@@ -4,6 +4,7 @@ date: '2015-12-01'
 title: 'Saurusfood'
 subtitle: 'Archive - Web design & WordPress theme creation'
 link: 'http://saurusfood.com/'
+featuredImage: './home.png'
 ---
 
 A responsive recipe blog using the WordPress platform.

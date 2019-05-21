@@ -3,6 +3,7 @@ path: '/blog/knutsford-tri-club'
 date: '2010-08-01'
 title: 'Knutsford Tri Club'
 subtitle: 'Archive - Identity design for a local triathlon club'
+featuredImage: './stationery.jpg'
 ---
 
 The Knutsford Triathlon Club wanted an identity design to help foster a sense of respectability, culture, and pride in their community. Their ideal logo would incorporate some kind of representation of the Knutsford area, and ideally some form of a shield shape to help combine a modern aesthetic with a sense of tradition. They specified a colour scheme of black, white, and pink.

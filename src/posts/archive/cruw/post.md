@@ -4,6 +4,7 @@ date: '2013-05-02'
 title: 'CRUW Wellington'
 subtitle: 'Archive - Identity design, web design & development for a charity in New Zealand'
 link: 'http://cruw.org.nz/'
+featuredImage: './splash.png'
 ---
 
 CRUW is a small charity based in Wellington, New Zealand, dedicated to the care and rescue of urban wildlife. As a new charity they had been using a stock image of a sparrow as their logo, and wanted a new identity which would be unique, simple, and stylish, and which would represent their care for the native and introduced species found in their area.
