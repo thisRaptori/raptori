@@ -1,7 +1,7 @@
 ---
-path: '/blog/i-know-what-im-doing'
+path: '/blog/always-check-your-work'
 date: '2019-05-15'
-title: "I Know What I'm Doing"
+title: "Note to self: always check your work"
 subtitle: 'Trying out some new technology is always an adventure, especially if you start by assuming you know how to use it.'
 tags: ['featured']
 featuredImage: './new-site-dark.png'
