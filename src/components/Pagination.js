@@ -40,7 +40,7 @@ const Pagination = ({ currentPage, pageCount }) => (
 			<ListItem key={i + 1}>
 				{React.createElement(currentPage === i + 1 ? 'span' : Link, {
 					children: i + 1,
-					to: i === 0 ? `/blog` : `/blog/${i}`,
+					to: i === 0 ? `/blog` : `/blog/${i + 1}`,
 				})}
 			</ListItem>
 		))}

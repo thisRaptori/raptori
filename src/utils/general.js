@@ -12,7 +12,7 @@ export const encode = data =>
 		.join('&')
 
 export const get = (source, next, ...paths) =>
-	paths.length && source[next]
+	paths.length && source && source[next]
 		? get(source[next], ...paths)
 		: source && source[next]
 

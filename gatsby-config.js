@@ -3,7 +3,7 @@ module.exports = {
 		title: `Raptori`,
 		description: `Joe McGrath - Portfolio`,
 		author: `@thisRaptori`,
-		url: `https://raptori.dev`
+		url: `https://raptori.dev`,
 	},
 	plugins: [
 		`gatsby-plugin-styled-components`,
@@ -37,6 +37,13 @@ module.exports = {
 							backgroundColor: 'transparent',
 							maxWidth: 900,
 							linkImagesToOriginal: false,
+						},
+					},
+					{
+						resolve: `gatsby-remark-prismjs`,
+						options: {
+							aliases: { js: 'javascript', html: 'markup' },
+							noInlineHighlight: true,
 						},
 					},
 				],

@@ -39,7 +39,7 @@ exports.createPages = ({ actions, graphql }) => {
 		}
 
 		const posts = result.data.allMarkdownRemark.edges
-		const postsPerPage = 20
+		const postsPerPage = 10
 		const pageCount = Math.ceil(posts.length / postsPerPage)
 
 		posts.forEach(({ node, next, previous }) => {
@@ -55,7 +55,7 @@ exports.createPages = ({ actions, graphql }) => {
 
 		Array.from({ length: pageCount }).forEach((_, i) => {
 			createPage({
-				path: i === 0 ? '/blog' : `/blog/${i}`,
+				path: i === 0 ? '/blog' : `/blog/${i + 1}`,
 				component: blogListTemplate,
 				context: {
 					limit: postsPerPage,
