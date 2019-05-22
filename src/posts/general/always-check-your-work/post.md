@@ -9,7 +9,7 @@ featuredImage: './new-site-dark.png'
 
 Trying out some new technology is always an adventure, especially if you start by assuming you know how to use it.
 
-A couple of years ago, I had a portfolio website which felt pretty decent. It was a good representation of my skillset at that point - a clean design, semantic HTML, clean CSS, and some interactions and animations added via jQuery.
+A couple of years ago, I had a portfolio website which felt pretty decent. It was a good representation of my skillset at that point - a nice design, semantic HTML, clean CSS, and some interactions and animations added via jQuery.
 
 ![](./old-site.png)
 
@@ -53,7 +53,7 @@ Those issues were easy to fix: I just made the hooks fall back to sane values wh
 
 One feature I had really wanted to include was a light/dark mode toggle similar to the one on [Dan Abramov's site](https://overreacted.io/). I prefer dark mode, but not everyone feels the same, and it's really nice to provide the option to switch.
 
-The feature itself worked fine. The toggle icon itself, however, was broken - _sometimes_. It looked correct most of the time, but not always - and it wasn't clear at first how to replicate the issue, which is always a bad sign.
+The feature itself worked fine. The toggle icon, however, was broken - _sometimes_. The correct icon was rendered most of the time, but not always - and it wasn't clear at first how to replicate the issue, which is always a bad sign.
 
 The svg icons are implemented as two separate components - a `Sun` and a `Moon` - which are both exposed as part of a generic `Icon` component. The `ThemeToggle` component uses a `useRaptoriTheme` hook to switch between the two depending on the selected theme.
 
@@ -83,7 +83,7 @@ This implied that either something was broken with the server-side rendering, or
 
 I spent a bit of time testing things. Explicitly setting the props on the icon made it work. Tracing the data through the app via the React devtools showed that all the props being passed down were correct.
 
-The only place which actually showed anything out of place was the rendered DOM itself. Compare the expected to the actual markup:
+The only area which showed anything out of place was the rendered DOM itself. Compare the expected to the actual markup:
 
 ```html
 <!-- expected -->
@@ -135,7 +135,7 @@ The only place which actually showed anything out of place was the rendered DOM 
 <!-- actual -->
 ```
 
-The properties on the `svg` element were incorrect, and the first `path` child element was wrong as well. Instead, the `svg` props were what I'd expect for the _light theme's_ Moon icon; the incorrect `path` was the one created for the Moon icon as well. React was rendering a weird mix of the two different icons.
+The properties on the `svg` element were incorrect, and the first `path` child element was wrong as well. The `svg` props were what I'd expect for the _light_ theme's Moon icon instead of the dark theme's Sun icon; the incorrect `path` was the one created for the Moon icon as well. React was rendering a weird mix of the two different icons.
 
 So what was going on? I'm still not entirely sure, but as best as I can tell:
 
