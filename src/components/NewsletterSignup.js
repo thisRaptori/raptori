@@ -39,6 +39,7 @@ const NewsletterForm = styled.div`
 		border: none;
 		color: inherit;
 		outline: none !important;
+		width: 100%;
 	}
 
 	input[value='']:not(:focus) {
