@@ -57,13 +57,20 @@ button {
 }
 
 @keyframes jump {
-	20%,
-	80% {
+	20% {
 		transform: rotate(-10deg);
 	}
 
 	50% {
 		transform: scale(1.2) rotate(10deg);
+	}
+
+	80% {
+		transform: scale(1.2) rotate(-10deg);
+	}
+
+	100% {
+		transform: scale(1.2);
 	}
 }
 /* End Transition Styles */
