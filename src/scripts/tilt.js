@@ -1,8 +1,9 @@
 ;(function() {
+	let waitUntilScrollEnd
 	let throttle
 	const gatsbyRoot = document.getElementById('___gatsby')
 	const rotationHandler = event => {
-		if (throttle) {
+		if (waitUntilScrollEnd || throttle) {
 			return
 		}
 		throttle = setTimeout(() => {
@@ -13,5 +14,14 @@
 		const skewValue = event.beta > 90 ? skewStrength : -skewStrength
 		gatsbyRoot.style.setProperty('--skew', `${skewValue}deg`)
 	}
+	const scrollHandler = () => {
+		if (waitUntilScrollEnd) {
+			clearTimeout(waitUntilScrollEnd)
+		}
+		waitUntilScrollEnd = setTimeout(() => {
+			waitUntilScrollEnd = undefined
+		}, 32)
+	}
 	window.addEventListener('deviceorientation', rotationHandler, true)
+	window.addEventListener('scroll', scrollHandler, true)
 })()
