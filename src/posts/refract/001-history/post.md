@@ -6,7 +6,7 @@ subtitle: 'Have you ever wondered how open-source libraries built by companies c
 tags: ['featured', 'refract']
 featuredImage: './refract-logo.jpg'
 published: [
-    ['FreeCodeCamp', 'https://medium.freecodecamp.org/how-we-harnessed-the-power-of-reactive-programming-with-refract-87f269ac779e'],
+    ['FreeCodeCamp', 'https://www.freecodecamp.org/news/how-we-harnessed-the-power-of-reactive-programming-with-refract-87f269ac779e/'],
     ['FanDuel Life', 'https://medium.com/fanduel-life/how-we-harnessed-the-power-of-reactive-programming-with-refract-a9e6568281e1']
 ]
 link: 'https://refract.js.org'
