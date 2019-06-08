@@ -11,11 +11,41 @@ const Waves = ({ invert, offset }) => {
 		<Wrapper className="background transition" invert={invert}>
 			<Gradient />
 			<Clip className="background transition">
-				<Wave offset={offset} fill={fill} speed={0.8} size={1.0} />
-				<Wave offset={offset} fill={fill} speed={1.1} size={1.1} />
-				<Wave offset={offset} fill={fill} speed={1.2} size={0.9} />
-				<Wave offset={offset} fill={fill} speed={1.3} size={0.7} />
-				<Wave offset={offset} fill={fill} speed={1.6} size={0.8} />
+				<Wave
+					offset={offset}
+					fill={fill}
+					speed={0.8}
+					size={1.0}
+					as={isDark && 'span'}
+				/>
+				<Wave
+					offset={offset}
+					fill={fill}
+					speed={1.1}
+					size={1.1}
+					as={isDark && 'span'}
+				/>
+				<Wave
+					offset={offset}
+					fill={fill}
+					speed={1.2}
+					size={0.9}
+					as={isDark && 'span'}
+				/>
+				<Wave
+					offset={offset}
+					fill={fill}
+					speed={1.3}
+					size={0.7}
+					as={isDark && 'span'}
+				/>
+				<Wave
+					offset={offset}
+					fill={fill}
+					speed={1.6}
+					size={0.8}
+					as={isDark && 'span'}
+				/>
 			</Clip>
 		</Wrapper>
 	)
