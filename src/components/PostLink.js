@@ -10,6 +10,25 @@ const StyledLink = styled(Link)`
 	padding: 1rem;
 	text-decoration: none;
 
+	${props =>
+		!props.inFooter
+			? `
+		box-shadow:
+			0 0.5rem 1rem rgba(25, 33, 41, 0.3),
+			0 0 1rem rgba(25, 33, 41, 0.4);
+		border-radius: .5rem;
+		background: var(--background);
+		transition: all ease 0.1s;
+
+		&:hover {
+			box-shadow:
+				0 1rem 2rem rgba(25,33,41,0.3),
+				0 0 1rem rgba(25, 33, 41, 0.4);
+			transform: translate(0, -.2rem) scale(1.02);
+		}
+	`
+			: ''}
+
 	& + & {
 		margin-top: calc(4rem + 1vw);
 	}
