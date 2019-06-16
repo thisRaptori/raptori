@@ -29,6 +29,8 @@ const StyledLink = styled(Link)`
 	`
 			: ''}
 
+	${props => (props.featured ? 'grid-column-end: span 2;' : '')}
+
 	& + & {
 		margin-top: calc(4rem + 1vw);
 	}
@@ -43,13 +45,18 @@ const StyledLink = styled(Link)`
 `
 
 const PostLink = ({
+	featured,
 	post: {
 		fields: { readingTime },
-		frontmatter: { date, path, subtitle, title },
+		frontmatter: { date, path, subtitle, tags, title },
 	},
 	inFooter,
 }) => (
-	<StyledLink to={path} inFooter={inFooter}>
+	<StyledLink
+		featured={featured || (tags || []).includes('featured')}
+		inFooter={inFooter}
+		to={path}
+	>
 		<h4>{title}</h4>
 		<MetaText italic>
 			{date} • {readingTime.text}
