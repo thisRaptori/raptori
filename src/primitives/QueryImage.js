@@ -1,4 +1,5 @@
 import React from 'react'
+import { StaticQuery, graphql } from 'gatsby'
 
 import Image from './Image'
 import { get } from 'src/utils'
@@ -28,7 +29,7 @@ const QueryImage = ({ name, ...props }) => (
 				return node.name === name || node.relativePath.includes(name)
 			})
 
-			return <Image image={image} {...props} />
+			return <Image image={image.node} {...props} />
 		}}
 	/>
 )

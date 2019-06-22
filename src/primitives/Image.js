@@ -1,10 +1,9 @@
 import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
 import { get } from 'src/utils'
 
-const Image = ({ height, image, style, width }) => {
+const Image = ({ height, image, style, width, ...props }) => {
 	const combinedStyles = { ...style }
 	if (width) {
 		combinedStyles.width = width
@@ -15,8 +14,8 @@ const Image = ({ height, image, style, width }) => {
 
 	return image ? (
 		<Img
-			fluid={get(image, 'node', 'childImageSharp', 'fluid')}
-			style={combinedStyle}
+			fluid={get(image, 'childImageSharp', 'fluid')}
+			style={combinedStyles}
 			{...props}
 		/>
 	) : null
