@@ -20,7 +20,7 @@ const StyledLink = styled(Link)`
 			0 0 1rem var(--shadow);
 		border-radius: .5rem;
 		background: var(--background);
-		transition: all ease 0.1s;
+		transition: all linear .25s;
 
 		&:hover {
 			box-shadow:
