@@ -3,6 +3,7 @@ path: '/blog/stamps'
 date: '2010-10-01'
 title: 'Sustainability Stamps'
 subtitle: 'Archive - University graphic design project: postage stamps'
+tags: ['featured']
 featuredImage: './large.png'
 ---
 

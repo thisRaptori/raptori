@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import {
 	Icon,
-	Image,
 	Layout,
 	Link,
+	QueryImage,
 	SEO,
 	Small,
 	WaveSection,
@@ -31,7 +31,7 @@ const ProjectsPage = () => (
 		<Projects>
 			<section>
 				<h3>
-					<Image name="refract" width={300} />
+					<QueryImage name="refract" width={300} />
 				</h3>
 				<p>
 					Refract is a JavaScript library which makes makes reactive
@@ -78,7 +78,7 @@ const ProjectsPage = () => (
 
 			<WaveSection as="section">
 				<h3>
-					<Image
+					<QueryImage
 						name="harmony"
 						style={{
 							display: 'inline-block',

@@ -1,7 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Layout, Link, PostLink, SEO, WaveSection } from 'src/components'
+import {
+	Layout,
+	Link,
+	PostGrid,
+	PostLink,
+	SEO,
+	WaveSection,
+} from 'src/components'
 import { get } from 'src/utils'
 
 const H3 = styled.h3`
@@ -40,9 +47,15 @@ const IndexPage = ({ data }) => {
 			{edges.length ? (
 				<>
 					<H3>Featured Posts</H3>
-					{edges.map(edge => (
-						<PostLink key={edge.node.id} post={edge.node} />
-					))}
+					<PostGrid>
+						{edges.map((edge, i) => (
+							<PostLink
+								key={edge.node.id}
+								featured={i === 0}
+								post={edge.node}
+							/>
+						))}
+					</PostGrid>
 				</>
 			) : null}
 		</Layout>
@@ -63,7 +76,13 @@ export const pageQuery = graphql`
 					id
 					excerpt(pruneLength: 250)
 					frontmatter {
-						date(formatString: "MMMM DD, YYYY")
+						featuredImage {
+							childImageSharp {
+								fluid {
+									src
+								}
+							}
+						}
 						path
 						title
 						subtitle
