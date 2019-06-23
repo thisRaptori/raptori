@@ -11,7 +11,9 @@
 	--contrast-secondary-light: #efb94c;
 	--contrast-secondary-dark: #d1331b;
 	--light: #d5e2eb;
+	--light-shadow: #abb6bf66;
 	--dark: #2f3d4c;
+	--dark-shadow: #19212966;
 	--header-height: 3.2rem;
 	--header-padding: 2rem;
 	--menu-height: calc(
@@ -106,6 +108,7 @@ input {
 
 body {
 	--background: var(--light);
+	--shadow: var(--light-shadow);
 	--text: var(--dark);
 	--secondary: var(--secondary-dark);
 	--contrast-secondary: var(--contrast-secondary-dark);
@@ -113,6 +116,7 @@ body {
 
 body.dark {
 	--background: var(--dark);
+	--shadow: var(--dark-shadow);
 	--text: var(--light);
 	--secondary: var(--secondary-light);
 	--contrast-secondary: var(--contrast-secondary-light);

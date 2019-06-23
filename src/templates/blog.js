@@ -35,6 +35,13 @@ export const pageQuery = graphql`
 					excerpt(pruneLength: 250)
 					frontmatter {
 						date(formatString: "MMMM DD, YYYY")
+						featuredImage {
+							childImageSharp {
+								fluid {
+									src
+								}
+							}
+						}
 						path
 						tags
 						title
