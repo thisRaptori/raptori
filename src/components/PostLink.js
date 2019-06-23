@@ -40,31 +40,28 @@ const StyledLink = styled(Link)`
 
 	.gatsby-image-wrapper {
 		background: var(--text);
+		flex: 0 0 160px;
+		margin: -1rem -1rem 1rem -1rem;
 	}
 
-	${props =>
-		props.featured
-			? `
-		grid-column-end: span 2;
-		min-height: 230px;
-		padding: 2rem 1.5rem 2rem calc(50% + 5rem);
+	@media (min-width: 600px) {
+		${props =>
+			props.featured
+				? `
+			grid-column-end: span 2;
+			min-height: 230px;
+			padding: 2rem 1.5rem 2rem calc(50% + 5rem);
 
-		.gatsby-image-wrapper {
-			bottom: 0;
-			left: 0;
-			margin-right: -2rem;
-			position: absolute !important;
-			right: 50%;
-			top: 0;
-		}
-	`
-			: `
-		.gatsby-image-wrapper {
-			flex: 0 0 160px;
-			margin: -1rem -1rem 1rem -1rem;
-		}
-		`}
-
+			.gatsby-image-wrapper {
+				bottom: 0;
+				left: 0;
+				margin: 0 -2rem 0 0;
+				position: absolute !important;
+				right: 50%;
+				top: 0;
+			}`
+				: ''}
+	}
 	& + & {
 		margin-top: calc(4rem + 1vw);
 	}
