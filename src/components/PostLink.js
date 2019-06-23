@@ -26,8 +26,6 @@ const StyledLink = styled(Link)`
 			0 0.5rem 1rem var(--shadow),
 			0 0 1rem var(--shadow);
 		border-radius: .5rem;
-		background: var(--background);
-		transition: all linear .25s;
 
 		&:hover {
 			box-shadow:
@@ -89,11 +87,12 @@ const PostLink = ({
 	inFooter,
 }) => (
 	<StyledLink
+		className="background transition"
 		featured={featured || (tags || []).includes('featured')}
 		inFooter={inFooter}
 		to={path}
 	>
-		<Image image={featuredImage} />
+		<Image className="transition" image={featuredImage} />
 		<h4>{title}</h4>
 		{subtitle ? <MetaText>{subtitle}</MetaText> : null}
 		<hr />
