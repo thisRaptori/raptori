@@ -3,7 +3,7 @@ path: '/blog/explorers-and-architects'
 date: '2019-05-20'
 title: 'Explorers and Architects'
 subtitle: 'How does the famous divide in the writing community apply to programming?'
-tags: ['featured']
+tags: ['home']
 featuredImage: './blueprint.jpg'
 ---
 
