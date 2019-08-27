@@ -1,15 +1,15 @@
 ---
 path: '/blog/impostor-syndrome-vs-the-dunning-kruger-effect'
-date: '2019-06-25'
+date: '2019-08-30'
 title: 'Impostor Syndrome vs the Dunning-Kruger Effect'
-subtitle: 'To find the sweet spot between impostor syndrome and overconfidence, you need to understand that you can be wrong without it reflecting on your competence.'
+subtitle: 'To find the sweet spot between impostor syndrome and overconfidence, you need to understand that you can make mistakes without it reflecting on your competence.'
 tags: ['featured', 'home']
 featuredImage: './balance.jpg'
 ---
 
-Impostor syndrome and the Dunning-Kruger effect are two common psychological problems which haunt many in the dev community and beyond. Since these have been explored in-depth by a huge number of insightful people, here's my conclusion in a nutshell:
+Impostor syndrome and the Dunning-Kruger effect are two common psychological problems which haunt many in the dev community and beyond. Since these have been explored in depth by a huge number of insightful people, here's my conclusion in a nutshell:
 
-> To find the sweet spot between impostor syndrome and overconfidence, you need to understand that you can be wrong without it reflecting on your competence.
+> To find the sweet spot between impostor syndrome and overconfidence, you need to understand that you can make mistakes without it reflecting on your competence.
 
 That's it.
 
@@ -47,6 +47,10 @@ Instead, we need some balance.
 
 The way out of this catch-22 is to clearly define what the middle ground is, what mindset people should aim for which will help them avoid both extremes.
 
+For me, the first step towards that mindset was understanding that you can make mistakes without it reflecting on your competence. When you internalise this, you can create the distance between yourself and your work which lets you do your best without the fear it won't be enough.
+
+Failure is not something to be feared - it's an opportunity to learn and improve. Success is something to celebrate - but it's also a chance to learn, to figure out what went right and make sure it's something you repeat.
+
 And so, we have returned to our conclusion:
 
-> To find the sweet spot between impostor syndrome and overconfidence, you need to understand that you can be wrong without it reflecting on your competence.
+> To find the sweet spot between impostor syndrome and overconfidence, you need to understand that you can make mistakes without it reflecting on your competence.
