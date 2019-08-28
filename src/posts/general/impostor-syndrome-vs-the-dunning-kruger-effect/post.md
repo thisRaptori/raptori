@@ -59,4 +59,4 @@ And so, we have returned to our conclusion:
 
 > To find the sweet spot between impostor syndrome and overconfidence, you first need to understand that you can make mistakes without it reflecting on your competence.
 
-Once you've internalised this, you will have built the foundation of a balanced mindset. You'll be better prepared to make mistakes and learn from them--ready to build up that nebulous thing we call "experience", and unlock the wisdom it contains.
+Once you've internalised this, you will have built the foundation of a balanced mindset. You'll be better prepared to make mistakes and learn from them, and to begin anticipating the gaps in your knowledge before they even become a problem. You'll be ready to build up that nebulous thing we call "experience", and unlock the wisdom it contains.
