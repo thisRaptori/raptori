@@ -1,6 +1,6 @@
 ---
 path: '/blog/impostor-syndrome-vs-the-dunning-kruger-effect'
-date: '2019-08-30'
+date: '2019-08-31'
 title: 'Impostor Syndrome vs the Dunning-Kruger Effect'
 subtitle: 'To find the sweet spot between impostor syndrome and overconfidence, yo firstu need to understand that you can make mistakes without it reflecting on your competence.'
 tags: ['featured', 'home']
@@ -59,4 +59,6 @@ And so, we have returned to our conclusion:
 
 > To find the sweet spot between impostor syndrome and overconfidence, you first need to understand that you can make mistakes without it reflecting on your competence.
 
-Once you've internalised this, you will have built the foundation of a balanced mindset. You'll be better prepared to make mistakes and learn from them, and to begin anticipating the gaps in your knowledge before they even become a problem. You'll be ready to build up that nebulous thing we call "experience", and unlock the wisdom it contains.
+Once you've internalised this idea, you will have built the foundation of a balanced mindset. You'll be better prepared to make mistakes and learn from them, to create good habits with positive feedback loops, and to begin anticipating the gaps in your knowledge before they even become a problem.
+
+So please, don't be so hard on yourself!
