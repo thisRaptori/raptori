@@ -27,7 +27,7 @@ I then made a quick first pass at a simple design, based around the content I ha
 
 I used the <a href="http://underscores.me/" target="_blank">underscores</a> starter theme as a base, but stripped out a lot of the existing code to keep it clean and simple. The stylesheet, for example, has been completely rewritten from scratch.
 
-I used the existing company colours - black, orange, and white - and aimed to guide attention to the text first and foremost. Each page now has a splash section which gives an overview of what it covers at a glance, with further content below the fold. The style of the site is clean and simple, and lets the content take precedence while still providing some visual interest.
+I used the existing company colours--black, orange, and white--and aimed to guide attention to the text first and foremost. Each page now has a splash section which gives an overview of what it covers at a glance, with further content below the fold. The style of the site is clean and simple, and lets the content take precedence while still providing some visual interest.
 
 <p class="mockup mockup-left">
     <img src="./home.png" alt="Home" />

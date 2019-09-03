@@ -13,7 +13,7 @@ Before we start, it's important to note that reality is nuanced. These camps are
 
 ![](./blueprint.jpg)
 
-The most common terms for these two camps are **architects** and **discovery writers**. Since I'm a writer at heart, this mixed metaphor really grates on my nerves - I always refer to them as **architects** and **explorers** instead.
+The most common terms for these two camps are **architects** and **discovery writers**. Since I'm a writer at heart, this mixed metaphor really grates on my nerves--I always refer to them as **architects** and **explorers** instead.
 
 Architects are people who plan ahead. They draw up their grand design, perfecting every last detail before they ever put pen to paper and write some prose. If the design doesn't work when confronted with reality, they go back to the drawing board and fix the plan itself before continuing.
 
@@ -47,7 +47,7 @@ When writing fiction, I'm at the extreme architect end of the spectrum. My wife 
 
 When writing code, I tend to lean towards the opposite. Without exploring the problem space by experimenting with real, working code, it's hard for me to even get started.
 
-I've had to explain this to people in the past to help them understand the way I want to work, and every time it's been a new idea to them - even if they're explorers themselves.
+I've had to explain this to people in the past to help them understand the way I want to work, and every time it's been a new idea to them--even if they're explorers themselves.
 
 It also presents a slight problem in interviews. You often see interviewers state that if you _don't_ plan your solution before diving in to code, they will mark you down. Most interviewers are understanding if you tell them at the start that you approach things differently, but to do so you have the be aware of the difference first!
 

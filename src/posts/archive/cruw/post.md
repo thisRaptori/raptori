@@ -29,4 +29,4 @@ Finally, I developed a fairly basic website for the charity, since the client wa
     <img src="./splash.png" alt="Splash" />
 </p>
 
-To put the birds front and center, we added a splash section to the homepage, which features another bird native to New Zealand - a Tui - and the single-colour version of the logo. The simple interaction used here was written using jQuery.
+To put the birds front and center, we added a splash section to the homepage, which features another bird native to New Zealand--a Tui--and the single-colour version of the logo. The simple interaction used here was written using jQuery.

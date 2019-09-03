@@ -2,7 +2,7 @@
 path: '/blog/impostor-syndrome-vs-the-dunning-kruger-effect'
 date: '2019-08-31'
 title: 'Impostor Syndrome vs the Dunning-Kruger Effect'
-subtitle: 'To find the sweet spot between impostor syndrome and overconfidence, yo firstu need to understand that you can make mistakes without it reflecting on your competence.'
+subtitle: 'To find the sweet spot between impostor syndrome and overconfidence, you first need to understand that you can make mistakes without it reflecting on your competence.'
 tags: ['featured', 'home']
 featuredImage: './balance.jpg'
 ---

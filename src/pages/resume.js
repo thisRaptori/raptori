@@ -34,7 +34,7 @@ const ResumePage = () => (
 					<p>
 						Software engineer contributing to a visual website
 						design and development platform with over a million
-						customers. Part of the Collaboration team - focused on
+						customers. Part of the Collaboration team—focused on
 						building collaboration features such as deep linking,
 						site version control, and real-time webRTC multi-user
 						editing functionality.
@@ -113,7 +113,7 @@ const ResumePage = () => (
 			>
 				<Resume.Description>
 					<p>
-						Working with my partner in our spare time - we developed
+						Working with my partner in our spare time—we developed
 						a real-time multiplayer online game and managed the
 						community which grew around it.
 					</p>
