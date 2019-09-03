@@ -8,17 +8,17 @@ featuredImage: './new-site-dark.png'
 
 Trying out some new technology is always an adventure, especially if you start by assuming you know how to use it.
 
-A couple of years ago, I had a portfolio website which felt pretty decent. It was a good representation of my skillset at that point - a nice design, semantic HTML, clean CSS, and some interactions and animations added via jQuery.
+A couple of years ago, I had a portfolio website which felt pretty decent. It was a good representation of my skillset at that point--a nice design, semantic HTML, clean CSS, and some interactions and animations added via jQuery.
 
 ![](./old-site.png)
 
-However, that skillset did not fit the path I wanted to take. It was suited for working at a web agency, building websites for small to medium companies. As much as I had enjoyed that work, it didn't capture my imagination any more. I wanted to work on larger, more complex products instead - and that required some different skills.
+However, that skillset did not fit the path I wanted to take. It was suited for working at a web agency, building websites for small to medium companies. As much as I had enjoyed that work, it didn't capture my imagination any more. I wanted to work on larger, more complex products instead--and that required some different skills.
 
 After trying out a couple of frameworks and libraries, it was clear that React was the right tech for me to learn. It felt natural to work with, was increasingly popular, and seemed perfect for the kind of project I wanted to work on.
 
 As a learning exercise, I rebuilt my portfolio using React. This turned out to be a great idea, as it helped me get comfortable with the library while also giving an honest representation of how well I could use it.
 
-Within a few weeks I had the job offer I had been hoping for. I would be joining a startup working on an interesting SaaS product - and I would get to use React and the surrounding ecosystem every day.
+Within a few weeks I had the job offer I had been hoping for. I would be joining a startup working on an interesting SaaS product--and I would get to use React and the surrounding ecosystem every day.
 
 Fast forward a couple of years, and my portfolio site had become an increasingly awkward memento.
 
@@ -38,7 +38,7 @@ Or so I thought...
 
 Over the course of a couple of months, I started putting together my new site in my spare time. Gatsby's developer experience is excellent, and I didn't hit any problems I couldn't solve either from general React experience or via searching the Gatsby docs.
 
-By the time the site was getting close to the finish line, I was preparing to switch jobs. I had planned to take two weeks off in between - a perfect opportunity to finish off the site!
+By the time the site was getting close to the finish line, I was preparing to switch jobs. I had planned to take two weeks off in between--a perfect opportunity to finish off the site!
 
 At the start of this time off, one of the first things I did was build the site outside of developer mode for the first time ...and everything promptly broke.
 
@@ -52,9 +52,9 @@ Those issues were easy to fix: I just made the hooks fall back to sane values wh
 
 One feature I had really wanted to include was a light/dark mode toggle similar to the one on [Dan Abramov's site](https://overreacted.io/). I prefer dark mode, but not everyone feels the same, and it's really nice to provide the option to switch.
 
-The feature itself worked fine. The toggle icon, however, was broken - _sometimes_. The correct icon was rendered most of the time, but not always - and it wasn't clear at first how to replicate the issue, which is always a bad sign.
+The feature itself worked fine. The toggle icon, however, was broken--_sometimes_. The correct icon was rendered most of the time, but not always--and it wasn't clear at first how to replicate the issue, which is always a bad sign.
 
-The svg icons are implemented as two separate components - a `Sun` and a `Moon` - which are both exposed as part of a generic `Icon` component. The `ThemeToggle` component uses a `useRaptoriTheme` hook to switch between the two depending on the selected theme.
+The svg icons are implemented as two separate components--a `Sun` and a `Moon`--which are both exposed as part of a generic `Icon` component. The `ThemeToggle` component uses a `useRaptoriTheme` hook to switch between the two depending on the selected theme.
 
 Here's what the code looks like:
 
@@ -146,14 +146,14 @@ So what was going on? I'm still not entirely sure, but as best as I can tell:
 
     It re-rendered the app, diffing against the existing DOM instead of rendering from scratch like it would without the SSR.
 
-1.  The stored theme setting is retrieved from local storage - it's possible that this happened while React was in the middle of hydrating.
+1.  The stored theme setting is retrieved from local storage--it's possible that this happened while React was in the middle of hydrating.
 1.  React re-rendered the icon, but failed to correctly diff the original and new DOM, resulting in the mixed icons.
 
     I'm actually not sure whether this was caused by my code, something in Gatsby, or something in React. Hopefully I'll have some time to dig into this at some point!
 
 ![](./lightbulb.jpg)
 
-It felt like a bug which could take a while to investigate - not something I wanted to look into at that point. But I didn't want to publish the site with a broken icon...
+It felt like a bug which could take a while to investigate--not something I wanted to look into at that point. But I didn't want to publish the site with a broken icon...
 
 So I tried something stupid. If the problem was that React failed to correctly resolve which properties it should change when diffing the DOM, perhaps making the DOM _more_ different would make it do the right thing! I changed the DOM structure of one of the icons slightly: I added a `div` around the `svg`.
 

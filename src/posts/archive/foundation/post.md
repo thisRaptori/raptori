@@ -36,7 +36,7 @@ In addition to representing the book itself, it was important to ensure that the
 
 Again, the text is a quote from a main character which is highly relevant to the illustration and the idea behind it.
 
-Both posters fulfil the brief - the explicit poster shows exactly what to expect from the book, while the implicit poster reveals nothing while successfully implying what type of story it is. They also successfully evoke the correct genre, and hint at the detached, historical style of the writing.
+Both posters fulfil the brief--the explicit poster shows exactly what to expect from the book, while the implicit poster reveals nothing while successfully implying what type of story it is. They also successfully evoke the correct genre, and hint at the detached, historical style of the writing.
 
 ![Covers](./covers.jpg)
 

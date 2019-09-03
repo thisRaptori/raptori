@@ -6,7 +6,7 @@ subtitle: 'Archive - A React-powered progressive web app'
 featuredImage: './screenshots.png'
 ---
 
-My wife tries to keep track of how much time we spend walking our dog - we have a husky, so it's a <em>lot</em> of walking - but the apps available never quite fit what she wants.
+My wife tries to keep track of how much time we spend walking our dog--we have a husky, so it's a <em>lot</em> of walking--but the apps available never quite fit what she wants.
 
 They're usually too complex and often require geolocation, whereas she just wants to be able to track the amount of time without worrying about data usage or anything else. Another option would be a stopwatch app, but they're usually too simple.
 

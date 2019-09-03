@@ -96,10 +96,10 @@ const ProjectsPage = () => (
 				<p>
 					Discord is a chat application (primarily aimed at gamers)
 					which is used by some major subsections of the programming
-					community. I'm an active member of several of these servers
-					- most notably{' '}
-					<Link to="https://www.reactiflux.com">Reactiflux</Link> -
-					and as a result use Discord daily.
+					community. I'm an active member of several of these
+					servers—most notably{' '}
+					<Link to="https://www.reactiflux.com">Reactiflux</Link>—and
+					as a result use Discord daily.
 				</p>
 				<p>
 					The Discord interface has some bugs and slight annoyances
@@ -131,9 +131,9 @@ const ProjectsPage = () => (
 			<section>
 				<h3>SaurusSims</h3>
 				<p>
-					My wife creates content for the Sims 4 - custom clothes,
-					hairs, objects, etc - and shares her creations with the
-					game's community.
+					My wife creates content for the Sims 4—custom clothes,
+					hairs, objects, etc—and shares her creations with the game's
+					community.
 				</p>
 				<p>
 					The Sims 4 creator community is mostly active on Tumblr, so
