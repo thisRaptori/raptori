@@ -76,6 +76,15 @@ const StyledLink = styled(Link)`
 		border: none;
 		margin-top: 2rem;
 	}
+
+	h4 {
+		line-height: 1.3;
+	}
+
+	p {
+		line-height: 1.5;
+		margin-top: 2rem;
+	}
 `
 
 const PostLink = ({
@@ -94,7 +103,7 @@ const PostLink = ({
 	>
 		<Image className="transition" image={featuredImage} />
 		<h4>{title}</h4>
-		{subtitle ? <MetaText>{subtitle}</MetaText> : null}
+		{subtitle ? <p>{subtitle}</p> : null}
 		<hr />
 		<MetaText italic>{readingTime.text}</MetaText>
 	</StyledLink>
