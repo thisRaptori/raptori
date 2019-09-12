@@ -11,7 +11,7 @@ const ResumePage = () => (
 				<p>
 					Here's an overview of some of the things I've worked on
 					since I started building software for the web way back in
-					2009. For more details, downlod my resume as a PDF, or check
+					2009. For more details, download my resume as a PDF, or check
 					out some of my code on GitHub!
 				</p>
 				<p>
