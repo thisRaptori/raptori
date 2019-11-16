@@ -18,6 +18,10 @@ const NewsletterForm = styled.div`
 	padding: 4px;
 
 	* {
+		cursor: text;
+	}
+
+	button {
 		cursor: pointer;
 	}
 
