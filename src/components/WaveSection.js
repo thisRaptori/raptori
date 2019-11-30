@@ -6,9 +6,9 @@ import { useWindowWidth } from 'src/hooks'
 import { fullWidth, getSectionWidth } from 'src/utils'
 
 const Wrapper = styled.div`
-	${props => (props.disableTopMargin ? 'margin-top: -3rem;' : '')}
+	${props => (props.disableTopMargin ? 'margin-top: -2rem;' : '')}
 	main > &:first-child {
-		margin-top: -3rem;
+		margin-top: -2rem;
 	}
 
 	& ~ * {
