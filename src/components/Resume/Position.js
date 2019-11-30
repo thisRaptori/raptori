@@ -5,10 +5,7 @@ import { Icon, Link } from 'src/components'
 
 const Section = styled.section`
 	margin-bottom: 2rem;
-
-	& + & {
-		margin-top: calc(6rem + 1vw);
-	}
+	margin-top: calc(6rem + 1vw);
 
 	& > & {
 		margin-top: 2rem;
@@ -80,9 +77,7 @@ const createComponent = (title, root) => {
 			children: (
 				<>
 					{name}&nbsp;
-					{link ? (
-						<Icon name="External" size={12} />
-					) : null}
+					{link ? <Icon name="External" size={12} /> : null}
 				</>
 			),
 		})

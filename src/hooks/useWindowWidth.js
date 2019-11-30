@@ -24,7 +24,8 @@ export default function useWindowWidth() {
 
 				// offsetWidth - 1 is used here to ensure the state
 				// changes and React re-renders
-				setWidth(getOffsetWidth() - 1)
+				setWidth(() => getOffsetWidth() - 1)
+				setWidth(() => getOffsetWidth())
 			}
 		}
 

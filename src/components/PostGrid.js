@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export default styled.div`
-    margin: 2rem 1rem;
+	margin: 2rem 1rem;
 
 	@media (min-width: 600px) {
 		display: grid;

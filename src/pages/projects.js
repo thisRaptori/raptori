@@ -12,8 +12,12 @@ import {
 } from 'src/components'
 
 const Projects = styled.div`
-	section > :first-child {
-		margin-top: 0;
+	section {
+		padding: calc(2rem + 1vw) 0;
+
+		> :first-child {
+			margin-top: 0;
+		}
 	}
 `
 

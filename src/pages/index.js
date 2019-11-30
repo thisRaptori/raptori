@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import {
 	Layout,
@@ -10,10 +9,6 @@ import {
 	WaveSection,
 } from 'src/components'
 import { get } from 'src/utils'
-
-const H3 = styled.h3`
-	margin-top: 0;
-`
 
 const IndexPage = ({ data }) => {
 	const edges = get(data, 'allMarkdownRemark', 'edges') || []
@@ -46,7 +41,7 @@ const IndexPage = ({ data }) => {
 			</WaveSection>
 			{edges.length ? (
 				<>
-					<H3>Featured Posts</H3>
+					<h3>Featured Posts</h3>
 					<PostGrid>
 						{edges.map((edge, i) => (
 							<PostLink

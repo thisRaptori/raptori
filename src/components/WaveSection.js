@@ -3,13 +3,12 @@ import styled from 'styled-components'
 
 import { Waves } from 'src/components'
 import { useWindowWidth } from 'src/hooks'
-
-const getSectionWidth = props => (props.width ? `${props.width}px` : '100vw')
+import { fullWidth, getSectionWidth } from 'src/utils'
 
 const Wrapper = styled.div`
-	${props => (props.disableTopMargin ? 'margin-top: -6rem;' : '')}
+	${props => (props.disableTopMargin ? 'margin-top: -3rem;' : '')}
 	main > &:first-child {
-		margin-top: -6rem;
+		margin-top: -3rem;
 	}
 
 	& ~ * {
@@ -23,6 +22,8 @@ const Wrapper = styled.div`
 
 	@media (max-width: 699px) {
 		${props => (props.footer ? '' : 'margin-left: -2rem;')}
+		max-width: 100vw;
+		overflow: hidden;
 		padding: 0 2rem;
 		width: ${getSectionWidth};
 	}
@@ -43,26 +44,21 @@ const Skew = styled.div`
 `
 
 const Section = styled.div`
-	background: var(--primary);
 	color: var(--dark);
+	margin: 0 -2rem;
+	padding: 0 !important;
 
-	${props => `
-        margin: 0 -2rem;
-
-        @media (min-width: 700px) {
-            & {
-                margin: 0;
-                ${
-					props.footer
-						? ''
-						: `transform: translateX(calc((640px - ${getSectionWidth(
-								props
-						  )}) / 2));`
-				}
-                width: ${getSectionWidth(props)};
-            }
-        }
-		`}
+	@media (min-width: 700px) {
+		& {
+			margin: 0;
+			overflow: hidden;
+			width: ${getSectionWidth};
+			${props =>
+				props.footer
+					? 'width: 100%;'
+					: `transform: ${fullWidth(props)};`}
+		}
+	}
 
 	${props =>
 		props.footer
@@ -83,6 +79,10 @@ const Section = styled.div`
 		}
 	`
 			: ''}
+`
+
+const Background = styled.div`
+	background: var(--primary);
 `
 
 const Content = styled.div`
@@ -133,7 +133,9 @@ const WaveSection = ({ as, children, disableTopMargin, footer }) => {
 			<Skew footer={footer}>
 				<Section width={width} as={as} footer={footer}>
 					<Waves />
-					<Content>{children}</Content>
+					<Background>
+						<Content>{children}</Content>
+					</Background>
 					{footer ? null : <Waves invert offset />}
 				</Section>
 			</Skew>
