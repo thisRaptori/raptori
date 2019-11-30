@@ -40,75 +40,80 @@ function getColor(index) {
 	)
 }
 
+const count = 2000
+function createWave({ canvas, count, ctx, fill }, speed) {
+	const values = {
+		a: Math.random() * 2,
+		b: Math.random() * 4,
+		c: Math.random() * 6,
+	}
+
+	const createGetValue = (key, magnitude) => () => {
+		values[key] += speed / magnitude
+		if (values[key] > Math.PI * 100) {
+			values[key] -= Math.PI * 100
+		}
+		return values[key]
+	}
+
+	const getA = createGetValue('a', 100)
+	const getB = createGetValue('b', 500)
+	const getC = createGetValue('c', 1000)
+
+	const getNextY = () =>(
+		[getA(), getB() / 2, getC() / 4].reduce(
+			(acc, cur, i) => acc + (Math.sin(cur) + 1) / (i + 1),
+			0
+		) / 4
+	)
+
+	const points = Array.from(Array(count), getNextY).reverse()
+
+	return {
+		render() {
+			const height = canvas.height
+			const width = canvas.clientWidth
+			const step = width > 2000
+				? count / 10000
+				: count / (width * 5)
+			const nextY = getNextY()
+
+			points.pop()
+
+			ctx.fillStyle = fill.current
+			ctx.beginPath()
+			ctx.moveTo(0, nextY)
+
+			points.forEach((y, x) => {
+				ctx.lineTo(x * step, y * height)
+			})
+
+			ctx.lineTo(width, height)
+			ctx.lineTo(0, height)
+			ctx.lineTo(0, nextY)
+			ctx.closePath()
+			ctx.fill()
+
+			points.unshift(nextY)
+		},
+	}
+}
+
 function createWaves(ref, waves, fill) {
 	const canvas = ref
-	const count = 3000
 	const ctx = canvas.getContext('2d')
-
-	function createWave(speed) {
-		const values = {
-			a: Math.random() * 2,
-			b: Math.random() * 4,
-			c: Math.random() * 6,
-		}
-
-		const createGetValue = (key, magnitude) => () => {
-			values[key] += speed / magnitude
-			if (values[key] > Math.PI * 100) {
-				values[key] -= Math.PI * 100
-			}
-			return values[key]
-		}
-
-		const getA = createGetValue('a', 100)
-		const getB = createGetValue('b', 500)
-		const getC = createGetValue('c', 1000)
-
-		const getNextY = () =>(
-			[getA(), getB() / 2, getC() / 4].reduce(
-				(acc, cur, i) => acc + (Math.sin(cur) + 1) / (i + 1),
-				0
-			) / 4
-		)
-
-		const points = Array.from(Array(count), getNextY).reverse()
-
-		return {
-			render() {
-				const height = canvas.height
-				const width = canvas.clientWidth
-				const step = count / width / 5
-				const nextY = getNextY()
-
-				ctx.fillStyle = fill.current
-				ctx.beginPath()
-				ctx.moveTo(0, nextY)
-
-				points.forEach((y, x) => {
-					ctx.lineTo(x * step, y * height)
-				})
-
-				ctx.lineTo(width, height)
-				ctx.lineTo(0, height)
-				ctx.lineTo(0, nextY)
-				ctx.closePath()
-				ctx.fill()
-
-				points.unshift(nextY)
-			},
-		}
-	}
 
 	// storing waves in a ref so that switching colour scheme
 	// does not cause the wave shapes to be reset
 	if (!waves.current) {
+		const data = { canvas, ctx, count, fill }
 		waves.current = [
-			createWave(0.8),
-			createWave(0.8),
-			createWave(1),
-			createWave(1),
-			createWave(1.2),
-			createWave(1.2),
+			createWave(data, 0.8),
+			createWave(data, 0.8),
+			createWave(data, 1),
+			createWave(data, 1),
+			createWave(data, 1.2),
+			createWave(data, 1.2),
 		]
 	}
 
