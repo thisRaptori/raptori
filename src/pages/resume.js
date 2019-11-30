@@ -113,8 +113,8 @@ const ResumePage = () => (
 			>
 				<Resume.Description>
 					<p>
-						Working with my partner in our spare time—we developed
-						a real-time multiplayer online game and managed the
+						Working with my partner in our spare time—we developed a
+						real-time multiplayer online game and managed the
 						community which grew around it.
 					</p>
 				</Resume.Description>

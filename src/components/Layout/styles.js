@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const getSectionWidth = props => (props.width ? `${props.width}px` : '100vw')
+import { getSectionWidth } from 'src/utils'
 
 export const Main = styled.main`
 	margin: 0 auto;

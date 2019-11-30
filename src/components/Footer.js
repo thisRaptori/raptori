@@ -24,8 +24,7 @@ const Footer = () => (
 		<Text>
 			Copyright {year} Joe McGrath •{' '}
 			<Link to="https://github.com/thisRaptori/raptori">
-				View source code{' '}
-				<Icon name="GitHub" />
+				View source code <Icon name="GitHub" />
 			</Link>
 		</Text>
 	</Wrapper>
