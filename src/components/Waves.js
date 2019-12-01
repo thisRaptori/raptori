@@ -40,12 +40,15 @@ function getColor(index) {
 	)
 }
 
+let seed = Math.floor(Math.random() * 100)
 const count = 1000
+const getSeed = () => (seed += seed > 100 ? -100 : 5)
+
 function createWave({ canvas, count, ctx, fill }, speed) {
 	const values = {
-		a: Math.random() * 2,
-		b: Math.random() * 4,
-		c: Math.random() * 6,
+		a: getSeed(),
+		b: getSeed(),
+		c: getSeed(),
 	}
 
 	const createGetValue = (key, magnitude) => () => {
@@ -57,44 +60,48 @@ function createWave({ canvas, count, ctx, fill }, speed) {
 	}
 
 	const getA = createGetValue('a', 100)
-	const getB = createGetValue('b', 500)
-	const getC = createGetValue('c', 1000)
+	const getB = createGetValue('b', 100)
+	const getC = createGetValue('c', 50)
 
-	const getNextY = () =>(
+	const getNextY = () =>
 		[getA(), getB() / 2, getC() / 4].reduce(
 			(acc, cur, i) => acc + (Math.sin(cur) + 1) / (i + 1),
 			0
 		) / 4
-	)
 
 	const points = Array.from(Array(count), getNextY).reverse()
 
+	function renderWave(isOffset) {
+		const height = canvas.height
+		const width = canvas.clientWidth
+		const step = width > 1600 ? count / 3200 : count / (width * 2)
+
+		ctx.beginPath()
+
+		points.forEach((y, x) => {
+			const xOffset = isOffset ? Math.sin(y) * 15 * speed : 0
+			const yOffset = isOffset ? speed * 5 : 0
+			ctx.lineTo(x * step - xOffset, y * height + yOffset)
+		})
+
+		ctx.lineTo(width, height)
+		ctx.lineTo(0, height)
+
+		ctx.closePath()
+
+		ctx.fillStyle = fill.current
+		ctx.fill()
+	}
+
 	return {
 		render() {
-			const height = canvas.height
-			const width = canvas.clientWidth
-			const step = width > 1600
-				? count / 3200
-				: count / (width * 2)
 			const nextY = getNextY()
 
+			points.unshift(nextY)
 			points.pop()
 
-			ctx.fillStyle = fill.current
-			ctx.beginPath()
-			ctx.moveTo(0, nextY)
-
-			points.forEach((y, x) => {
-				ctx.lineTo(x * step, y * height)
-			})
-
-			ctx.lineTo(width, height)
-			ctx.lineTo(0, height)
-			ctx.lineTo(0, nextY)
-			ctx.closePath()
-			ctx.fill()
-
-			points.unshift(nextY)
+			renderWave()
+			renderWave(true)
 		},
 	}
 }
@@ -109,10 +116,7 @@ function createWaves(ref, waves, fill) {
 		const data = { canvas, ctx, count, fill }
 		waves.current = [
 			createWave(data, 0.8),
-			createWave(data, 0.8),
 			createWave(data, 1),
-			createWave(data, 1),
-			createWave(data, 1.2),
 			createWave(data, 1.2),
 		]
 	}
