@@ -57,15 +57,14 @@ function createWave({ canvas, count, ctx, fill }, speed) {
 	}
 
 	const getA = createGetValue('a', 100)
-	const getB = createGetValue('b', 500)
-	const getC = createGetValue('c', 1000)
+	const getB = createGetValue('b', 100)
+	const getC = createGetValue('c', 50)
 
-	const getNextY = () =>(
+	const getNextY = () =>
 		[getA(), getB() / 2, getC() / 4].reduce(
 			(acc, cur, i) => acc + (Math.sin(cur) + 1) / (i + 1),
 			0
 		) / 4
-	)
 
 	const points = Array.from(Array(count), getNextY).reverse()
 
@@ -73,16 +72,13 @@ function createWave({ canvas, count, ctx, fill }, speed) {
 		render() {
 			const height = canvas.height
 			const width = canvas.clientWidth
-			const step = width > 1600
-				? count / 3200
-				: count / (width * 2)
+			const step = width > 1600 ? count / 3200 : count / (width * 2)
 			const nextY = getNextY()
 
+			points.unshift(nextY)
 			points.pop()
 
-			ctx.fillStyle = fill.current
 			ctx.beginPath()
-			ctx.moveTo(0, nextY)
 
 			points.forEach((y, x) => {
 				ctx.lineTo(x * step, y * height)
@@ -90,11 +86,11 @@ function createWave({ canvas, count, ctx, fill }, speed) {
 
 			ctx.lineTo(width, height)
 			ctx.lineTo(0, height)
-			ctx.lineTo(0, nextY)
-			ctx.closePath()
-			ctx.fill()
 
-			points.unshift(nextY)
+			ctx.closePath()
+
+			ctx.fillStyle = fill.current
+			ctx.fill()
 		},
 	}
 }
