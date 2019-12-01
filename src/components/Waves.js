@@ -40,7 +40,7 @@ function getColor(index) {
 	)
 }
 
-const count = 2000
+const count = 1000
 function createWave({ canvas, count, ctx, fill }, speed) {
 	const values = {
 		a: Math.random() * 2,
@@ -73,9 +73,9 @@ function createWave({ canvas, count, ctx, fill }, speed) {
 		render() {
 			const height = canvas.height
 			const width = canvas.clientWidth
-			const step = width > 2000
-				? count / 10000
-				: count / (width * 5)
+			const step = width > 1600
+				? count / 3200
+				: count / (width * 2)
 			const nextY = getNextY()
 
 			points.pop()
