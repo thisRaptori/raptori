@@ -6,9 +6,9 @@ import { useWindowWidth } from 'src/hooks'
 import { fullWidth, getSectionWidth } from 'src/utils'
 
 const Wrapper = styled.div`
-	${props => (props.disableTopMargin ? 'margin-top: -2rem;' : '')}
+	${props => (props.disableTopMargin ? 'margin-top: -20rem;' : '')}
 	main > &:first-child {
-		margin-top: -2rem;
+		margin-top: -20rem;
 	}
 
 	& ~ * {
@@ -21,10 +21,10 @@ const Wrapper = styled.div`
 	}
 
 	@media (max-width: 699px) {
-		${props => (props.footer ? '' : 'margin-left: -2rem;')}
+		${props => (props.footer ? '' : 'margin-left: -20rem;')}
 		max-width: 100vw;
 		overflow: hidden;
-		padding: 0 2rem;
+		padding: 0 20rem;
 		width: ${getSectionWidth};
 	}
 `
@@ -45,7 +45,7 @@ const Skew = styled.div`
 
 const Section = styled.div`
 	color: var(--dark);
-	margin: 0 -2rem;
+	margin: 0 -20rem;
 	padding: 0 !important;
 
 	@media (min-width: 700px) {
@@ -73,8 +73,8 @@ const Section = styled.div`
 			top: 80%;
 
 			@media (max-width: 699px) {
-				left: -2rem;
-				right: -2rem;
+				left: -20rem;
+				right: -20rem;
 			}
 		}
 	`
@@ -86,9 +86,9 @@ const Background = styled.div`
 `
 
 const Content = styled.div`
-	margin: 0 2rem;
+	margin: 0 20rem;
 	max-width: 640px;
-	padding: calc(2rem + 1vw) 0;
+	padding: calc(20rem + 1vw) 0;
 	position: relative;
 	transform: skew(0, calc(0deg - var(--skew)));
 	z-index: 2;

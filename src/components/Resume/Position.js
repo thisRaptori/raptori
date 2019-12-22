@@ -4,11 +4,11 @@ import styled from 'styled-components'
 import { Icon, Link } from 'src/components'
 
 const Section = styled.section`
-	margin-bottom: 2rem;
-	margin-top: calc(6rem + 1vw);
+	margin-bottom: 20rem;
+	margin-top: calc(60rem + 1vw);
 
 	& > & {
-		margin-top: 2rem;
+		margin-top: 20rem;
 	}
 `
 
@@ -17,7 +17,7 @@ const Header = styled.header`
 	display: flex;
 	justify-content: space-between;
 	line-height: 1;
-	margin-bottom: 2rem;
+	margin-bottom: 20rem;
 
 	svg {
 		height: 1em;
@@ -50,15 +50,15 @@ const Header = styled.header`
 	}
 
 	> p {
-		font-size: 1.6rem;
+		font-size: 16rem;
 		font-weight: 100;
 		line-height: 1.4;
-		margin-left: 0.4rem;
+		margin-left: 4rem;
 		text-align: right;
 		white-space: nowrap;
 
 		@media (max-width: 1000px) {
-			font-size: calc(1.4rem + 0.2vw);
+			font-size: calc(14rem + 0.2vw);
 		}
 	}
 `
