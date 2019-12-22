@@ -14,8 +14,8 @@
 	--light-shadow: #abb6bf66;
 	--dark: #2f3d4c;
 	--dark-shadow: #19212966;
-	--header-height: 3.2rem;
-	--header-padding: 2rem;
+	--header-height: 32rem;
+	--header-padding: 20rem;
 	--menu-height: calc(
 		var(--header-height) + (var(--header-padding) * 2) + 2px
 	);
@@ -79,7 +79,7 @@ button {
 
 html {
 	background: var(--primary);
-	font-size: 62.5%;
+	font-size: 6.25%;
 	font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
 	min-width: 320px;
 	overflow-y: scroll;
@@ -91,7 +91,7 @@ body {
 
 body,
 input {
-	font-size: 1.8rem;
+	font-size: 18rem;
 }
 
 *,
@@ -206,33 +206,33 @@ main > :first-child {
 }
 
 h1 {
-	font-size: 3.6rem;
+	font-size: 36rem;
 }
 
 h1.intro-title {
-	font-size: 6rem;
+	font-size: 60rem;
 	line-height: 1;
-	margin-bottom: -1rem;
+	margin-bottom: -10rem;
 }
 
 h2 {
-	font-size: 3.6rem;
+	font-size: 36rem;
 }
 
 h3 {
-	font-size: 3.2rem;
+	font-size: 32rem;
 }
 
 h4 {
-	font-size: 2.4rem;
+	font-size: 24rem;
 }
 
 h5 {
-	font-size: 2.2rem;
+	font-size: 22rem;
 }
 
 h6 {
-	font-size: 2rem;
+	font-size: 20rem;
 }
 
 button {
@@ -265,8 +265,8 @@ blockquote {
 	border-left: 2px solid var(--text);
 	display: block;
 	font-size: 1.6em;
-	margin-top: 2rem;
-	padding: 1rem 0 1rem 2rem;
+	margin-top: 20rem;
+	padding: 10rem 0 10rem 20rem;
 }
 
 :focus {
@@ -274,7 +274,7 @@ blockquote {
 }
 
 .gatsby-resp-image-wrapper {
-	margin: 0 -2rem !important;
+	margin: 0 -20rem !important;
 }
 
 .centered .gatsby-resp-image-wrapper {
@@ -284,40 +284,40 @@ blockquote {
 @media (max-width: 1000px) {
 	body,
 	input {
-		font-size: 1.8rem;
-		font-size: calc(1.4rem + 0.4vw);
+		font-size: 18rem;
+		font-size: calc(14rem + 0.4vw);
 	}
 
 	h1 {
-		font-size: calc(1.4rem + 2.2vw);
+		font-size: calc(14rem + 2.2vw);
 	}
 
 	h1.intro-title {
-		font-size: calc(3.8rem + 2.2vw);
+		font-size: calc(38rem + 2.2vw);
 	}
 
 	h2 {
-		font-size: calc(1rem + 2.6vw);
+		font-size: calc(10rem + 2.6vw);
 	}
 
 	h3 {
-		font-size: calc(1rem + 2.2vw);
+		font-size: calc(10rem + 2.2vw);
 	}
 
 	h4 {
-		font-size: calc(1rem + 1.4vw);
+		font-size: calc(10rem + 1.4vw);
 	}
 
 	h5 {
-		font-size: calc(1rem + 1.2vw);
+		font-size: calc(10rem + 1.2vw);
 	}
 
 	h6 {
-		font-size: calc(1.4rem + 0.6vw);
+		font-size: calc(14rem + 0.6vw);
 	}
 
 	blockquote {
-		font-size: calc(1.4rem + 1.4vw);
+		font-size: calc(14rem + 1.4vw);
 	}
 }
 
@@ -327,8 +327,8 @@ blockquote {
 }
 
 .mockup {
-	margin-left: -2rem;
-	margin-right: -2rem;
+	margin-left: -20rem;
+	margin-right: -20rem;
 }
 
 .mockup > * {
@@ -337,7 +337,7 @@ blockquote {
 
 @media (max-width: 740px) {
 	.add-mobile-spacing {
-		padding: 0 1rem;
+		padding: 0 10rem;
 	}
 
 	.mockup {
@@ -349,12 +349,12 @@ blockquote {
 	}
 
 	.mockup-left > * {
-		transform: translateX(2rem);
+		transform: translateX(20rem);
 	}
 
 	.mockup-right > * {
 		float: right;
-		transform: translateX(-2rem);
+		transform: translateX(-20rem);
 	}
 }
 
