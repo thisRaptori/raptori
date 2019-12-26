@@ -168,26 +168,38 @@ h6 {
 }
 
 h1 {
+	font-size: 36rem;
 	line-height: 1.2;
 }
 
+h1.intro-title {
+	font-size: 60rem;
+	line-height: 1;
+	margin-bottom: -10rem;
+}
+
 h2 {
+	font-size: 36rem;
 	line-height: 1.3;
 }
 
 h3 {
+	font-size: 32rem;
 	line-height: 1.4;
 }
 
 h4 {
+	font-size: 24rem;
 	line-height: 1.5;
 }
 
 h5 {
+	font-size: 22rem;
 	line-height: 1.6;
 }
 
 h6 {
+	font-size: 20rem;
 	line-height: 1.7;
 }
 
@@ -203,36 +215,6 @@ strong {
 
 main > :first-child {
 	margin-top: 0;
-}
-
-h1 {
-	font-size: 36rem;
-}
-
-h1.intro-title {
-	font-size: 60rem;
-	line-height: 1;
-	margin-bottom: -10rem;
-}
-
-h2 {
-	font-size: 36rem;
-}
-
-h3 {
-	font-size: 32rem;
-}
-
-h4 {
-	font-size: 24rem;
-}
-
-h5 {
-	font-size: 22rem;
-}
-
-h6 {
-	font-size: 20rem;
 }
 
 button {
