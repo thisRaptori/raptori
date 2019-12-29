@@ -6,6 +6,8 @@ module.exports = {
 		url: `https://raptori.dev`,
 	},
 	plugins: [
+		`gatsby-plugin-mdx`,
+		`gatsby-theme-waves`,
 		`gatsby-plugin-styled-components`,
 		`gatsby-plugin-root-import`,
 		`gatsby-plugin-react-helmet`,
@@ -25,12 +27,12 @@ module.exports = {
 				name: 'posts',
 			},
 		},
-		`gatsby-transformer-remark`,
 		`gatsby-plugin-sharp`,
 		{
-			resolve: `gatsby-transformer-remark`,
+			resolve: `gatsby-plugin-mdx`,
 			options: {
-				plugins: [
+				extensions: [`.mdx`, `.md`],
+				gatsbyRemarkPlugins: [
 					{
 						resolve: `gatsby-remark-images`,
 						options: {
@@ -46,7 +48,17 @@ module.exports = {
 							noInlineHighlight: true,
 						},
 					},
-					`gatsby-remark-smartypants`
+					`gatsby-remark-smartypants`,
+				],
+				plugins: [
+					{
+						resolve: `gatsby-remark-images`,
+						options: {
+							backgroundColor: 'transparent',
+							maxWidth: 900,
+							linkImagesToOriginal: false,
+						},
+					},
 				],
 			},
 		},

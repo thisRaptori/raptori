@@ -19,16 +19,30 @@ const Form = ({
 	...props
 }) => {
 	const [status, setStatus] = React.useState(NONE)
-	const fieldState = fields.map(field => {
-		const [value, setState] = React.useState(field.defaultValue || '')
-		const onChange = e => setState(e.target.value)
+	const [fieldState, setFieldState] = React.useState(
+		fields.reduce((acc, { defaultValue, name }) => {
+			acc[name] = typeof defaultValue !== 'undefined' ? defaultValue : ''
+			return acc
+		}, {})
+	)
 
-		return { ...field, value, onChange }
-	})
+	const fieldData = fields.map(field => ({
+		...field,
+		onChange: e => {
+			const value = e.target.value
+			if (value !== fieldState[field.name]) {
+				setFieldState(prev => ({
+					...prev,
+					[field.name]: value,
+				}))
+			}
+		},
+		value: fieldState[field.name],
+	}))
 
 	const onSubmitCallback = () => {
 		setStatus(SUBMITTING)
-		onSubmit(fieldState.map(field => [field.name, field.value]))
+		onSubmit(fieldData.map(field => [field.name, field.value]))
 			.then(() => setStatus(SUCCESS))
 			.catch(() => setStatus(ERROR))
 	}
@@ -75,15 +89,15 @@ const Form = ({
 						label="If you're not a robot, leave this field blank!"
 						name="bot-field"
 					/>
-					{form(fieldState, onSubmitCallback)}
+					{form(fieldData, onSubmitCallback)}
 				</form>
 			)
 	}
 }
 
-const renderForm = (fieldState, onSubmit) => (
+const renderForm = (fieldData, onSubmit) => (
 	<>
-		{fieldState.map(field => (
+		{fieldData.map(field => (
 			<Input key={field.name} {...field} />
 		))}
 		<p>

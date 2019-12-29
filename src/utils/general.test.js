@@ -17,21 +17,13 @@ describe('compose', () => {
 			expect(exampleFunction(number)).toEqual(cube(number))
 		})
 
-		exampleFunction = compose(
-			double,
-			square
-		)
+		exampleFunction = compose(double, square)
 
 		exampleNumbers.forEach(number => {
 			expect(exampleFunction(number)).toEqual(double(square(number)))
 		})
 
-		exampleFunction = compose(
-			double,
-			square,
-			cube,
-			quadruple
-		)
+		exampleFunction = compose(double, square, cube, quadruple)
 
 		exampleNumbers.forEach(number => {
 			expect(exampleFunction(number)).toEqual(
@@ -39,13 +31,7 @@ describe('compose', () => {
 			)
 		})
 
-		exampleFunction = compose(
-			double,
-			triple,
-			quadruple,
-			square,
-			cube
-		)
+		exampleFunction = compose(double, triple, quadruple, square, cube)
 
 		exampleNumbers.forEach(number => {
 			expect(exampleFunction(number)).toEqual(
