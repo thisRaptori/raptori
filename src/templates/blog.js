@@ -5,7 +5,7 @@ import { Layout, Pagination, PostGrid, PostLink, SEO } from 'src/components'
 import { get } from 'src/utils'
 
 const BlogPage = ({ data, pageContext: { currentPage, pageCount } }) => {
-	const edges = get(data, 'allMarkdownRemark', 'edges') || []
+	const edges = get(data, 'allMdx', 'edges') || []
 	return (
 		<Layout activePage="blog">
 			<SEO title="Blog" />
@@ -24,7 +24,7 @@ export default BlogPage
 
 export const pageQuery = graphql`
 	query($skip: Int!, $limit: Int!) {
-		allMarkdownRemark(
+		allMdx(
 			sort: { order: DESC, fields: [frontmatter___date] }
 			limit: $limit
 			skip: $skip

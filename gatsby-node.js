@@ -8,7 +8,7 @@ exports.createPages = ({ actions, graphql }) => {
 
 	return graphql(`
 		{
-			allMarkdownRemark(
+			allMdx(
 				sort: { order: DESC, fields: [frontmatter___date] }
 				limit: 1000
 			) {
@@ -38,7 +38,7 @@ exports.createPages = ({ actions, graphql }) => {
 			return Promise.reject(result.errors)
 		}
 
-		const posts = result.data.allMarkdownRemark.edges
+		const posts = result.data.allMdx.edges
 		const postsPerPage = 10
 		const pageCount = Math.ceil(posts.length / postsPerPage)
 

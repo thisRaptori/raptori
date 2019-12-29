@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 import {
 	Hr,
@@ -14,29 +15,7 @@ import {
 } from 'src/components'
 import { get } from 'src/utils'
 
-const Content = styled.div`
-	position: relative;
-	z-index: 1;
-
-	&:not(:first-of-type) *:first-child {
-		margin-top: 0;
-	}
-
-	ul {
-		list-style: disc;
-		margin-left: 1em;
-	}
-
-	ol {
-		margin-left: 1em;
-	}
-`
-
 const PostHeader = styled.header`
-	h1 {
-		margin-top: 0;
-	}
-
 	${MetaText} a {
 		color: inherit;
 	}
@@ -74,8 +53,6 @@ const PostHeader = styled.header`
 			margin-bottom: 20rem;
 		}
 	}
-
-	${props => (props.isArchived ? 'h1 { margin-top: 0 }' : '')}
 `
 
 const NextPrevLinks = styled.p`
@@ -129,7 +106,7 @@ const Links = ({ links }) => (
 
 export default function Template({
 	data: {
-		markdownRemark: {
+		mdx: {
 			fields: { readingTime },
 			frontmatter: {
 				date,
@@ -140,7 +117,7 @@ export default function Template({
 				subtitle,
 				title,
 			},
-			html,
+			body,
 		},
 		site: {
 			siteMetadata: { url: siteUrl },
@@ -151,24 +128,7 @@ export default function Template({
 	const imagePath = get(featuredImage, 'childImageSharp', 'fluid', 'src')
 	const image = imagePath && `${siteUrl}${imagePath}`
 	const isArchived = subtitle.startsWith('Archive')
-	const content = html.split('<waves>').map((chunk, i) =>
-		i % 2 ? (
-			<WaveSection key={i}>
-				<Content
-					dangerouslySetInnerHTML={{
-						__html: chunk,
-					}}
-				/>
-			</WaveSection>
-		) : (
-			<Content
-				key={i}
-				dangerouslySetInnerHTML={{
-					__html: chunk,
-				}}
-			/>
-		)
-	)
+	const content = <MDXRenderer>{body}</MDXRenderer>
 
 	const mainLinks =
 		published && published.length ? (
@@ -265,8 +225,8 @@ export const pageQuery = graphql`
 				url
 			}
 		}
-		markdownRemark(frontmatter: { path: { eq: $path } }) {
-			html
+		mdx(frontmatter: { path: { eq: $path } }) {
+			body
 			frontmatter {
 				date(formatString: "MMMM DD, YYYY")
 				link

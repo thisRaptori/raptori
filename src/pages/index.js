@@ -11,7 +11,7 @@ import {
 import { get } from 'src/utils'
 
 const IndexPage = ({ data }) => {
-	const edges = get(data, 'allMarkdownRemark', 'edges') || []
+	const edges = get(data, 'allMdx', 'edges') || []
 	return (
 		<Layout>
 			<SEO title="Home" />
@@ -61,7 +61,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
 	query {
-		allMarkdownRemark(
+		allMdx(
 			sort: { order: DESC, fields: [frontmatter___date] }
 			limit: 3
 			filter: { frontmatter: { tags: { in: ["home"] } } }
