@@ -35,5 +35,4 @@ export const Below = styled.div`
 `
 
 export const Wrapper = styled.div`
-	overflow-y: hidden;
 `

@@ -23,14 +23,12 @@ module.exports = {
 			resolve: `gatsby-source-filesystem`,
 			options: {
 				path: `${__dirname}/src/posts`,
-				name: 'posts',
 			},
 		},
 		`gatsby-plugin-sharp`,
 		{
 			resolve: `gatsby-plugin-mdx`,
 			options: {
-				extensions: [`.mdx`, `.md`],
 				gatsbyRemarkPlugins: [
 					{
 						resolve: `gatsby-remark-images`,
@@ -58,6 +56,14 @@ module.exports = {
 							linkImagesToOriginal: false,
 						},
 					},
+					{
+						resolve: `gatsby-remark-prismjs`,
+						options: {
+							aliases: { js: 'javascript', html: 'markup' },
+							noInlineHighlight: true,
+						},
+					},
+					`gatsby-remark-smartypants`,
 				],
 			},
 		},
@@ -79,6 +85,5 @@ module.exports = {
 				trackingId: 'UA-140200159-1',
 			},
 		},
-		`gatsby-plugin-mdx`,
 	],
 }
