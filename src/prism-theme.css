@@ -95,8 +95,9 @@ pre[class*='language-'] {
 	color: #f9f2f4;
 	background: transparent;
 }
+.token.method,
 .token.function {
-	color: #ff3a34;
+	color: #34d8ff;
 }
 .token.regex,
 .token.important,

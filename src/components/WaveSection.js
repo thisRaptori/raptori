@@ -59,26 +59,6 @@ const Section = styled.div`
 					: `transform: ${fullWidth(props)};`}
 		}
 	}
-
-	${props =>
-		props.footer
-			? `
-		&:after {
-			background: var(--primary);
-			content: '';
-			height: 100vh;
-			left: 0;
-			position: absolute;
-			right: 0;
-			top: 80%;
-
-			@media (max-width: 699px) {
-				left: -20rem;
-				right: -20rem;
-			}
-		}
-	`
-			: ''}
 `
 
 const Background = styled.div`

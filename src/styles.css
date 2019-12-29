@@ -29,6 +29,11 @@ button,
 	transition: all 0.2s linear;
 }
 
+pre {
+	transition: background 0.2s linear;
+}
+
+pre,
 .background {
 	background-color: var(--background);
 }
