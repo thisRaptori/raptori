@@ -6,7 +6,6 @@ module.exports = {
 		url: `https://raptori.dev`,
 	},
 	plugins: [
-		`gatsby-plugin-mdx`,
 		`gatsby-theme-waves`,
 		`gatsby-plugin-styled-components`,
 		`gatsby-plugin-root-import`,
@@ -80,5 +79,6 @@ module.exports = {
 				trackingId: 'UA-140200159-1',
 			},
 		},
+		`gatsby-plugin-mdx`,
 	],
 }
