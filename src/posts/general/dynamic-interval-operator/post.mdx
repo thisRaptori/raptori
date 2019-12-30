@@ -1,0 +1,386 @@
+---
+path: '/blog/dynamic-interval-operator'
+date: '2019-12-30'
+title: 'Dynamic Interval Operator'
+subtitle: "Rxjs has such a variety of operators that it's taken two years for me to write one which can't be built using the lazy approach. Let's look at what the problem was, and how we can solve it!"
+tags: ['featured', 'home']
+featuredImage: './hourglass.jpg'
+---
+
+import { CodeWave } from "gatsby-theme-waves"
+
+Rxjs has such a variety of operators that it's taken two years for me to write one which can't be built using the lazy approach.
+
+For anyone unfamiliar, rxjs operators are composable pieces of logic, basic building blocks which you combine to create your own data transformations. Operators are to rxjs as components are to React--with a big difference in that unlike React, rxjs comes with its own comprehensive pre-built component library!
+
+Most custom operators can be built by reusing these existing operators. They cover so many different situations that most requirements can be expressed this way without hand-coding the logic.
+
+
+<CodeWave>
+
+```js 1:17
+const input = [1, 2, 3, 4, 5]
+const pow = exponent => map(x => Math.pow(x, exponent))
+
+of(input).pipe(
+	pow(2)
+)
+// -> [1, 4, 9, 16, 25]
+
+of(input).pipe(
+	pow(3)
+)
+// -> [1, 8, 27, 64, 125]
+```
+
+As an example, here's a simple custom operator which wraps `Math.pow` for convenience.
+
+It transforms every value passed into it, raising the numbers by the exponent specified when you call the operator. If you call `pow(2)`, it squares every number passed in; if you call `pow(3)` it cubes them.
+
+It is implemented here as an extension of the standard rxjs `map` operator.
+
+```js 1:17
+const input = ['string', 1, 2, {}, 3, true, 4, 5]
+const pow = exponent => source =>
+	source.pipe(
+		filter(value => typeof value === 'number'),
+		map(x => Math.pow(x, exponent))
+	)
+
+of(input).pipe(
+	pow(2)
+)
+// -> [1, 4, 9, 16, 25]
+
+of(input).pipe(
+	pow(3)
+)
+// -> [1, 8, 27, 64, 125]
+```
+
+We can also combine multiple existing operators using the `pipe` method.
+
+For example, what if we need to use our `pow` operator somewhere else, and we're unable to guarantee that every value we pass in is a number? If we try to call `Math.pow` on something which is not a number we'll get broken output, so our operator built using `map` alone is not sufficient.
+
+Instead, we need to ignore any non-numeric values passed in completely, so we use the `filter` operator in addition to `map`.
+
+```js 1:17
+const input = ['string', 1, 2, {}, 3, true, 4, 5]
+const pow = exponent => map(x => Math.pow(x, exponent))
+const filterPow = exponent => source =>
+	source.pipe(
+		filter(value => typeof value === 'number'),
+		pow(exponent)
+	)
+
+of(input).pipe(
+	filterPow(2)
+)
+// -> [1, 4, 9, 16, 25]
+
+of(input).pipe(
+	filterPow(3)
+)
+// -> [1, 8, 27, 64, 125]
+```
+
+We can compose any operators together, including the custom ones we create.
+
+This is a powerful approach, which lets you express complex functionality in a concise and consistent way, built on top of code which has been battle-tested in millions of apps for many years.
+
+</CodeWave>
+
+Beyond this type of operator, there's another level of flexibility available if you write your operator using raw observables.
+
+While experimenting with an API idea, I wanted to create some behaviour which I was unable to build by composing operators. My experiment was a bit contrived, but it's a use case which could exist in the real world, so let's explore it.
+
+I wanted to combine two things: an interval, and a counter. I wanted the delay of the interval to equal the current value of the counter. When you increase the counter, the time between each interval value should increase; when you decrease the counter, the time between each interval value should decrease.
+
+<CodeWave>
+
+```md 1:6
+alter delay: ------o---------->
+2s interval: -o-o-o-o|
+4s interval:         ---o---o->
+combination: -o-o-o-o---o---o->
+```
+
+Let's walk through some marble diagrams so we can visualise the end result, and understand the flawed behaviour which emerged from my first couple of attempts built by composing existing operators.
+
+Initially, the `interval` stream has a 2 second delay. To simplify the diagrams, when we emit an event in the `alter delay` stream, we change the delay to 4 seconds. The `combination` stream in the marble diagram shows how we want our operator to combine these events.
+
+```md 1:6
+alter delay: ------o---------->
+2s interval: -o-o-o|
+4s interval:       ---o---o--->
+combination: -o-o-o---o---o--->
+```
+
+My first attempt looked like it did the job at first.
+
+It's slightly different to the original intent - when the `alter delay` stream emits an event, the `interval` immediately switches over to a new interval. This seemed to work, but it felt like the timing was a little off when transitioning from one delay to another.
+
+```md 1:6
+alter delay: ------o-o-o---->
+2s interval: -o-o-o|
+4s interval:       --|
+4s interval:         --|
+4s interval:           ---o->
+combination: -o-o-o-------o->
+```
+
+After playing with it for a while, the flaw became clear.
+
+When you alter the delay too often, the `combination` observable misses out on events, sometimes for a significant period of time. I was altering the delay via button clicks--when clicking quickly this flaw was painfully obvious.
+
+```md 1:6
+alter delay: -----o--------->
+2s interval: o-o-o|
+4s interval:      o---o---o->
+combination: o-o-oo---o---o->
+```
+
+I also created a similar version of this operator with tweaked behaviour to see if a simple workaround was possible.
+
+It differs from the previous attempt in one way: when a new `interval` stream is created, it immediately starts with an initial event. This meant that clicking quickly would no longer cause the `combination` observable to appear frozen.
+
+```md 1:6
+alter delay: -----o-o-o----->
+2s interval: o-o-o|
+4s interval:      o-|
+4s interval:        o-|
+4s interval:          o---o->
+combination: o-o-oo-o-o---o->
+```
+
+However, it's still far from what I had in mind--it also breaks when the delay changes too quickly.
+
+When clicking quickly, the `combination` included an extra event every time the delay changed--no better a result than the previous broken version.
+
+</CodeWave>
+
+So how can we actually build this in a way which isn't broken?
+
+Here's the marble diagram for the desired behaviour again:
+
+```js
+alter delay: ------o---------->
+2s interval: -o-o-o-o|
+4s interval:         ---o---o->
+combination: -o-o-o-o---o---o->
+```
+
+And the original intent:
+
+Given an interval and a counter, the delay of the interval should equal the current value of the counter. When you increase the counter, the time between each interval value should increase; when you decrease the counter, the time between each interval value should decrease.
+
+<CodeWave>
+
+```js
+const dynamicInterval = () => source =>
+	new Observable(observer => {
+		return source.subscribe({
+			next: value => observer.next(value),
+			error: err => observer.error(err),
+			complete: () => observer.complete(),
+		})
+	})
+```
+
+The solution was to dive a little deeper and handle things manually. I started by creating an operator which does not alter any events, as a kind of blank slate.
+
+This code would be used as a pipeable operator, like `delay$.pipe(dynamicInterval())`. The function takes a source observable as its only argument, and returns a new observable which will forward data on to its subscribers.
+
+1. We call `new Observable` to create an observable
+2. We return a subscription to the `source` observable
+3. Inside this subscription, we forward the `next`, `error`, and `complete` signals on to the `observer`.
+
+```js
+const dynamicInterval = () => source =>
+    new Observable(observer => {
+        // TODO: store our state here
+
+        return source.subscribe({
+			// TODO: replace next()
+            next: value => observer.next(value),
+            error: err => observer.error(err),
+            complete: () => observer.complete(),
+        })
+    })
+```
+
+The standard rxjs `interval` operator returns an observable which continually counts upwards. Since we want a custom variant of this, we'll need to keep track of some state. We'll add this into the main closure, so that the state persists for each individual subscription.
+
+We'll also need to replace the `next` function. For the `error` or `complete` functions we don't want to do anything special, so we can leave them unchanged.
+
+```js
+const dynamicInterval = () => source =>
+    new Observable(observer => {
+        let count = 0
+
+        return source.subscribe({
+			// TODO: replace next()
+            next: value => observer.next(count++),
+            error: err => observer.error(err),
+            complete: () => observer.complete(),
+        })
+    })
+```
+
+For starters, we can store a `count` as our first piece of internal state.
+
+Here, we increment the count every time the source emits a value, and forward the count on to the subscriber. This operator essentially counts the number of events output by the source observable.
+
+```js
+const dynamicInterval = () => source =>
+	new Observable(observer => {
+        let count = 0
+        let interval
+
+		return source.subscribe({
+			next: duration => {
+                clearInterval(interval)
+				interval = setInterval(
+                    () => observer.next(count++),
+                    duration
+                )
+			},
+			error: err => observer.error(err),
+			complete: () => observer.complete(),
+		})
+	})
+```
+
+Let's start working on our `next` function by trying to use `setInterval`.
+
+Every time the source emits a new duration, we clear the previous interval, and create a new one with the new duration. Every time the interval runs, it increments the `count` state and forwards it to the observer.
+
+This results in the problem behaviour we encountered earlier where we clear the interval before it has a chance to emit the next value.
+
+```js
+const dynamicInterval = () => source =>
+    new Observable(observer => {
+        let count = 0
+        let duration
+
+        // TODO: somehow call the observer.next() function
+
+        return source.subscribe({
+			next: nextDuration => {
+				duration = nextDuration
+			},
+			error: err => observer.error(err),
+			complete: () => observer.complete(),
+        })
+    })
+```
+
+Instead, we need to completely decouple the interval from the source.
+
+We'll store the duration as another piece of state. Whenever the source sends the next duration, we'll update this state, but we'll handle the interval separately.
+
+```js
+const dynamicInterval = () => source =>
+    new Observable(observer => {
+        let count = 0
+        let duration
+
+        const loop = () => {
+            setTimeout(() => {
+                observer.next(count++)
+                loop()
+            }, duration)
+        }
+
+        return source.subscribe({
+			next: nextDuration => {
+				duration = nextDuration
+				// TODO: kickstart the loop
+			},
+			error: err => observer.error(err),
+			complete: () => observer.complete(),
+        })
+    })
+```
+
+Instead of using `setInterval`, we'll call `setTimeout` recursively to get the effect we're looking for.
+
+Every time we call our `loop` function, the following steps occur:
+
+1. We set a timeout which waits for the correct `duration` to pass, then fires the callback.
+2. The `count` state is sent to the observer and incremented.
+3. The `loop` function is called again.
+
+Note that this means that the loop function always waits until the previous timeout has completed, and then uses the most recent `duration` from source observable when setting the next timeout.
+
+Now we just need to kickstart the loop!
+
+```js
+const dynamicInterval = () => source =>
+    new Observable(observer => {
+        let count = 0
+        let duration
+        let currentIteration
+
+        const loop = () => {
+            currentIteration = setTimeout(() => {
+                observer.next(count++)
+                loop()
+            }, duration)
+        }
+
+        return source.subscribe({
+			next: nextDuration => {
+				duration = nextDuration
+				if (!currentIteration) loop()
+			},
+			error: err => observer.error(err),
+			complete: () => observer.complete(),
+        })
+    })
+```
+
+For the final step, we want to kickstart the `loop` when the source emits its first value.
+
+To do this, we add one more piece of state: a reference to the current timeout id. If there is no timeout id when the `next` function gets called, we start the loop. If a timeout exists, we let the existing loop continue.
+
+```js 1:22
+const dynamicInterval = () => source =>
+    new Observable(observer => {
+        let count = 0
+        let duration
+        let currentIteration
+
+        const loop = () => {
+            currentIteration = setTimeout(() => {
+                observer.next(count++)
+                loop()
+            }, duration)
+        }
+
+        return source.subscribe({
+			next: nextDuration => {
+				duration = nextDuration
+				if (!currentIteration) loop()
+			},
+			error: err => observer.error(err),
+			complete: () => observer.complete(),
+        })
+    })
+```
+
+This gives us exactly the functionality we wanted!
+
+The subscriber receives a continuously updated count, with the delay in between each value dynamically adjusted according to the values forwarded into the operator by the source observable.
+
+</CodeWave>
+
+This cleanly encapsulates the concept of a dynamic interval into one operator. We can now use it as easily as this:
+
+```js
+delay$.pipe(dynamicInterval())
+```
+
+Reactive programming has a reputation for being intimidating, but when you break it down to its building blocks it's a lot less difficult than you might expect. You just have to take it one step at a time.
+
+As for the API idea I've been experimenting with? Let's just say I like it a lot more than hooks...
