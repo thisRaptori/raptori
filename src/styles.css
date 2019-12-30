@@ -35,7 +35,6 @@ pre {
 	transition: background 0.2s linear;
 }
 
-[class*='Wave'] pre,
 .background {
 	background-color: var(--background);
 }
@@ -361,6 +360,6 @@ blockquote {
 	}
 }
 
-[class*='Wave'] [class*='Scroller'] p:first-child {
+.scroller p:first-child {
 	margin-top: 0;
 }
