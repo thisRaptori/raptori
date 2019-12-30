@@ -48,7 +48,7 @@ const theme = {
 		{
 			types: ['operator', 'entity', 'url'],
 			style: {
-				color: 'var(--text)',
+				color: 'var(--light)',
 			},
 		},
 		{
