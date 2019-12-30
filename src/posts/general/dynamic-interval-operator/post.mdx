@@ -197,16 +197,16 @@ This code would be used as a pipeable operator, like `delay$.pipe(dynamicInterva
 
 ```js
 const dynamicInterval = () => source =>
-    new Observable(observer => {
-        // TODO: store our state here
+	new Observable(observer => {
+		// TODO: store our state here
 
-        return source.subscribe({
+		return source.subscribe({
 			// TODO: replace next()
-            next: value => observer.next(value),
-            error: err => observer.error(err),
-            complete: () => observer.complete(),
-        })
-    })
+			next: value => observer.next(value),
+			error: err => observer.error(err),
+			complete: () => observer.complete(),
+		})
+	})
 ```
 
 The standard rxjs `interval` operator returns an observable which continually counts upwards. Since we want a custom variant of this, we'll need to keep track of some state. We'll add this into the inner closure, so that the state persists for each individual subscription.
@@ -215,16 +215,16 @@ We'll also need to replace the `next` function. For the `error` or `complete` ev
 
 ```js
 const dynamicInterval = () => source =>
-    new Observable(observer => {
-        let count = 0
+	new Observable(observer => {
+		let count = 0
 
-        return source.subscribe({
+		return source.subscribe({
 			// TODO: replace next()
-            next: value => observer.next(count++),
-            error: err => observer.error(err),
-            complete: () => observer.complete(),
-        })
-    })
+			next: value => observer.next(count++),
+			error: err => observer.error(err),
+			complete: () => observer.complete(),
+		})
+	})
 ```
 
 For starters, we'll store a `count` as our first piece of internal state.
@@ -234,16 +234,16 @@ Here, we increment the count every time the source emits a value, and forward th
 ```js
 const dynamicInterval = () => source =>
 	new Observable(observer => {
-        let count = 0
-        let interval
+		let count = 0
+		let interval
 
 		return source.subscribe({
 			next: duration => {
-                clearInterval(interval)
+				clearInterval(interval)
 				interval = setInterval(
-                    () => observer.next(count++),
-                    duration
-                )
+					() => observer.next(count++),
+					duration
+				)
 			},
 			error: err => observer.error(err),
 			complete: () => observer.complete(),
@@ -259,20 +259,20 @@ This results in the problem behaviour we encountered earlier where we clear the 
 
 ```js
 const dynamicInterval = () => source =>
-    new Observable(observer => {
-        let count = 0
-        let duration
+	new Observable(observer => {
+		let count = 0
+		let duration
 
-        // TODO: somehow call the observer.next() function
+		// TODO: somehow call the observer.next() function
 
-        return source.subscribe({
+		return source.subscribe({
 			next: nextDuration => {
 				duration = nextDuration
 			},
 			error: err => observer.error(err),
 			complete: () => observer.complete(),
-        })
-    })
+		})
+	})
 ```
 
 Instead, we need to completely decouple the interval from the source.
@@ -281,26 +281,26 @@ We'll store the duration as another piece of state. Whenever the source sends th
 
 ```js
 const dynamicInterval = () => source =>
-    new Observable(observer => {
-        let count = 0
-        let duration
+	new Observable(observer => {
+		let count = 0
+		let duration
 
-        const loop = () => {
-            setTimeout(() => {
-                observer.next(count++)
-                loop()
-            }, duration)
-        }
+		const loop = () => {
+			setTimeout(() => {
+				observer.next(count++)
+				loop()
+			}, duration)
+		}
 
-        return source.subscribe({
+		return source.subscribe({
 			next: nextDuration => {
 				duration = nextDuration
 				// TODO: kickstart the loop
 			},
 			error: err => observer.error(err),
 			complete: () => observer.complete(),
-        })
-    })
+		})
+	})
 ```
 
 Rather than using `setInterval`, we'll call `setTimeout` recursively to get the effect we're looking for.
@@ -317,27 +317,27 @@ This behaviour is exactly what we're looking for! Now we just need to kickstart 
 
 ```js
 const dynamicInterval = () => source =>
-    new Observable(observer => {
-        let count = 0
-        let duration
-        let currentIteration
+	new Observable(observer => {
+		let count = 0
+		let duration
+		let currentIteration
 
-        const loop = () => {
-            currentIteration = setTimeout(() => {
-                observer.next(count++)
-                loop()
-            }, duration)
-        }
+		const loop = () => {
+			currentIteration = setTimeout(() => {
+				observer.next(count++)
+				loop()
+			}, duration)
+		}
 
-        return source.subscribe({
+		return source.subscribe({
 			next: nextDuration => {
 				duration = nextDuration
 				if (!currentIteration) loop()
 			},
 			error: err => observer.error(err),
 			complete: () => observer.complete(),
-        })
-    })
+		})
+	})
 ```
 
 For the final step, we want to kickstart the `loop` when the source emits its first value, without unintentionally creating more than one loop.
@@ -346,27 +346,27 @@ To do this, we add one more piece of state: a reference to the current timeout i
 
 ```js 1:22
 const dynamicInterval = () => source =>
-    new Observable(observer => {
-        let count = 0
-        let duration
-        let currentIteration
+	new Observable(observer => {
+		let count = 0
+		let duration
+		let currentIteration
 
-        const loop = () => {
-            currentIteration = setTimeout(() => {
-                observer.next(count++)
-                loop()
-            }, duration)
-        }
+		const loop = () => {
+			currentIteration = setTimeout(() => {
+				observer.next(count++)
+				loop()
+			}, duration)
+		}
 
-        return source.subscribe({
+		return source.subscribe({
 			next: nextDuration => {
 				duration = nextDuration
 				if (!currentIteration) loop()
 			},
 			error: err => observer.error(err),
 			complete: () => observer.complete(),
-        })
-    })
+		})
+	})
 ```
 
 This gives us exactly the functionality we wanted.
