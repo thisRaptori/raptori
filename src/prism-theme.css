@@ -92,12 +92,12 @@ pre[class*='language-'] {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-	color: #f9f2f4;
+	color: var(--text);
 	background: transparent;
 }
 .token.method,
 .token.function {
-	color: #34d8ff;
+	color: var(--alternate);
 }
 .token.regex,
 .token.important,

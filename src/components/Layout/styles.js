@@ -33,6 +33,3 @@ export const Below = styled.div`
 	max-width: 680px;
 	padding: 20rem;
 `
-
-export const Wrapper = styled.div`
-`

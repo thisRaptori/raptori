@@ -7,7 +7,7 @@ import '../../prism-theme.css'
 
 import { Footer, Header, WaveSection } from 'src/components'
 import { useIsVisible } from 'src/hooks'
-import { Below, Main, Wrapper } from './styles'
+import { Below, Main } from './styles'
 
 const Layout = ({ activePage, belowTheWaves, children }) => {
 	const [footerRef, footerIsVisible] = useIsVisible()
@@ -30,7 +30,7 @@ const Layout = ({ activePage, belowTheWaves, children }) => {
 						footerIsVisible={footerIsVisible}
 						siteTitle={data.site.siteMetadata.title}
 					/>
-					<Wrapper className="background transition">
+					<div className="background transition">
 						<Main>{children}</Main>
 						<WaveSection footer>
 							<div ref={footerRef} />
@@ -39,7 +39,7 @@ const Layout = ({ activePage, belowTheWaves, children }) => {
 							) : null}
 							<Footer />
 						</WaveSection>
-					</Wrapper>
+					</div>
 				</>
 			)}
 		/>
