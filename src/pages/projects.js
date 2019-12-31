@@ -13,7 +13,7 @@ import {
 
 const Projects = styled.div`
 	section {
-		padding: calc(20rem + 1vw) 0;
+		padding: calc(2rem + 1vw) 0;
 
 		> :first-child {
 			margin-top: 0;

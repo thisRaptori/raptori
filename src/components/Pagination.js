@@ -5,7 +5,7 @@ import { Link } from 'src/components'
 
 const List = styled.ul`
 	display: flex;
-	margin: 30rem -5px 0;
+	margin: 3rem -5px 0;
 `
 
 const ListItem = styled.li`

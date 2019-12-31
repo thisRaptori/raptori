@@ -8,7 +8,7 @@ const Wrapper = styled.footer`
 `
 
 const Text = styled.p`
-	margin: 20rem;
+	margin: 2rem;
 	text-align: center;
 
 	a {

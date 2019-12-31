@@ -5,7 +5,7 @@ import { getSectionWidth } from 'src/utils'
 export const Main = styled.main`
 	margin: 0 auto;
 	max-width: 680px;
-	padding: 20rem;
+	padding: 2rem;
 	position: relative;
 	z-index: 1;
 `
@@ -31,5 +31,5 @@ export const Below = styled.div`
 	color: var(--dark);
 	margin: 0 auto;
 	max-width: 680px;
-	padding: 20rem;
+	padding: 2rem;
 `

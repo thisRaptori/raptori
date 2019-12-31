@@ -39,8 +39,8 @@ const PostHeader = styled.header`
 		${MetaText} {
 			border-right: 1px solid;
 			font-size: 0;
-			margin: 30rem 20rem 0 0;
-			padding-right: 20rem;
+			margin: 3rem 2rem 0 0;
+			padding-right: 2rem;
 			position: absolute;
 			right: 100%;
 			text-align: right;
@@ -50,11 +50,11 @@ const PostHeader = styled.header`
 
 		${MetaText} span {
 			display: block;
-			font-size: 16rem;
+			font-size: 1.6rem;
 		}
 
 		${MetaText} span:not(:last-child) {
-			margin-bottom: 20rem;
+			margin-bottom: 2rem;
 		}
 	}
 `
@@ -69,12 +69,12 @@ const NextPrevLinks = styled.p`
 		flex: 0 1 50%;
 		justify-content: center;
 		line-height: 1;
-		padding: 10rem 12px;
+		padding: 1rem 12px;
 		text-align: center;
 	}
 
 	> :not(:first-child) {
-		margin-left: 20rem !important;
+		margin-left: 2rem !important;
 	}
 
 	.text {
