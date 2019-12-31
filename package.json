@@ -30,7 +30,9 @@
     "gatsby-transformer-sharp": "^2.1.13",
     "mdx-utils": "^0.2.0",
     "minireset.css": "~0.0.4",
+    "mjml": "^4.5.1",
     "polished": "^3.4.2",
+    "prettier": "^1.19.1",
     "prism-react-renderer": "^1.0.2",
     "prismjs": "^1.16.0",
     "prop-types": "^15.6.2",
@@ -47,10 +49,11 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "email": "mjml -w ./email/template.mjml -o ./email/output.html",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "jest",
-    "prettier": "npx prettier --write 'src/**/*.js'"
+    "prettier": "prettier --write 'src/**/*.js'"
   },
   "repository": {
     "type": "git",
