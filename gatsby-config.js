@@ -6,7 +6,6 @@ module.exports = {
 		url: `https://raptori.dev`,
 	},
 	plugins: [
-		`gatsby-theme-waves`,
 		`gatsby-plugin-styled-components`,
 		`gatsby-plugin-root-import`,
 		`gatsby-plugin-react-helmet`,
@@ -38,13 +37,6 @@ module.exports = {
 							linkImagesToOriginal: false,
 						},
 					},
-					{
-						resolve: `gatsby-remark-prismjs`,
-						options: {
-							aliases: { js: 'javascript', html: 'markup' },
-							noInlineHighlight: true,
-						},
-					},
 					`gatsby-remark-smartypants`,
 				],
 				plugins: [
@@ -56,14 +48,6 @@ module.exports = {
 							linkImagesToOriginal: false,
 						},
 					},
-					{
-						resolve: `gatsby-remark-prismjs`,
-						options: {
-							aliases: { js: 'javascript', html: 'markup' },
-							noInlineHighlight: true,
-						},
-					},
-					`gatsby-remark-smartypants`,
 				],
 			},
 		},
@@ -85,5 +69,6 @@ module.exports = {
 				trackingId: 'UA-140200159-1',
 			},
 		},
+		`gatsby-theme-waves`,
 	],
 }

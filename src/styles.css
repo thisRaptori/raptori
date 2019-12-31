@@ -5,6 +5,8 @@
 	--primary: var(--source);
 	--primary-faded: #43b9b755;
 	--primary-transparent: #43b9b700;
+	--alternate-dark: #289eba;
+	--alternate-light: #34d8ff;
 	--secondary-dark: #28597f;
 	--secondary-light: #8bf4a7;
 	--contrast: #ef7432;
@@ -33,7 +35,6 @@ pre {
 	transition: background 0.2s linear;
 }
 
-pre,
 .background {
 	background-color: var(--background);
 }
@@ -117,6 +118,7 @@ body {
 	--text: var(--dark);
 	--secondary: var(--secondary-dark);
 	--contrast-secondary: var(--contrast-secondary-dark);
+	--alternate: var(--alternate-dark);
 }
 
 body.dark {
@@ -125,6 +127,7 @@ body.dark {
 	--text: var(--light);
 	--secondary: var(--secondary-light);
 	--contrast-secondary: var(--contrast-secondary-light);
+	--alternate: var(--alternate-light);
 }
 
 a,
@@ -355,4 +358,8 @@ blockquote {
 	.mockup > * {
 		margin: 0 auto !important;
 	}
+}
+
+.scroller p:first-child {
+	margin-top: 0;
 }

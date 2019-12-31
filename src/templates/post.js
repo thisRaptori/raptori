@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 import {
+	MDXContent,
 	Hr,
 	Icon,
 	Layout,
@@ -16,6 +16,10 @@ import {
 import { get } from 'src/utils'
 
 const PostHeader = styled.header`
+	h1 {
+		margin-top: 0;
+	}
+
 	${MetaText} a {
 		color: inherit;
 	}
@@ -128,7 +132,6 @@ export default function Template({
 	const imagePath = get(featuredImage, 'childImageSharp', 'fluid', 'src')
 	const image = imagePath && `${siteUrl}${imagePath}`
 	const isArchived = subtitle.startsWith('Archive')
-	const content = <MDXRenderer>{body}</MDXRenderer>
 
 	const mainLinks =
 		published && published.length ? (
@@ -190,7 +193,7 @@ export default function Template({
 						</MetaText>
 					</PostHeader>
 					<Hr />
-					{content}
+					<MDXContent>{body}</MDXContent>
 					<Hr margin={6} />
 					<NextPrevLinks>
 						{next ? (

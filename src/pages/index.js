@@ -8,10 +8,14 @@ import {
 	SEO,
 	WaveSection,
 } from 'src/components'
+import { useWindowWidth } from 'src/hooks'
 import { get } from 'src/utils'
 
 const IndexPage = ({ data }) => {
-	const edges = get(data, 'allMdx', 'edges') || []
+	const width = useWindowWidth()
+	const postCount = width > 1200 ? 5 : 3
+	const edges = get(data, 'allMdx', 'edges').slice(0, postCount) || []
+
 	return (
 		<Layout>
 			<SEO title="Home" />
@@ -42,7 +46,7 @@ const IndexPage = ({ data }) => {
 			{edges.length ? (
 				<>
 					<h3>Featured Posts</h3>
-					<PostGrid>
+					<PostGrid wide>
 						{edges.map((edge, i) => (
 							<PostLink
 								key={edge.node.id}
@@ -63,7 +67,7 @@ export const pageQuery = graphql`
 	query {
 		allMdx(
 			sort: { order: DESC, fields: [frontmatter___date] }
-			limit: 3
+			limit: 5
 			filter: { frontmatter: { tags: { in: ["home"] } } }
 		) {
 			edges {
