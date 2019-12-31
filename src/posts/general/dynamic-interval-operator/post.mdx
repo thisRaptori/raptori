@@ -11,10 +11,9 @@ import { CodeWave } from "gatsby-theme-waves"
 
 Rxjs has such a variety of operators that it's taken two years for me to write one which couldn't be built using the lazy approach.
 
-For anyone unfamiliar, rxjs operators are composable pieces of logic, basic building blocks which we combine to create our own data transformations. Operators are to rxjs as components are to React--with a big difference in that unlike React, rxjs comes with its own comprehensive pre-built component library!
+For anyone unfamiliar, rxjs operators are composable pieces of logic; basic building blocks which we combine to create our own data transformations. Operators are to rxjs as components are to React--with a big difference in that unlike React, rxjs comes with its own comprehensive pre-built component library!
 
 Most custom operators can be built by reusing these existing operators. They cover so many different situations that most requirements can be expressed this way without hand-coding the logic.
-
 
 <CodeWave>
 
@@ -94,7 +93,7 @@ Beyond this type of operator, there's another level of flexibility available if 
 
 While experimenting with an API idea, I wanted to create some behaviour which I was unable to build by composing operators. My experiment felt a bit contrived, but it's a use case which could exist in the real world, so let's explore it.
 
-I wanted to combine two things: an interval, and a counter. I wanted the delay of the interval to equal the current value of the counter. When we increase the counter, the time between each interval value should increase; when we decrease the counter, the time between each interval value should decrease.
+I wanted to combine two things: an interval, and a counter. I wanted the delay of the interval to equal the current value of the counter. When we increase the counter, the time between each interval value should increase; when we decrease the counter, the time between each interval value should decrease. Ideally, when the counter changes, it should wait until the next iteration before changing the interval's delay.
 
 <CodeWave>
 
@@ -172,7 +171,7 @@ combination: -o-o-o-o---o---o->
 
 And the original intent:
 
-Given an interval and a counter, the delay of the interval should equal the current value of the counter. When we increase the counter, the time between each interval value should increase; when we decrease the counter, the time between each interval value should decrease.
+Given an interval and a counter, the delay of the interval should equal the current value of the counter. When we increase the counter, the time between each interval value should increase; when we decrease the counter, the time between each interval value should decrease. Ideally, when the counter changes, it should wait until the next iteration before changing the interval's delay.
 
 <CodeWave>
 

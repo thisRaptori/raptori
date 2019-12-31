@@ -48,7 +48,7 @@ const StyledLink = styled(Link)`
 				? `
 			grid-column-end: span 2;
 			min-height: 230px;
-			padding: 20rem 15rem 20rem calc(50% + 50rem);
+			padding: 15rem 15rem 10rem calc(50% + 45rem);
 
 			.gatsby-image-wrapper {
 				bottom: 0;

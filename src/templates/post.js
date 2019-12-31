@@ -16,6 +16,10 @@ import {
 import { get } from 'src/utils'
 
 const PostHeader = styled.header`
+	h1 {
+		margin-top: 0;
+	}
+
 	${MetaText} a {
 		color: inherit;
 	}
