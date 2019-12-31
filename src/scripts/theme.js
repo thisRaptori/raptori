@@ -14,6 +14,10 @@
 		},
 	}
 
+	function getTheme(e) {
+		setTheme(e.matches)
+	}
+
 	function setTheme(isNextThemeDark) {
 		window.isCurrentThemeDark = isNextThemeDark
 		document.body.className = window.isCurrentThemeDark ? 'dark' : 'light'
@@ -28,12 +32,14 @@
 		} catch (err) {}
 	}
 
-	themeQuery.addListener(function(e) {
-		setTheme(e.matches)
-	})
+	themeQuery.addListener(getTheme)
 
 	try {
-		var isStoredThemeDark = localStorage.getItem('isThemeDark') === 'true'
-		setTheme(isStoredThemeDark)
+		var storedTheme = localStorage.getItem('isThemeDark')
+		if (storedTheme) {
+			setTheme(storedTheme === 'true')
+		} else {
+			getTheme(themeQuery)
+		}
 	} catch (err) {}
 })()
