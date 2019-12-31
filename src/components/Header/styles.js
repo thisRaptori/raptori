@@ -42,7 +42,7 @@ export const HeaderElement = styled.header`
 			border: 1px solid var(--primary);
 			border-radius: 50%;
 			fill: var(--primary);
-			margin-right: 10rem;
+			margin-right: 1rem;
 		}
 	}
 
@@ -75,7 +75,7 @@ export const Space = styled.span`
 	padding: 0 !important;
 
 	a & {
-		min-width: 10rem;
+		min-width: 1rem;
 	}
 `
 

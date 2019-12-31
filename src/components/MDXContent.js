@@ -20,7 +20,7 @@ const mdxComponents = {
 const Content = styled.div`
 	ol,
 	ul {
-		padding-left: 20rem;
+		padding-left: 2rem;
 	}
 
 	ul {

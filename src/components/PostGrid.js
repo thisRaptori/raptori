@@ -17,13 +17,13 @@ const wideGrid = css`
 `
 
 const PostGrid = styled.div`
-	margin: 20rem 10rem;
+	margin: 2rem 1rem;
 
 	@media (min-width: 600px) {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		grid-gap: 60rem;
-		margin-top: 30rem;
+		grid-gap: 6rem;
+		margin-top: 3rem;
 
 		a {
 			margin-top: 0 !important;

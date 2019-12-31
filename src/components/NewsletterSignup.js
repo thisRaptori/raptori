@@ -14,7 +14,7 @@ const NewsletterForm = styled.div`
 	color: var(--light);
 	cursor: pointer;
 	display: flex;
-	margin: 20rem 0;
+	margin: 2rem 0;
 	padding: 4px;
 
 	* {
@@ -29,7 +29,7 @@ const NewsletterForm = styled.div`
 		display: flex;
 		flex: 1 1 100%;
 		flex-direction: column-reverse;
-		height: 46rem;
+		height: 4.6rem;
 		justify-content: space-between;
 		padding: 4px;
 	}
@@ -47,7 +47,7 @@ const NewsletterForm = styled.div`
 	}
 
 	input[value='']:not(:focus) {
-		font-size: 10rem;
+		font-size: 1rem;
 	}
 
 	input::placeholder {
@@ -65,7 +65,7 @@ const NewsletterForm = styled.div`
 
 	input:not([value='']) + span,
 	input:focus + span {
-		font-size: 10rem;
+		font-size: 1rem;
 	}
 `
 
