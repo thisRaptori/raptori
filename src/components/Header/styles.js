@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Link } from 'src/components'
+import Link from '../Link'
 
 export const HeaderElement = styled.header`
 	border-top: 2px solid var(--primary);
