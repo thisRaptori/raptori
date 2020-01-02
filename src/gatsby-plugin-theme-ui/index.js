@@ -38,7 +38,7 @@ const customWavesTheme = {
 					marginLeft: ['calc(50% - 50vw)', 0],
 					position: ['sticky', 'static'],
 					top: ['4.2rem', 'auto'],
-					width: ['100vw', '60%'],
+					width: ['100%', '60%'],
 					zIndex: [1, 'auto'],
 				},
 				Sticker: {
