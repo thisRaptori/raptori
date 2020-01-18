@@ -2,20 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import theme from '!raw-loader!./scripts/theme.js'
-import tilt from '!raw-loader!./scripts/tilt.js'
 
 const themeScript = (
 	<script
 		dangerouslySetInnerHTML={{
 			__html: theme,
-		}}
-	/>
-)
-
-const tiltScript = (
-	<script
-		dangerouslySetInnerHTML={{
-			__html: tilt,
 		}}
 	/>
 )
@@ -43,7 +34,6 @@ export default function HTML(props) {
 					id="___gatsby"
 					dangerouslySetInnerHTML={{ __html: props.body }}
 				/>
-				{tiltScript}
 				{props.postBodyComponents}
 			</body>
 		</html>

@@ -29,20 +29,6 @@ const Wrapper = styled.div`
 	}
 `
 
-const Skew = styled.div`
-	position: relative;
-	transform: skew(0, var(--skew));
-
-	&:not(:first-child) {
-		${props => (props.footer ? '' : 'z-index: -1;')}
-	}
-
-	& ~ * {
-		position: relative;
-		z-index: 2;
-	}
-`
-
 const Section = styled.div`
 	color: var(--dark);
 	margin: 0 -2rem;
@@ -70,7 +56,6 @@ const Content = styled.div`
 	max-width: 640px;
 	padding: calc(2rem + 1vw) 0;
 	position: relative;
-	transform: skew(0, calc(0deg - var(--skew)));
 	z-index: 2;
 
 	@media (min-width: 680px) {
@@ -110,15 +95,13 @@ const WaveSection = ({ as, children, disableTopMargin, footer }) => {
 			footer={footer}
 			width={width}
 		>
-			<Skew footer={footer}>
-				<Section width={width} as={as} footer={footer}>
-					<Waves />
-					<Background>
-						<Content>{children}</Content>
-					</Background>
-					{footer ? null : <Waves invert offset />}
-				</Section>
-			</Skew>
+			<Section width={width} as={as} footer={footer}>
+				<Waves />
+				<Background>
+					<Content>{children}</Content>
+				</Background>
+				{footer ? null : <Waves invert offset />}
+			</Section>
 		</Wrapper>
 	)
 }
