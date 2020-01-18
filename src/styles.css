@@ -21,7 +21,6 @@
 	--menu-height: calc(
 		var(--header-height) + (var(--header-padding) * 2) + 2px
 	);
-	--skew: 0deg;
 }
 
 /* Transition Styles */
