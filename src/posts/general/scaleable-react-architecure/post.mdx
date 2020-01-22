@@ -63,7 +63,7 @@ Most apps tend to contain a number of static resources which do not change over 
 
 These resources are varied: state containers, router instances, API facades, telemetry services, and much more. The have a clear common pattern: we initiate and configure them once, when the app first loads in the browser. This is the first phase: **setup**.
 
-One exception where this distinct phase has been consciously recognised is **Redux**. People are encouraged to write a `configureStore` function which encapsulates the store's setup. I helped write [the docs recipe](https://redux.js.org/recipes/configuring-your-store/) exploring this!
+One exception where this distinct phase has been consciously recognised is **Redux**. People are encouraged to write a `configureStore` function which encapsulates their store's setup. I helped write [the docs recipe](https://redux.js.org/recipes/configuring-your-store/) exploring this!
 
 The rest of the runtime happens in a separate phase: **...naming is hard**. We refer back to the static resources, but only their internal state ever changes, and we never replace or remove them (with some rare exceptions).
 
@@ -108,9 +108,11 @@ configureResources().then(resources => {
 
 Written out like that it seems simple, but it makes a surprisingly large difference to code maintainability. This is especially the case when you have resources which depend on each other, which often results in tightly coupled setup code which leaks out into a number of files.
 
-Isolating the setup phase makes the shape of the code more consistent. Each layer exhibits a similar structure, making it a lot easier to dive deeper when needed, while providing a simple but accurate mental model at a higher level. It can help keep your code consistent and decentralised without sacrificing user experience, and group your code by domain instead of by type.
+Isolating the setup phase makes the shape of the code more consistent. Each layer exhibits a similar structure, making it a lot easier to dive deeper when needed, while providing a simple but accurate mental model at a higher level. It can help keep your code consistent and decentralised without sacrificing user experience, and lets you group your code by domain instead of by type.
 
-Rather than trying to cover all of this in one article, we'll explore it across several posts. We'll look into some problems with the pattern and how we can solve them, then dive deeper into some of the different resources we can create using this pattern to help our app scale. If you just want to skip ahead and dig through the code, you can check out the repo here.
+Rather than trying to cover all of this in one article, we'll explore it more extensively across several. We'll look into some problems with the pattern and how we can solve them, then dive deeper into some of the different resources we can create to help our app scale.
+
+If you just want to skip ahead and dig through the code, you can check out [this repo here]().
 
 Here's some of the topics we'll cover:
 
