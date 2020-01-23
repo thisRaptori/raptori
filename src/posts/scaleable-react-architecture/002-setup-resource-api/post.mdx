@@ -1,7 +1,7 @@
 ---
-path: '/blog/scaleable-architecture-magic'
+path: '/blog/scaleable-architecture-setup-api'
 date: '2020-01-24'
-title: 'Scaleable React Architecure - A Little Bit of Magic'
+title: 'Scaleable React Architecure - Resource Setup API'
 subtitle: 'Explore the benefits and flaws of the setupResource pattern, and the path to solving them in a scaleable way.'
 tags: ['featured']
 featuredImage: './box.jpg'
@@ -159,11 +159,11 @@ Let's look at this from another angle.
 
 The example code we've looked at so far involves manually implementing the loading sequence of all of our resources. We made performance gains by reasoning about where the bottlenecks were, and manually implementing logic which solved them.
 
-This introduces tight coupling across all of this logic, which is the opposite of one of our key aims: we want to decoupling our code _more_, not less. We want our code to follow consistent shared patterns, but we want to be able to reason about each resource in isolation.
+This introduced tight coupling across all of this logic, which is the opposite of one of our key aims: we want to decouple our code _more_, not less. We want our code to follow consistent shared patterns, but we want to be able to reason about each resource in isolation.
 
 In an ideal world, we could completely decouple the logic for each resource into separate functions. So what would an API which lent us that kind of perspective look like?
 
-For now, `combineResourceCreators` will be a magic box into which we put all of our complexity; we'll figure out how to make it work later on.
+For now, `combineResourceCreators` will be a magic box into which we put all of our complexity; we'll figure out how to make it work later on, once we have a clear picture of the user-facing API it needs to expose.
 
 ```js
 async function setupAPI() {
@@ -179,13 +179,13 @@ async function setupStore() {
 }
 ```
 
-This is the core of what we want to be able to do in our `setupResource` functions. We can distil our problem space into three key initial requirements:
+Configuring and registering each resource is the core of what we want to be able to do in our `setupResource` functions. We can distil our problem space into three key requirements:
 
 - We want to manage dependencies in a way which _always_ results in the ideal resolution scenario, without manual logic or tight coupling.
 - We want to encapsulate the setup and configuration of each resource into one isolated location.
 - We want our combined function to resolve into a single object containing all the resources.
 
-Let's start with our simple cases with no dependencies.
+Let's start with our simple resources with no dependencies.
 
 ```js 1:11
 async function setupAPI() {
@@ -203,7 +203,7 @@ async function setupStore() {
 
 Note that we're writing `async` functions, which lets us use the `await` keyword for async code inside our setup function.
 
-Our second requirement is easily done. Since we're now implementing each resource's setup logic as a separate function, we already have exactly what we need. We can put all of our resource-specific code into its dedicated function.
+Our second requirement comes for free with this approach. Since we're implementing each resource's setup logic as a separate function, we already have exactly what we need. We can put all of our resource-specific code into its dedicated function.
 
 Note that in reality, this `setupResource` code would look very different. The pattern is strongly related to the [Redux `configureStore` recipe doc](https://redux.js.org/recipes/configuring-your-store/) mentioned in the previous article; the real-world code for this would often look much like the final code explored in the recipe.
 
@@ -222,9 +222,9 @@ async function setupStore({ addResource }) {
 }
 ```
 
-A flawed approach for our third requirement would have been to create an empty `resources` object at the top of our `combineResourceCreators` function and pass it around into all the `setupResource` functions.
+A flawed approach for our third requirement would have been to create an empty `resources` object inside our `combineResourceCreators` function and pass the raw object around into all the `setupResource` functions.
 
-This would have introduced a risk of the different functions diverging in approach, increasing complexity and reducing the effectiveness of our pattern. Being able to mutate the resources object would be a potential foot-gun, and instead we want to designe our API so that people will default to doing things the right way.
+This would have introduced a risk of the different functions diverging in approach, increasing complexity and reducing the effectiveness of our pattern. Being able to mutate the resources object directly would be a potential foot-gun, and instead we want to design our API so that people will default to doing things the right way.
 
 Instead we treat the mutation as an implementation detail, hidden behind a declarative API exposed to each setup function.
 
@@ -255,18 +255,17 @@ async function setupSideEffects({ addResource }) {
 
 But what about the resources which depend on one another?
 
-We can't manually pass the dependency into our setup function - that would be the same as our flawed approach from earlier.
+We can't manually pass the resources each setup dependends upon into the function - that would be essentially the same as our flawed approach from earlier.
 
 Instead, we need something which will completely solve all of the subtle problems we encountered. We also want it to be clear and concise, so that people unfamiliar with the code will be able to read it and understand the intent straight away.
 
-For now, we'll have to rely on our magic box to hand-wave away this complexity. 
+For now, we'll have to ignore the implementation details and hand-wave this complexity away completely. 
 
 ```js 1:31
 async function setupRouter({ addResource, getResources }) {
 	const { api } = await getResources('api')
 
 	const router = await createRouter(api)
-
 	addResource('router', router)
 }
 
@@ -290,13 +289,13 @@ async function setupSideEffects({ addResource, getResources }) {
 }
 ```
 
-Magic! 🎉
+Magic! ✨
 
 The second piece of our API is another function, called `getResources`. It takes a list of resource names, and returns a promise. This promise resolves into an object containing only the resources we requested--and it does so as quickly as possible.
 
-The moment all the requested resources resolve, the promise is returned, and the setup function continues. This behaviour means that we can guarantee that our resource tree will always be resolved according to the best-case loading path.
+The moment all the requested resources resolve, the promise is resolved, and the setup function continues. This behaviour means that we can guarantee that our resource tree will always be resolved according to the best-case loading path.
 
-By structuring our API in this way, we're able to avoid writing any of the complex, coupled code which would have made it difficult to make changes in future. Instead, we declare our dependencies where they are needed, and can trust that they will resolve efficiently.
+By structuring our API in this way, we are able to avoid writing any of the complex, coupled code which would have made it difficult to make changes in future. Instead, we declare our dependencies where they are needed, and can trust that they will resolve efficiently.
 
 ```js 1:11
 async function setupRouter({ addResource, getResources }) {
@@ -312,13 +311,15 @@ async function setupRouter({ addResource, getResources }) {
 }
 ```
 
+This approach would likely be exposed to the rest of the app via the Router resource itself. More on that in a later article!
+
 One other minor detail also needs to be taken into account. As mentioned earlier, we may have some resources which need to defer logic until after all the other resources have resolved.
 
 Our Router resource is a perfect example of this. It sits in the middle of our dependency tree, meaning that we cannot force it to wait by declaring that it depends on every other resourse--that would introduce a circular dependency, and our resources would never resolve.
 
-Instead, we can solve this by introducing another api feature. If we return a callback function from a `setupResource` function, we can defer calling it until all the resources resolve.
+Instead, we can solve this by introducing another api feature. If we return a callback from a `setupResource` function, we can defer calling it until all the resources have successfully resolved.
 
-Since we may need to perform some asynchronous work inside these callbacks (as is the case in this example), we will then also wait for any further promises to resolve before we resolve the overall `resources` object and complete the setup phase.
+Since we may need to perform some asynchronous work inside these callbacks (as is the case in this example), we should also wait for any promises the callbacks return to resolve before we resolve the final `resources` object and complete the setup phase.
 
 This gives us another simple yet powerful tool for synchronising our setup code in a way which doesn't couple the different resources together.
 
@@ -344,7 +345,7 @@ async function setupSomeOtherResource({ getResources }) {
 
 My current version also has two further features:
 
-- A synchronous `getAllResources` function, which simply returns the currently available resources (particularly useful in the callbacks which can be returned from a setup function).
-- An `addSetupResources` function, which is a variant of `addResources`. It adds resources which are available during the setup phase, but are then cleared and not made available to the **damnit i really need a name for it** phase.
+- A synchronous `getAllResources` function, which returns the currently available resources. This is particularly useful in the callbacks which can be returned from a setup function, and it can be used to .
+- The `addResources` function also returns a callback which removes the resource. This allows you to add a resourse which should only be available during the setup phase, and then remove it so that it's not made available to the **damnit i really need a name for it** phase. This API choice was made to ensure that each resource can only be removed by the setup function which created it.
 
-Check out the next article in this series to see exactly what's inside the magic `combineResourceCreators` box!
+Now that we've covered the different aspects of the API, it's time to build it! Check out the next article in this series to see exactly what's inside the magic `combineResourceCreators` box.
