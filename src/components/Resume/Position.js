@@ -53,7 +53,7 @@ const Header = styled.header`
 		font-size: 1.6rem;
 		font-weight: 100;
 		line-height: 1.4;
-		margin-left: .4rem;
+		margin-left: 0.4rem;
 		text-align: right;
 		white-space: nowrap;
 

@@ -1,0 +1,350 @@
+---
+path: '/blog/scaleable-architecture-magic'
+date: '2020-01-24'
+title: 'Scaleable React Architecure - A Little Bit of Magic'
+subtitle: 'Explore the benefits and flaws of the setupResource pattern, and the path to solving them in a scaleable way.'
+tags: ['featured']
+featuredImage: './box.jpg'
+---
+
+import { CodeWave } from "gatsby-theme-waves"
+
+At the end of the previous article, we saw a simple pattern for abstracting our **setup** phase into a single function.
+
+The code begs a couple of questions: what happens inside this `setupResources` function--and what's the catch?
+
+
+<CodeWave>
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import App from './app'
+import setupResources from './setupResources'
+
+setupResources().then(resources => {
+	ReactDOM.render(
+		<App resources={resources} />,
+		document.getElementById('root')
+	)
+})
+```
+
+At a high level, `setupResources` returns a promise which resolves into an object containing all of our app's static resources; we then pass this object into the app to kick off the second phase of runtime.
+
+We could implenent this function in many different ways. For example, a naïve approach would be to just throw all the setup code into the body of this one function.
+
+Reviewing and iterating on this simple approach highlights some of the problems which we will need to solve if we want to use this approach.
+
+```js
+async function setupResources() {
+	const api = await setupAPI()
+	const store = await setupStore()
+	const router = await setupRouter(api)
+	const persistentProcess = await setupPersistentProcess(api, store)
+	const sideEffects = await setupSideEffects(
+		api,
+		persistentProcess,
+		router,
+		store
+	)
+
+	return new Promise(resolve => {
+		router.start(() => {
+			resolve({ api, persistentProcess, router, store })
+		})
+	})
+}
+```
+
+This simplified example `setupResources` function includes five interconnected resources:
+
+-   An **API Facade**.
+-   A global **Store**.
+-   A **Router**.
+-   A **Persistent Process Management** system (PPM).
+-   A **Side-Effect Management** system (SEM).
+
+The purpose of each resource isn't important right now.
+
+In our example, every resource includes some asynchronous logic which introduces a delay. Some resources depend on others. One resource also needs to defer some logic which should not be run until after all the other resources have been resolved.
+
+Our dependency graph looks like this:
+
+![](dependency-graph.png)
+
+These are typical constraints which are likely to exist in any non-trivial app which follows this pattern. In a real-world app, we might also want to defer loading some resources until they're needed, but we'll skip that requirement for now.
+
+To help make some deatils clear, each resource involves a different delay period. These are wildly unrealistic, to make them easier to follow:
+
+-   API Facade: **1 second**.
+-   Store: **10 seconds**.
+-   Router: **8 seconds**.
+-   PPM: **2 seconds**.
+-   SEM: **5 seconds**.
+
+Let's explore the problems inherent in this approach.
+
+```js 1:24
+async function setupResources() {
+	const [api, store] = await Promise.all([
+		await setupAPI(),
+		await setupStore(),
+	])
+
+	const [router, persistentProcess] = await Promise.all([
+		await setupRouter(api),
+		await setupPersistentProcess(api, store),
+	])
+
+	const sideEffects = await setupSideEffects(
+		api,
+		persistentProcess,
+		router,
+		store
+	)
+
+	return new Promise(resolve => {
+		router.start(() => {
+			resolve({ api, persistentProcess, router, store })
+		})
+	})
+}
+```
+
+Arguably the biggest problem is the loading sequence.
+
+In the initial version, we first awaited the API setup; once the API resolved, we initiated the setup for the Store. We then awaited the Store setup; once the Store resolved we... and so on for each resource in sequence.
+
+This is inefficient. Using our example delays, this approach would make our `setupResources` function take 26 seconds to resolve--the absolute worst-case wait time for this combination of resources.
+
+We can make a slight improvement by using `Promise.all` to parallelise some of the wait times. This new code loads the API and the Store simultaneously, then the Router and the PPM simultaneously, before completing as per the original code.
+
+However, this still only cuts our total load time by 3 seconds. The two main branches in our dependency tree each contain one of the two slow-loading resources, and since they're in different levels of the tree we don't see much benefit from the parallelisation.
+
+For other resource structures we would see better results from this, but we want to solve the worst-case scenarios, not the best-case ones.
+
+</CodeWave>
+
+Let's look at a diagram which visualises what's happening. It illustrates three cases:
+
+- The worst-case scenario, where we loaded everything sequentially.
+- The second scenario, where we used `Promise.all` to make some small improvements.
+- The ideal scenario, in which we start loading each resource as soon as all of its dependencies resolve.
+
+![](loading-sequences.png)
+
+We could potentially write some more convoluted code which successfully resolves this dependency tree in the ideal amount of time, but it would not be easy.
+
+And then what would we do if we needed to introduce another resource into the middle of the tree? How hard would it be to splice it into the logic? What if the person doing the splicing had never seen this code before, and the person who wrote it had already left the company?
+
+How hard would it be to replace one of these resources with a new library, or remove one entirely? How painful would our code be to manage if we had a couple of dozen resources?
+
+Hand-coding our resource loading sequence simply does not scale.
+
+<CodeWave>
+
+```js
+const setupResources = combineResourceCreators(
+	setupAPI,
+	setupRouter,
+	setupStore,
+	setupPersistentProcess,
+	setupSideEffects
+)
+```
+
+Let's look at this from another angle.
+
+The example code we've looked at so far involves manually implementing the loading sequence of all of our resources. We made performance gains by reasoning about where the bottlenecks were, and manually implementing logic which solved them.
+
+This introduces tight coupling across all of this logic, which is the opposite of one of our key aims: we want to decoupling our code _more_, not less. We want our code to follow consistent shared patterns, but we want to be able to reason about each resource in isolation.
+
+In an ideal world, we could completely decouple the logic for each resource into separate functions. So what would an API which lent us that kind of perspective look like?
+
+For now, `combineResourceCreators` will be a magic box into which we put all of our complexity; we'll figure out how to make it work later on.
+
+```js
+async function setupAPI() {
+	// set up the API
+
+	// add the API to the resources object
+}
+
+async function setupStore() {
+	// set up the Store
+
+	// add the Store to the resources object
+}
+```
+
+This is the core of what we want to be able to do in our `setupResource` functions. We can distil our problem space into three key initial requirements:
+
+- We want to manage dependencies in a way which _always_ results in the ideal resolution scenario, without manual logic or tight coupling.
+- We want to encapsulate the setup and configuration of each resource into one isolated location.
+- We want our combined function to resolve into a single object containing all the resources.
+
+Let's start with our simple cases with no dependencies.
+
+```js 1:11
+async function setupAPI() {
+	const api = await createAPI()
+
+	// add the API to the resources object
+}
+
+async function setupStore() {
+	const store = await createStore()
+
+	// add the Store to the resources object
+}
+```
+
+Note that we're writing `async` functions, which lets us use the `await` keyword for async code inside our setup function.
+
+Our second requirement is easily done. Since we're now implementing each resource's setup logic as a separate function, we already have exactly what we need. We can put all of our resource-specific code into its dedicated function.
+
+Note that in reality, this `setupResource` code would look very different. The pattern is strongly related to the [Redux `configureStore` recipe doc](https://redux.js.org/recipes/configuring-your-store/) mentioned in the previous article; the real-world code for this would often look much like the final code explored in the recipe.
+
+
+```js 1:11
+async function setupAPI({ addResource }) {
+	const api = await createAPI()
+
+	addResource('api', api)
+}
+
+async function setupStore({ addResource }) {
+	const store = await createStore()
+
+	addResource('store', store)
+}
+```
+
+A flawed approach for our third requirement would have been to create an empty `resources` object at the top of our `combineResourceCreators` function and pass it around into all the `setupResource` functions.
+
+This would have introduced a risk of the different functions diverging in approach, increasing complexity and reducing the effectiveness of our pattern. Being able to mutate the resources object would be a potential foot-gun, and instead we want to designe our API so that people will default to doing things the right way.
+
+Instead we treat the mutation as an implementation detail, hidden behind a declarative API exposed to each setup function.
+
+The first piece of this API is a function called `addResource`. It takes two arguments: the name of the resource, and a value. It adds the resource to the final resource object.
+
+```js 1:20
+async function setupRouter({ addResource }) {
+	// get the api resource here
+
+	const router = await createRouter()
+	addResource('router', router)
+}
+
+async function setupPersistentProcess({ addResource }) {
+	// get the api and store resources here
+
+	const persistentProcess = await createPersistentProcess()
+	addResource('persistentProcess', persistentProcess)
+}
+
+async function setupSideEffects({ addResource }) {
+	// get all four other resources here
+
+	const sideEffects = await createSideEffects()
+	addResource('sideEffects', sideEffects)
+}
+```
+
+But what about the resources which depend on one another?
+
+We can't manually pass the dependency into our setup function - that would be the same as our flawed approach from earlier.
+
+Instead, we need something which will completely solve all of the subtle problems we encountered. We also want it to be clear and concise, so that people unfamiliar with the code will be able to read it and understand the intent straight away.
+
+For now, we'll have to rely on our magic box to hand-wave away this complexity. 
+
+```js 1:31
+async function setupRouter({ addResource, getResources }) {
+	const { api } = await getResources('api')
+
+	const router = await createRouter(api)
+
+	addResource('router', router)
+}
+
+async function setupPersistentProcess({ addResource, getResources }) {
+	const { api, store } = await getResources('api', 'store')
+
+	const persistentProcess = await createPersistentProcess(api, store)
+	addResource('persistentProcess', persistentProcess)
+}
+
+async function setupSideEffects({ addResource, getResources }) {
+	const {
+		api,
+		persistentProcess,
+		router,
+		store
+	} = await getResources('api', 'persistentProcess', 'router', 'store')
+
+	const sideEffects = await createSideEffects(api, persistentProcess, router, store)
+	addResource('sideEffects', sideEffects)
+}
+```
+
+Magic! 🎉
+
+The second piece of our API is another function, called `getResources`. It takes a list of resource names, and returns a promise. This promise resolves into an object containing only the resources we requested--and it does so as quickly as possible.
+
+The moment all the requested resources resolve, the promise is returned, and the setup function continues. This behaviour means that we can guarantee that our resource tree will always be resolved according to the best-case loading path.
+
+By structuring our API in this way, we're able to avoid writing any of the complex, coupled code which would have made it difficult to make changes in future. Instead, we declare our dependencies where they are needed, and can trust that they will resolve efficiently.
+
+```js 1:11
+async function setupRouter({ addResource, getResources }) {
+	const { api } = await getResources('api')
+
+	const router = await createRouter(api)
+
+	addResource('router', router)
+
+	return () => new Promise(resolve => {
+		router.start(resolve)
+	})
+}
+```
+
+One other minor detail also needs to be taken into account. As mentioned earlier, we may have some resources which need to defer logic until after all the other resources have resolved.
+
+Our Router resource is a perfect example of this. It sits in the middle of our dependency tree, meaning that we cannot force it to wait by declaring that it depends on every other resourse--that would introduce a circular dependency, and our resources would never resolve.
+
+Instead, we can solve this by introducing another api feature. If we return a callback function from a `setupResource` function, we can defer calling it until all the resources resolve.
+
+Since we may need to perform some asynchronous work inside these callbacks (as is the case in this example), we will then also wait for any further promises to resolve before we resolve the overall `resources` object and complete the setup phase.
+
+This gives us another simple yet powerful tool for synchronising our setup code in a way which doesn't couple the different resources together.
+
+</CodeWave>
+
+Other more advanced features will follow this same pattern. For example, we'll likely want to include a way to add lazy resources.
+
+If we have a particularly heavy resource which is only needed in a subset of our app, it makes sense to defer loading it until the user hits a route which actually needs the resource. We could even defer loading initially, and then start loading it when the thread is idle. We can even tie this in to the `getResources` API.
+
+Again, due to the structure of our code, these are implementation details which can be hidden behind a clean API:
+
+```js
+async function setupHeavyResource({ addLazyResource }) {
+	addLazyResource('heavy', () => import('./itsAChonkker'))
+}
+
+async function setupSomeOtherResource({ getResources }) {
+	// triggers loading the lazy resource
+	// resolves when it is available
+	const { heavy } = await getResources('heavy')
+}
+```
+
+My current version also has two further features:
+
+- A synchronous `getAllResources` function, which simply returns the currently available resources (particularly useful in the callbacks which can be returned from a setup function).
+- An `addSetupResources` function, which is a variant of `addResources`. It adds resources which are available during the setup phase, but are then cleared and not made available to the **damnit i really need a name for it** phase.
+
+Check out the next article in this series to see exactly what's inside the magic `combineResourceCreators` box!

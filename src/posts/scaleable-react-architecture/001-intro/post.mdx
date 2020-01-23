@@ -1,7 +1,7 @@
 ---
 path: '/blog/scaleable-react-architecture'
 date: '2020-01-23'
-title: 'Scaleable React Architecure'
+title: 'Scaleable React Architecure - Intro'
 subtitle: 'Frontend scaling centers around a conflict of interest: how can we build a cohesive experience while keeping our code decentralised?'
 tags: ['featured', 'home']
 featuredImage: './architecture.jpg'
@@ -96,9 +96,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import App from './app'
-import configureResources from './configureResources'
+import setupResources from './setupResources'
 
-configureResources().then(resources => {
+setupResources().then(resources => {
 	ReactDOM.render(
 		<App resources={resources} />,
 		document.getElementById('root')
