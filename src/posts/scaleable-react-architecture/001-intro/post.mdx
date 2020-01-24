@@ -43,29 +43,31 @@ While this may have made our lives a little easier, it actually missed the point
 
 When React debuted, the reaction was instinctive. People took one look at JSX and hated it. After all, it was a direct affront to one of the most fundamental beliefs we held about frontend: it coupled HTML with JavaScript. People rolled their eyes at the idea, and made sarcastic tweets along the lines of _"Facebook: rethinking established best practices™"_.
 
-In fact, by questioning this best practice they had gained an important insight: we were separating the wrong concerns. From a UI developer's perspective, a more intuitive unit of work is in fact a **component**, a single piece of functionality composed of markup, styling, _and_ interactivity. When separating by language we were in fact cutting our concerns into smaller chunks and spreading them out. If we separate by component instead, our mental overhead is reduced.
+In fact, by questioning this best practice they had gained an important insight: we were separating the wrong concerns. From a UI developer's perspective, a more intuitive unit of work is in fact a **component**, a single piece of functionality composed of markup, styling, _and_ interactivity. When separating by language we were in fact cutting each "concern" into smaller chunks and spreading it across several files. If we separate by component instead, our mental overhead is reduced.
 
 Once people got past the initial shock and tried the new pattern, it became clear that components were a much more natural way to work. Codebases written this way are a big step closer to how most of us think about our applications.
 
 ![](./code.jpg)
 
-Our current shared narrative glosses over another idea which can make a huge difference to the problem of scaling our apps.
+So, we have a history of focusing on the wrong things. Our lives can improve drastically when we shift our perspective, even when the new ideas seem unnecessary at first glance.
 
-Unlike the separation of concerns example where people had a flawed understanding, this one is more of a blind spot. It's a fundamental fact of how our apps work; we do sometimes write code to handle it, but we tend not to recognise it consciously, or at least not to recognise its importance. Because we don't think about it consciously, we tend not to build abstractions with it in mind.
+What might we find if we apply this thought to scaling our apps?
 
-The key insight is that an app's runtime is not a monolith, and instead it contains distinct phases inherent in our code.
+There's at least one place where our current shared narrative glosses over another idea which can make a huge difference. Unlike the separation of concerns example where people had a flawed understanding, this one is more of a blind spot. We sometimes write code to handle it, but we tend not to recognise it consciously--or at least not to recognise its importance. We tend not to build abstractions with it in mind.
 
-So what are these phases, and how can we tell them apart? In practice, there are two important ones.
+The key insight is a fundamental fact of how our apps work: an app's runtime is not a monolith, and instead it contains distinct phases inherent in our code.
+
+What are these phases, how can we tell them apart, and how might this change the way we write our apps? In practice, there are two important ones.
 
 ![](./fork.jpg)
 
 Most apps tend to contain a number of static resources which do not change over time.
 
-These resources are varied: state containers, router instances, API facades, telemetry services, and much more. The have a clear common pattern: we initiate and configure them once, when the app first loads in the browser. This is the first phase: **setup**.
+These resources are varied: state containers, router instances, API facades, telemetry services, and much more. In a lot of codebases, their existence is obscured by the way we structure our apps, spreading them across dozens of files. Despite this, they have a clear common pattern: we initiate and configure them once, when the app first loads in the browser. This is the first phase: **setup**.
 
 One exception where this distinct phase has been consciously recognised is **Redux**. People are encouraged to write a `configureStore` function which encapsulates their store's setup. I helped write [the docs recipe](https://redux.js.org/recipes/configuring-your-store/) exploring this!
 
-The rest of the runtime happens in a separate phase: **...naming is hard**. We refer back to the static resources, but only their internal state ever changes, and we never replace or remove them (with some rare exceptions).
+The rest of the runtime happens in a separate phase: **execution**. We refer back to the static resources, but only their internal state ever changes, and we never replace or remove them (with some rare exceptions).
 
 Since people tend not to recognise this consciously, the code handling the first phase is often not well abstracted--or sometimes not abstracted at all, tangling into a mess of spaghetti. People rarely build tooling which would handle this phase in a clear and concise way.
 
@@ -73,7 +75,7 @@ Different concerns become tightly coupled, complexity spreads across the app, co
 
 ![](./architecture.jpg)
 
-Using React, we can take this typical pseudo-ish setup code:
+Using React, and glossing over some implementation details, we can take this typical setup code:
 
 ```js
 import React from 'react'
@@ -89,7 +91,7 @@ ReactDOM.render(
 )
 ```
 
-Then introduce a function which encapsulates the **setup** phase, separating it from the rest of runtime:
+To encapsulate the **setup** phase, we can just use a function to separate it conceptually from the rest of runtime. It returns a promise, which resolves into an object containing all of our app's static resources. The **execution** phase happens inside the `.then` callback, after the promise resolves.
 
 ```js
 import React from 'react'
@@ -110,19 +112,23 @@ Written out like that it seems simple, but it makes a surprisingly large differe
 
 Isolating the setup phase makes the shape of the code more consistent. Each layer exhibits a similar structure, making it a lot easier to dive deeper when needed, while providing a simple but accurate mental model at a higher level. It can help keep your code consistent and decentralised without sacrificing user experience, and lets you group your code by domain instead of by type.
 
-Rather than trying to cover all of this in one article, we'll explore it more extensively across several. We'll look into some problems with the pattern and how we can solve them, then dive deeper into some of the different resources we can create to help our app scale.
+Having this much control over the flow of your application also makes advanced features like lazy loading for shared resources much easier. When a resource is loaded as an ES module, it tends to be imported throughout the app, which then becomes a huge pain point when you need to lazy load it.
+
+---
+
+Instead of trying to condense this this in one article, we'll explore it more extensively across several. We'll look into some common resources to demonstrate the benefits of extracting them into an isolated unit, then look into some problems the pattern might introduce and how we can solve them.
 
 If you just want to skip ahead and dig through the code, you can check out [this repo here]().
 
-Here's some of the topics we'll cover:
+Here are the topics we'll cover:
 
--   **Architectural flaws and how to solve them** - how to handle complex dependency graphs and resource setup execution order constraints without our code becoming a mess.
--   **Using an API dependency** - a facade to separate our app from our raw API, which also includes a caching mechanism.
--   **Patterns for persistent processes** - a couple of different options for how to handle long-lived application logic.
--   **Consistent side-effect management** - a pattern which allows us to isolate all side-effects to one consistent location accessed via declarative function calls.
+-   **Using an API resource** - a facade to separate our app from our raw API, which also includes a caching mechanism.
 -   **Decoupled telemetry** - separating our critical path from logging, analytics, and other telemetry.
 -   **Routing & data fetching** - UX wins via simultaneously loading data/routes, or optionally pre-loading related data/routes.
+-   **Consistent side-effect management** - a pattern which allows us to isolate all side-effects to one consistent location accessed via declarative function calls.
+-   **Patterns for persistent processes** - a couple of different options for how to handle long-lived application logic.
 -   **Other common static resources** - facades over browser APIs, routers, views, i18n.
+-   **Architectural flaws and how to solve them** - how to handle complex dependency graphs and resource setup execution order constraints without our code becoming a mess. This will be split into two posts--[one explaining the API](http://localhost:8000/blog/api-resource), and one diving into the implementation.
 
 There are other patterns you can use to structure your app as it grows, but this one is particularly low cost. It proves useful at a small scale, yet still makes a big difference when you have a large codebase.
 
