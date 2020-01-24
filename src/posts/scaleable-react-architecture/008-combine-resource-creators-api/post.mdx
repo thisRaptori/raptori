@@ -1,6 +1,6 @@
 ---
 path: '/blog/scaleable-architecture-setup-api'
-date: '2020-01-24'
+date: '2020-01-25'
 title: 'Scaleable React Architecure - Resource Setup API'
 subtitle: 'Explore the benefits and flaws of the setupResource pattern, and the path to solving them in a scaleable way.'
 tags: ['featured']
@@ -84,7 +84,9 @@ To help make some deatils clear, each resource involves a different delay period
 -   PPM: **2 seconds**.
 -   SEM: **5 seconds**.
 
-Let's explore the problems inherent in this approach.
+It's important to keep in mind that this dependency complexity is inherent in our apps. The code structure we're looking at here merely takes this fact and puts it squarely in front of you. Without following this pattern, this same logic will exist in our app; it will just be spread across multiple files and likely written using a number of inconsistent patterns.
+
+That said, let's explore the problems inherent in this example code.
 
 ```js 1:24
 async function setupResources() {
