@@ -35,10 +35,10 @@ const customWavesTheme = {
 				},
 				StickerContainer: {
 					height: ['calc(50vh - 4.2rem)', 'auto'],
-					marginLeft: ['calc(50% - 50vw)', 0],
+					marginLeft: ['calc(50% - 50% - 2rem)', 0],
 					position: ['sticky', 'static'],
 					top: ['4.2rem', 'auto'],
-					width: ['100%', '60%'],
+					width: ['calc(100% + 4rem)', '60%'],
 					zIndex: [1, 'auto'],
 				},
 				Sticker: {

@@ -1,11 +1,13 @@
 ---
-path: '/blog/scaleable-react-architecture'
-date: '2020-01-23'
+path: '/blog/scaleable-react-architecture-intro'
+date: '2020-01-21'
 title: 'Scaleable React Architecure - Intro'
 subtitle: 'Frontend scaling centers around a conflict of interest: how can we build a cohesive experience while keeping our code decentralised?'
 tags: ['featured', 'home']
 featuredImage: './architecture.jpg'
 ---
+
+import { WaveSection } from '../../../../src/components'
 
 Frontend and backend scale in different ways.
 
@@ -19,7 +21,7 @@ User experience is of utmost importance in our apps--we want our users to have a
 
 These two tendencies are at odds. How can we build a cohesive experience while keeping our code decentralised?
 
-![](./smartphone.jpg)
+<WaveSection separator />
 
 The first big step was one which the frontend community embraced years ago.
 
@@ -33,7 +35,7 @@ This means we can optimise our source code for maintainability, and then use our
 
 But that's easier said than done--sometimes, our perspective is incomplete.
 
-![](./incomplete.jpg)
+<WaveSection separator />
 
 A clear example of this is the original response when Facebook introduced React.
 
@@ -47,7 +49,7 @@ In fact, by questioning this best practice they had gained an important insight:
 
 Once people got past the initial shock and tried the new pattern, it became clear that components were a much more natural way to work. Codebases written this way are a big step closer to how most of us think about our applications.
 
-![](./code.jpg)
+<WaveSection separator />
 
 So, we have a history of focusing on the wrong things. Our lives can improve drastically when we shift our perspective, even when the new ideas seem unnecessary at first glance.
 
@@ -59,7 +61,7 @@ The key insight is a fundamental fact of how our apps work: an app's runtime is 
 
 What are these phases, how can we tell them apart, and how might this change the way we write our apps? In practice, there are two important ones.
 
-![](./fork.jpg)
+<WaveSection separator />
 
 Most apps tend to contain a number of static resources which do not change over time.
 
@@ -73,7 +75,7 @@ Since people tend not to recognise this consciously, the code handling the first
 
 Different concerns become tightly coupled, complexity spreads across the app, code becomes long-winded and hard to follow. Which is a shame considering how clean and obvious this distinction can be made.
 
-![](./architecture.jpg)
+<WaveSection separator />
 
 Using React, and glossing over some implementation details, we can take this typical setup code:
 
@@ -114,7 +116,7 @@ Isolating the setup phase makes the shape of the code more consistent. Each laye
 
 Having this much control over the flow of your application also makes advanced features like lazy loading for shared resources much easier. When a resource is loaded as an ES module, it tends to be imported throughout the app, which then becomes a huge pain point when you need to lazy load it.
 
----
+<WaveSection separator />
 
 Instead of trying to condense this this in one article, we'll explore it more extensively across several. We'll look into some common resources to demonstrate the benefits of extracting them into an isolated unit, then look into some problems the pattern might introduce and how we can solve them.
 
@@ -122,13 +124,13 @@ If you just want to skip ahead and dig through the code, you can check out [this
 
 Here are the topics we'll cover:
 
--   **Using an API resource** - a facade to separate our app from our raw API, which also includes a caching mechanism.
--   **Decoupled telemetry** - separating our critical path from logging, analytics, and other telemetry.
--   **Routing & data fetching** - UX wins via simultaneously loading data/routes, or optionally pre-loading related data/routes.
--   **Consistent side-effect management** - a pattern which allows us to isolate all side-effects to one consistent location accessed via declarative function calls.
--   **Patterns for persistent processes** - a couple of different options for how to handle long-lived application logic.
--   **Other common static resources** - facades over browser APIs, routers, views, i18n.
--   **Architectural flaws and how to solve them** - how to handle complex dependency graphs and resource setup execution order constraints without our code becoming a mess. This will be split into two posts--[one explaining the API](http://localhost:8000/blog/api-resource), and one diving into the implementation.
+-   [**Building an API resource**]() - a facade to separate our app from our raw API, which also includes a caching mechanism.
+-   [**Decoupled telemetry**]() - separating our critical path from logging, analytics, and other telemetry.
+-   [**Routing & data fetching**]() - UX wins via simultaneously loading data/routes, or optionally pre-loading related data/routes.
+-   [**Consistent side-effect management**]() - a pattern which allows us to isolate all side-effects to one consistent location accessed via declarative function calls.
+-   [**Patterns for persistent processes**]() - a couple of different options for how to handle long-lived application logic.
+-   [**Other common static resources**]() - facades over browser APIs, routers, views, i18n.
+-   **Architectural flaws and how to solve them** - how to handle complex dependency graphs and resource setup execution order constraints without our code becoming a mess. This will be split into two posts--[one explaining the API](/blog/setup-api), and [one diving into the implementation]().
 
 There are other patterns you can use to structure your app as it grows, but this one is particularly low cost. It proves useful at a small scale, yet still makes a big difference when you have a large codebase.
 

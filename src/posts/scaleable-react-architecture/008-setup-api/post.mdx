@@ -1,18 +1,17 @@
 ---
-path: '/blog/scaleable-architecture-setup-api'
-date: '2020-01-25'
+path: '/blog/setup-api'
+date: '2020-01-28'
 title: 'Scaleable React Architecure - Resource Setup API'
 subtitle: 'Explore the benefits and flaws of the setupResource pattern, and the path to solving them in a scaleable way.'
-tags: ['featured']
-featuredImage: './box.jpg'
+featuredImage: './.jpg'
 ---
 
 import { CodeWave } from "gatsby-theme-waves"
+import { WaveSection } from '../../../../src/components'
 
-At the end of the previous article, we saw a simple pattern for abstracting our **setup** phase into a single function.
+At the end of the introduction article, we saw a simple pattern for abstracting our **setup** phase into a single function. The code begs a couple of questions: what happens inside this `setupResources` function--and what's the catch?
 
-The code begs a couple of questions: what happens inside this `setupResources` function--and what's the catch?
-
+<WaveSection separator />
 
 <CodeWave>
 
@@ -42,7 +41,10 @@ async function setupResources() {
 	const api = await setupAPI()
 	const store = await setupStore()
 	const router = await setupRouter(api)
-	const persistentProcess = await setupPersistentProcess(api, store)
+	const persistentProcess = await setupPersistentProcess(
+		api,
+		store
+	)
 	const sideEffects = await setupSideEffects(
 		api,
 		persistentProcess,
@@ -129,6 +131,8 @@ For other resource structures we would see better results from this, but we want
 
 </CodeWave>
 
+<WaveSection separator />
+
 Let's look at a diagram which visualises what's happening. It illustrates three cases:
 
 - The worst-case scenario, where we loaded everything sequentially.
@@ -144,6 +148,8 @@ And then what would we do if we needed to introduce another resource into the mi
 How hard would it be to replace one of these resources with a new library, or remove one entirely? How painful would our code be to manage if we had a couple of dozen resources?
 
 Hand-coding our resource loading sequence simply does not scale.
+
+<WaveSection separator />
 
 <CodeWave>
 
@@ -271,10 +277,16 @@ async function setupRouter({ addResource, getResources }) {
 	addResource('router', router)
 }
 
-async function setupPersistentProcess({ addResource, getResources }) {
+async function setupPersistentProcess({
+	addResource,
+	getResources
+}) {
 	const { api, store } = await getResources('api', 'store')
 
-	const persistentProcess = await createPersistentProcess(api, store)
+	const persistentProcess = await createPersistentProcess(
+		api,
+		store
+	)
 	addResource('persistentProcess', persistentProcess)
 }
 
@@ -284,9 +296,19 @@ async function setupSideEffects({ addResource, getResources }) {
 		persistentProcess,
 		router,
 		store
-	} = await getResources('api', 'persistentProcess', 'router', 'store')
+	} = await getResources(
+		'api',
+		'persistentProcess',
+		'router',
+		'store'
+	)
 
-	const sideEffects = await createSideEffects(api, persistentProcess, router, store)
+	const sideEffects = await createSideEffects(
+		api,
+		persistentProcess,
+		router,
+		store
+	)
 	addResource('sideEffects', sideEffects)
 }
 ```
@@ -327,6 +349,8 @@ This gives us another simple yet powerful tool for synchronising our setup code 
 
 </CodeWave>
 
+<WaveSection separator />
+
 Other more advanced features will follow this same pattern. For example, we'll likely want to include a way to add lazy resources.
 
 If we have a particularly heavy resource which is only needed in a subset of our app, it makes sense to defer loading it until the user hits a route which actually needs the resource. We could even defer loading initially, and then start loading it when the thread is idle. We can even tie this in to the `getResources` API.
@@ -348,6 +372,6 @@ async function setupSomeOtherResource({ getResources }) {
 My current version also has two further features:
 
 - A synchronous `getAllResources` function, which returns the currently available resources. This is particularly useful in the callbacks which can be returned from a setup function, and it can be used to .
-- The `addResources` function also returns a callback which removes the resource. This allows you to add a resourse which should only be available during the setup phase, and then remove it so that it's not made available to the **damnit i really need a name for it** phase. This API choice was made to ensure that each resource can only be removed by the setup function which created it.
+- The `addResources` function also returns a callback which removes the resource. This allows you to add a resourse which should only be available during the setup phase, and then remove it so that it's not made available to the **execution** phase. This API choice was made to ensure that each resource can only be removed by the setup function which created it.
 
 Now that we've covered the different aspects of the API, it's time to build it! Check out the next article in this series to see exactly what's inside the magic `combineResourceCreators` box.

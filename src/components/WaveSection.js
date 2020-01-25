@@ -6,6 +6,7 @@ import { useWindowWidth } from 'src/hooks'
 import { fullWidth, getSectionWidth } from 'src/utils'
 
 const Wrapper = styled.div`
+	${props => (props.separator ? 'margin-top: 2rem;' : '')}
 	${props => (props.disableTopMargin ? 'margin-top: -2rem;' : '')}
 	main > &:first-child {
 		margin-top: -2rem;
@@ -54,7 +55,7 @@ const Background = styled.div`
 const Content = styled.div`
 	margin: 0 2rem;
 	max-width: 640px;
-	padding: calc(2rem + 1vw) 0;
+	padding: ${props => props.separator ? '.3rem 0' : 'calc(2rem + 1vw) 0'};
 	position: relative;
 	z-index: 2;
 
@@ -86,19 +87,20 @@ const Content = styled.div`
 	}
 `
 
-const WaveSection = ({ as, children, disableTopMargin, footer }) => {
+const WaveSection = ({ as, children, disableTopMargin, footer, separator }) => {
 	const width = useWindowWidth()
 
 	return (
 		<Wrapper
 			disableTopMargin={disableTopMargin}
 			footer={footer}
+			separator={separator}
 			width={width}
 		>
 			<Section width={width} as={as} footer={footer}>
 				<Waves />
 				<Background>
-					<Content>{children}</Content>
+					<Content separator={separator}>{children}</Content>
 				</Background>
 				{footer ? null : <Waves invert offset />}
 			</Section>
