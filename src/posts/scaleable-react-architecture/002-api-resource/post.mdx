@@ -54,7 +54,7 @@ function Component() {
 }
 ```
 
-This fetches some data when the component mounts. When the response resolves it either adds the results to the state, or displays an error message if anything went wrong.
+The code we're focusing on is inside the `useEffect`, which fetches some data. When the response resolves it either adds the results to the state, or displays an error message if anything went wrong.
 
 In a large app, we would potentially have hundreds of components which need to fetch data from an API. Each one would probably need to implement some slightly different logic, but the pattern would be fundamentally the same.
 
@@ -68,13 +68,13 @@ The first concern that emerges is repetition. While it's certainly possible to t
 
 What if we need to add a new HTML header to every request for security reasons? What if an external API we're using changes the structure of the data it returns? Or what if we simply need to change our own backend's URL structure?
 
-We would have to search through the entire codebase and update every fetch request individually. With a large codebase, this is a non-trivial amount of work. It would also likely mean the developer handling the task would need to change code in areas they are completely unfamiliar with, increasing the risk that the change will cause regressions.
+We would have to search through the entire codebase and update every related request individually. With a large codebase, this is a non-trivial amount of work. It would also likely mean the developer handling the task would need to change code in areas they are completely unfamiliar with, increasing the risk that the change will cause regressions.
 
 ### Data Consistency
 
-Another concern is the consistency of the data we pass into our app.
+Another concern is the consistency of the data we use in our app.
 
-Since we're implementing our logic separately for each component which fetches external data, there will be a strong temptation each time to structure the data in the most convenient way for that particular place in the app. Since the developer writing the code will likely be thinking of the feature they're working on in isolation, any tradeoffs inherent in that decision are likely to be missed entirely.
+Since we're implementing our logic separately for each component which fetches external data, there will be a strong temptation each time to structure the data in the most convenient way for that particular place in the app. Since the developer writing the code will likely be thinking of the feature they're working on in isolation, some tradeoffs inherent in that decision are likely to be missed.
 
 This might not seem like much of a problem, but inconsistent data structures can become a major pain point. They also make it much harder to combine data from multiple sources, and add to the overhead involved in updating to account for any changes to the API's data structures.
 
@@ -84,29 +84,33 @@ This issue is less important in situations where we're relying on an API we main
 
 With this basic setup, more advanced patterns like request sharing and caching are more or less impossible.
 
-For example, we might have multiple components which depend on data from the same API endpoint. The larger our app is, the more likely this will happen.
+Imagine a situation where we have multiple components which depend on data from the same API endpoint. The larger our app is, the more likely this will happen.
 
 When many of these components happen to render at the same time, it would be more efficient to send only one request rather than sending several redundant ones.
 
 When the data does not change often, it would be more efficient to fetch the data once, and then re-use that data for any components which need the data later on rather than sending a new request every time.
 
-<WaveSection separator />
-
-The flexibility problem is one which many developers notice, and the instinctive response is in fact to create an API facade.
-
-Most of the time this facade is very simple, and as a result only solves a subset of this first problem. However, the pattern can be built upon to create a much more poweful abstraction, which can also solve the other issues described above. How far we take this depends on our personal preferences and the complexity of our use case.
-
-Another response is to tie API requests to a global state container. This benefits from using a well-defined pattern to handle request logic, but introduces some awkward constraints at the same time. Other patterns such as thunks are a middle-ground which can combine these two approaches.
-
-When we use the facade pattern, the codebase benefits from having this resource encapsulated into a single location.
+If we encapsulate our API code into one place, we decrease the potential future cost of adding these kinds of features into our apps.
 
 <WaveSection separator />
 
-So if we do want to use this pattern, what are some different levels of abstraction we could build, and what are their different benefits and costs? We can think of this as a spectrum, with three key points worth considering.
+The first problem mentioned--inflexibility--is one which many developers notice, and the instinctive response is in fact to create an API facade.
+
+Most of the time this facade is very simple, and as a result only solves a subset of this problem. However, the pattern can be built upon to create a much more poweful abstraction, which can also solve the other issues described above. How far we take this depends on our personal preferences and the complexity of our use case.
+
+Another response is to tie API requests to a global state container. This benefits from using a well-defined pattern to handle request logic, but introduces some awkward constraints at the same time. Other patterns such as thunks are more of a middle-ground which can combine these two approaches.
+
+When we use the facade pattern, the codebase benefits from having this resource encapsulated into a single location, which makes future changes in this area much less costly.
+
+<WaveSection separator />
+
+So if we do want to use this pattern, what are some different levels of abstraction we could build, and what are their different benefits and costs? We can think of the abstraction level as a spectrum, with three key points worth considering.
 
 ### Simple Facade
 
-The most common approach is a super simple facade: a thin wrapper over `fetch` (or something like `axios`) which embeds some common concerns like headers or the API's base URL, and calls the `res.json()` method if necessary. Since it's a thin wrapper, it allows the consumer to access the full power of the underlying API.
+The most common approach is a super simple facade: a thin wrapper over `fetch` (or something like `axios`) which embeds some common concerns like headers or the API's base URL, and calls the `response.json()` method if necessary. Since it's a thin wrapper, it allows the consumer to access the full power of the underlying API.
+
+Note that it's more common for people to export this facade directly as an ES module, rather than exporting a `setupAPI` function.
 
 ```js
 function setupAPI() {
@@ -124,7 +128,7 @@ function setupAPI() {
 
 As mentioned above, this approach partially solves the inflexibility problem, but it doesn't help with data consistency or resource sharing/caching.
 
-An extension of this approach which aims to help with data consistency would be to also export data transformation functions which the call sites can use. However, this means the call site would need to be aware of the transformation, which isn't ideal--it would be preferable to treat this as an implementation detail of the API which we do not want to leak out to the call sites.
+An extension of this approach which aims to help with data consistency would be to export data transformation functions which the call sites can use. However, this means each call site would need to be aware of the transformation, which isn't ideal--it would be preferable to treat this as an implementation detail of the API which we do not want to leak out to the rest of the app.
 
 ### API Object
 
@@ -142,7 +146,7 @@ function setupAPI() {
 }
 ```
 
-We would then pass this object into the execution phase of our app (for example leveraging React context), and call the endpoint we need:
+We would then pass this object into the execution phase of our app, and call the endpoint we need:
 
 ```js
 api.person(personId)
@@ -191,7 +195,9 @@ function setupAPI() {
 }
 ```
 
-This would create two endpoints which include a 0.5-second debounce timer, a 10-second data cache, and a data transformer. We would then call this endpoint in our execution phase like so:
+This example would create two endpoints which include a 0.5-second debounce timer, a 10-second data cache, and a data transformer. Note that this `addEndpoint` function is available to the rest of the app--including to other resources which may then extend the core API when needed.
+
+We would then call this endpoint in our execution phase like so:
 
 ```js
 api.request('person', personId)
@@ -203,20 +209,20 @@ This approach comes with the same advantages as the previous approaches, plus a 
 
 At first glance, it looks like it comes with a significant disadvantage: the caching or debouncing logic adds complexity to the core of the API layer, and this is an extra layer of abstraction which developers might need to understand and debug.
 
-However, while this is a valid concern, a rich API layer removes the need to manually implement or consume these features at each call site. Depending on the frequency of use of these features, this can reduce complexity and ensure there's no scope for divergence of approach.
+However, while this is a valid concern, a rich API layer removes the need to manually implement or consume these features at each call site. Depending on the frequency of use of these features, this can reduce complexity overall, and ensures there's less risk of divergence of approach.
 
-When built this way, this abstraction tends to take some of the complexity which is often spread throughout our applications and isolate it into the resource itself, simplifying the code elsewhere.
+When built this way, this abstraction tends to take some of the complexity which is often spread throughout our applications and isolate it into the resource itself, simplifying the code elsewhere, and allowing developers to move faster by providing more powerful abstractions to build upon. It can also reduce or replace the tendency to embed caching logic into global state.
 
 It's still a trade-off which needs to be considered carefully, but in a large-scale app it can save a lot of pain.
 
 <WaveSection separator />
 
-With that in mind, it's worth noting that one significant benefit of encapsulating a resource into a `setupResource` function is that by colocating its code, we can move along this spectrum of simplicity to complexity much more easily.
+With that in mind, it's worth repeating that a significant benefit of encapsulating a resource into a `setupResource` function is that by colocating its code, we can move along this spectrum of simplicity to complexity much more easily.
 
 It often makes sense to start with a simple API facade, and to build up these extra layers of abstraction when needed. Once we reach a point where we need more nuanced functionality to keep our app working well, we have a natural place for this to belong. Our components can remain relatively simple, unaware of most changes to the logic of the endpoints they call, while still benefiting from any new features.
 
-This last point demonstrates one of the most powerful aspects of the resource pattern: we get to remove mental overhead from our application code. It also applies to using the API facade alongside other resources. In addition to components consuming the simplified API directly, other resources are able to do so.
+The places I've worked which consciously followed the setup pattern used the API object approach. We discussed adding a rich resource with caching, which would have let us remove some of the most complex code in our apps (e.g. caching requests in Redux), but never got around to implementing it due to other priorities.
 
-This structure keeps the api:consumer relationship loosely coupled while making the code more cohesive at both an architectural and implementation level.
+Regardless of how far we take it, this setup structure keeps the api:consumer relationship loosely coupled while making the code more cohesive at both an architectural and implementation level.
 
-As we will see when we explore other resources, this is one of the advantages inherent in this structure--next, we will look at the idea of a **Telemetry** resource, which has similar properties to those we've seen with the API facade.
+Next, we will look at the idea of a **Telemetry** resource, which has similar properties to those we've seen with the API facade.
