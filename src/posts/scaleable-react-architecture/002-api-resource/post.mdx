@@ -109,12 +109,16 @@ So if we do want to use this pattern, what are some different levels of abstract
 The most common approach is a super simple facade: a thin wrapper over `fetch` (or something like `axios`) which embeds some common concerns like headers or the API's base URL, and calls the `res.json()` method if necessary. Since it's a thin wrapper, it allows the consumer to access the full power of the underlying API.
 
 ```js
-function customFetch(endpoint, options) {
-	return fetch(`https://swapi.co/api/${endpoint}`, {
-		method: 'GET',
-		mode: 'cors',
-		...options,
-	}).then(res => res.json())
+function setupAPI() {
+	function customFetch(endpoint, options) {
+		return fetch(`https://swapi.co/api/${endpoint}`, {
+			method: 'GET',
+			mode: 'cors',
+			...options,
+		}).then(res => res.json())
+	}
+
+	return customFetch
 }
 ```
 
@@ -127,10 +131,14 @@ An extension of this approach which aims to help with data consistency would be 
 The middle approach is to create an object containing all of our endpoints as separate callable functions. This is typically built on top of the simple facade above, though the custom fetch function itself is not exposed to the rest of the app.
 
 ```js
-const api = {
-	everyone: () => customFetch('person').then(({ result }) => result),
-	person: personId =>
-		customFetch(`person/${personId}`).then(({ result }) => result),
+function setupAPI() {
+	const api = {
+		everyone: () => customFetch('person').then(({ result }) => result),
+		person: personId =>
+			customFetch(`person/${personId}`).then(({ result }) => result),
+	}
+
+	return api
 }
 ```
 
@@ -155,19 +163,32 @@ This approach would typically involve an extra level of abstraction. We would wr
 For example, the declarative API for adding a new endpoint might look like this:
 
 ```js
-api.addEndpoint('everyone', {
-	cacheDuration: 10000,
-	debounce: 500,
-	url: personId => `person`,
-	transform: ({ result }) => result,
-})
+function setupAPI() {
+	const api = {
+		addEndpoint: (name, config) => {
+			// add endpoint to the api object
+		},
+		request: (name, params) => {
+			// fetch from endpoint
+		},
+	}
 
-api.addEndpoint('person', {
-	cacheDuration: 10000,
-	debounce: 500,
-	url: personId => `person/${personId}`,
-	transform: ({ result }) => result,
-})
+	api.addEndpoint('everyone', {
+		cacheDuration: 10000,
+		debounce: 500,
+		url: personId => `person`,
+		transform: ({ result }) => result,
+	})
+
+	api.addEndpoint('person', {
+		cacheDuration: 10000,
+		debounce: 500,
+		url: personId => `person/${personId}`,
+		transform: ({ result }) => result,
+	})
+
+	return api
+}
 ```
 
 This would create two endpoints which include a 0.5-second debounce timer, a 10-second data cache, and a data transformer. We would then call this endpoint in our execution phase like so:
@@ -194,4 +215,8 @@ With that in mind, it's worth noting that one significant benefit of encapsulati
 
 It often makes sense to start with a simple API facade, and to build up these extra layers of abstraction when needed. Once we reach a point where we need more nuanced functionality to keep our app working well, we have a natural place for this to belong. Our components can remain relatively simple, unaware of most changes to the logic of the endpoints they call, while still benefiting from any new features.
 
-This last point demonstrates one of the most powerful aspects of the resource pattern: we get to remove mental overhead from our application code.
+This last point demonstrates one of the most powerful aspects of the resource pattern: we get to remove mental overhead from our application code. It also applies to using the API facade alongside other resources. In addition to components consuming the simplified API directly, other resources are able to do so.
+
+This structure keeps the api:consumer relationship loosely coupled while making the code more cohesive at both an architectural and implementation level.
+
+As we will see when we explore other resources, this is one of the advantages inherent in this structure--next, we will look at the idea of a **Telemetry** resource, which has similar properties to those we've seen with the API facade.
