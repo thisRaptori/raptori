@@ -35,7 +35,7 @@ This means we can optimise our source code for maintainability, and then use our
 
 But that's easier said than done--sometimes, our perspective is incomplete.
 
-<WaveSection separator />
+![](./incomplete.jpg)
 
 A clear example of this is the original response when Facebook introduced React.
 
@@ -49,7 +49,7 @@ In fact, by questioning this best practice they had gained an important insight:
 
 Once people got past the initial shock and tried the new pattern, it became clear that components were a much more natural way to work. Codebases written this way are a big step closer to how most of us think about our applications.
 
-<WaveSection separator />
+![](./code.jpg)
 
 So, we have a history of focusing on the wrong things. Our lives can improve drastically when we shift our perspective, even when the new ideas seem unnecessary at first glance.
 
@@ -61,7 +61,7 @@ The key insight is a fundamental fact of how our apps work: an app's runtime is 
 
 What are these phases, how can we tell them apart, and how might this change the way we write our apps? In practice, there are two important ones.
 
-<WaveSection separator />
+![](./fork.jpg)
 
 Most apps tend to contain a number of static resources which do not change over time.
 
@@ -116,7 +116,7 @@ Isolating the setup phase makes the shape of the code more consistent. Each laye
 
 Having this much control over the flow of your application also makes advanced features like lazy loading for shared resources much easier. When a resource is loaded as an ES module, it tends to be imported throughout the app, which then becomes a huge pain point when you need to lazy load it.
 
-<WaveSection separator />
+---
 
 Instead of trying to condense this this in one article, we'll explore it more extensively across several. We'll look into some common resources to demonstrate the benefits of extracting them into an isolated unit, then look into some problems the pattern might introduce and how we can solve them.
 

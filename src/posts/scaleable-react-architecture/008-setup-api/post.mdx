@@ -131,8 +131,6 @@ For other resource structures we would see better results from this, but we want
 
 </CodeWave>
 
-<WaveSection separator />
-
 Let's look at a diagram which visualises what's happening. It illustrates three cases:
 
 - The worst-case scenario, where we loaded everything sequentially.
@@ -148,8 +146,6 @@ And then what would we do if we needed to introduce another resource into the mi
 How hard would it be to replace one of these resources with a new library, or remove one entirely? How painful would our code be to manage if we had a couple of dozen resources?
 
 Hand-coding our resource loading sequence simply does not scale.
-
-<WaveSection separator />
 
 <CodeWave>
 
@@ -348,8 +344,6 @@ Since we may need to perform some asynchronous work inside these callbacks (as i
 This gives us another simple yet powerful tool for synchronising our setup code in a way which doesn't couple the different resources together.
 
 </CodeWave>
-
-<WaveSection separator />
 
 Other more advanced features will follow this same pattern. For example, we'll likely want to include a way to add lazy resources.
 
