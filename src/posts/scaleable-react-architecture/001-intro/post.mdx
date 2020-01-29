@@ -1,0 +1,137 @@
+---
+path: '/blog/scaleable-react-architecture-intro'
+date: '2020-01-21'
+title: 'Scaleable React Architecure - Intro'
+subtitle: 'Frontend scaling centers around a conflict of interest: how can we build a cohesive experience while keeping our code decentralised?'
+tags: ['featured', 'home']
+featuredImage: './architecture.jpg'
+---
+
+import { WaveSection } from '../../../../src/components'
+
+Frontend and backend scale in different ways.
+
+Backend scaling centers around increased load, and structuring our software so that it can serve ever more users. There is a wealth of information available discussing this and other pain points, the various solutions, and how to decide which ones fit our situation.
+
+While frontend is still affected by this, it's not quite as crucial. Our apps run on our users' devices instead of on our own servers, distributing much (if not all) of the processing they need.
+
+Frontend scaling centers around a different set of problems, which are mostly caused by a conflict of interest.
+
+User experience is of utmost importance in our apps--we want our users to have a seamless experience where all the parts function as a cohesive whole. At the same time, as our codebases grow they become ever harder to grasp in their entirety, so we have no choice but to break them down into smaller, more comprehensible chunks.
+
+These two tendencies are at odds. How can we build a cohesive experience while keeping our code decentralised?
+
+<WaveSection separator />
+
+The first big step was one which the frontend community embraced years ago.
+
+Originally, people used JavaScript in its most basic form: they wrote scripts and served them unchanged to their users. This worked, but quickly became unmanageable when applications grew in size and complexity.
+
+People then introduced build tooling, which provided a new distinction: a split between **build time** and **runtime**. This has long been a feature of other languages, and bringing it to the JavaScript ecosystem has unlocked a new world of innovation for the web.
+
+The big benefit of this deserves emphasis: **the split between build time and runtime lets us decouple our source code from the code we deliver to our users**.
+
+This means we can optimise our source code for maintainability, and then use our build tooling to transform it into runtime code which is optimised for our users. Build tooling grants us the freedom to write our code to match our perspective, on our terms.
+
+But that's easier said than done--sometimes, our perspective is incomplete.
+
+![](./incomplete.jpg)
+
+A clear example of this is the original response when Facebook introduced React.
+
+One common piece of developer wisdom is that **separation of concerns** is important. In the web community at the time, we had a shared understanding of what these "concerns" were: **markup**, **styling**, and **interactivity**. While we had previously written our styles and click handlers inline inside our HTML, most of us moved on to splitting our CSS and JavaScript into separate files.
+
+While this may have made our lives a little easier, it actually missed the point.
+
+When React debuted, the reaction was instinctive. People took one look at JSX and hated it. After all, it was a direct affront to one of the most fundamental beliefs we held about frontend: it coupled HTML with JavaScript. People rolled their eyes at the idea, and made sarcastic tweets along the lines of _"Facebook: rethinking established best practices™"_.
+
+In fact, by questioning this best practice they had gained an important insight: we were separating the wrong concerns. From a UI developer's perspective, a more intuitive unit of work is in fact a **component**, a single piece of functionality composed of markup, styling, _and_ interactivity. When separating by language we were in fact cutting each "concern" into smaller chunks and spreading it across several files. If we separate by component instead, our mental overhead is reduced.
+
+Once people got past the initial shock and tried the new pattern, it became clear that components were a much more natural way to work. Codebases written this way are a big step closer to how most of us think about our applications.
+
+![](./code.jpg)
+
+So, we have a history of focusing on the wrong things. Our lives can improve drastically when we shift our perspective, even when the new ideas seem unnecessary at first glance.
+
+What might we find if we apply this thought to scaling our apps?
+
+There's at least one place where our current shared narrative glosses over another idea which can make a huge difference. Unlike the separation of concerns example where people had a flawed understanding, this one is more of a blind spot. We sometimes write code to handle it, but we tend not to recognise it consciously--or at least not to recognise its importance. We tend not to build abstractions with it in mind.
+
+The key insight is a fundamental fact of how our apps work: an app's runtime is not a monolith, and instead it contains distinct phases inherent in our code.
+
+What are these phases, how can we tell them apart, and how might this change the way we write our apps? In practice, there are two important ones.
+
+![](./fork.jpg)
+
+Most apps tend to contain a number of static resources which do not change over time.
+
+These resources are varied: state containers, router instances, API facades, telemetry services, and much more. In a lot of codebases, their existence is obscured by the way we structure our apps, spreading them across dozens of files. Despite this, they have a clear common pattern: we initiate and configure them once, when the app first loads in the browser. This is the first phase: **setup**.
+
+One exception where this distinct phase has been consciously recognised is **Redux**. People are encouraged to write a `configureStore` function which encapsulates their store's setup. I helped write [the docs recipe](https://redux.js.org/recipes/configuring-your-store/) exploring this!
+
+The rest of the runtime happens in a separate phase: **execution**. We refer back to the static resources, but only their internal state ever changes, and we never replace or remove them (with some rare exceptions).
+
+Since people tend not to recognise this consciously, the code handling the first phase is often not well abstracted--or sometimes not abstracted at all, tangling into a mess of spaghetti. People rarely build tooling which would handle this phase in a clear and concise way.
+
+Different concerns become tightly coupled, complexity spreads across the app, code becomes long-winded and hard to follow. Which is a shame considering how clean and obvious this distinction can be made.
+
+<WaveSection separator />
+
+Using React, and glossing over some implementation details, we can take this typical setup code:
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import App from './app'
+import store from './store'
+import router from './router'
+
+ReactDOM.render(
+	<App store={store} router={router} />,
+	document.getElementById('root')
+)
+```
+
+To encapsulate the **setup** phase, we can just use a function to separate it conceptually from the rest of runtime. It returns a promise, which resolves into an object containing all of our app's static resources. The **execution** phase happens inside the `.then` callback, after the promise resolves.
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import App from './app'
+import setupResources from './setupResources'
+
+setupResources().then(resources => {
+	ReactDOM.render(
+		<App resources={resources} />,
+		document.getElementById('root')
+	)
+})
+```
+
+Written out like that it seems simple, but it makes a surprisingly large difference to code maintainability. This is especially the case when you have resources which depend on each other, which often results in tightly coupled setup code which leaks out into a number of files.
+
+Isolating the setup phase makes the shape of the code more consistent. Each layer exhibits a similar structure, making it a lot easier to dive deeper when needed, while providing a simple but accurate mental model at a higher level. It can help keep your code consistent and decentralised without sacrificing user experience, and lets you group your code by domain instead of by type.
+
+Having this much control over the flow of your application also makes advanced features like lazy loading for shared resources much easier. When a resource is loaded as an ES module, it tends to be imported throughout the app, which then becomes a huge pain point when you need to lazy load it.
+
+---
+
+Instead of trying to condense this this in one article, we'll explore it more extensively across several. We'll look into some common resources to demonstrate the benefits of extracting them into an isolated unit, then look into some problems the pattern might introduce and how we can solve them.
+
+If you just want to skip ahead and dig through the code, you can check out [this repo here]().
+
+Here are the topics we'll cover:
+
+-   [**Building an API resource**]() - a facade to separate our app from our raw API, which also includes a caching mechanism.
+-   [**Decoupled telemetry**]() - separating our critical path from logging, analytics, and other telemetry.
+-   [**Routing & data fetching**]() - UX wins via simultaneously loading data/routes, or optionally pre-loading related data/routes.
+-   [**Consistent side-effect management**]() - a pattern which allows us to isolate all side-effects to one consistent location accessed via declarative function calls.
+-   [**Patterns for persistent processes**]() - a couple of different options for how to handle long-lived application logic.
+-   [**Other common static resources**]() - facades over browser APIs, routers, views, i18n.
+-   **Architectural flaws and how to solve them** - how to handle complex dependency graphs and resource setup execution order constraints without our code becoming a mess. This will be split into two posts--[one explaining the API](/blog/setup-api), and [one diving into the implementation]().
+
+There are other patterns you can use to structure your app as it grows, but this one is particularly low cost. It proves useful at a small scale, yet still makes a big difference when you have a large codebase.
+
+Perhaps if this pattern becomes more commonplace, we can find more which build upon it, and work just as well at both extremes of scale.

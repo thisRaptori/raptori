@@ -1,0 +1,217 @@
+---
+path: '/blog/api-resource'
+date: '2020-01-22'
+title: 'Scaleable React Architecture - Building an API Resource'
+subtitle: '...'
+featuredImage: './.jpg'
+---
+
+import { CodeWave } from 'gatsby-theme-waves'
+import { WaveSection } from '../../../../src/components'
+
+The first resource we'll explore touches on code which exists in the vast majority of apps, but is rarely isolated into a single concept: an **API Facade**.
+
+The facade pattern involves creating a simplified interface to mask a more complex one. It is used to isolate complexity behind a cleaner API, or to provide a specialised subset of a more general API.
+
+We'll be applying this pattern to AJAX requests. This is a good introductory example for the facade pattern, since it involves code the majority of frontend developers will be used to writing. This makes it easier to understand some of the pros and cons.
+
+This pattern fits particularly well with the `setupResource` approach, so we'll apply it to other things in later articles.
+
+<WaveSection separator />
+
+What's the problem we're trying to solve by using this pattern?
+
+Let's take a look at how we fetch data from an API in a component without any extra setup at all:
+
+```js
+function Component() {
+	const [state, setState] = useState({
+		people: [],
+	})
+
+	useEffect(() => {
+		fetch('https://swapi.co/api/people/')
+			.then(response => response.json())
+			.then(({ result }) => setState({ people: result }))
+			.catch(() =>
+				setState({
+					error: 'Something went wrong!',
+				})
+			)
+	}, [])
+
+	if (state.error) {
+		return <p>{state.error}</p>
+	}
+
+	return (
+		<List>
+			{state.people.map(item => (
+				<Item {...item} />
+			))}
+		</List>
+	)
+}
+```
+
+The code we're focusing on is inside the `useEffect`, which fetches some data. When the response resolves it either adds the results to the state, or displays an error message if anything went wrong.
+
+In a large app, we would potentially have hundreds of components which need to fetch data from an API. Each one would probably need to implement some slightly different logic, but the pattern would be fundamentally the same.
+
+But why is that a problem? If this code works well for one component, why would we want to avoid implementing the logic exactly like this across hundreds of them?
+
+---
+
+### Problem 1: Repetition & Inflexibility
+
+The first concern is repetition. While it's certainly possible to take the **Don't Repeat Yourself** mantra too far, in this case we will potentially have hundreds of instances of mostly identical logic. This makes our code less flexible, and can lead to significant maintenance costs in the future.
+
+What if we need to add a new HTML header to every request for security reasons? What if an external API we're using changes the structure of the data it returns? Or what if we simply need to change our own backend's URL structure?
+
+We would have to search through the entire codebase and update every related request individually. With a large codebase, this is a non-trivial amount of work. It would also likely mean the developer handling the task would need to change code in areas they are completely unfamiliar with, increasing the risk that the change will cause regressions.
+
+### Solution 1: Simple Facade
+
+```js
+function setupAPI() {
+	function customFetch(endpoint, options) {
+		return fetch(`https://swapi.co/api/${endpoint}`, {
+			method: 'GET',
+			mode: 'cors',
+			...options,
+		}).then(response => response.json())
+	}
+
+	return customFetch
+}
+```
+
+This first problem is one which many developers notice, and the instinctive response is in fact to create an API facade: a thin wrapper over `fetch` (or over a fetch alternative like `axios`) which embeds some common concerns. For example it may include some headers, the API's base URL, and call the `response.json()` method. Since it's a thin wrapper, it often allows the consumer to access the full power of the underlying API.
+
+Note that it's more common for people to export this facade directly as an ES module or as part of a custom hook, rather than exporting a `setupAPI` function.
+
+---
+
+### Problem 2: Data Consistency
+
+Another concern is the consistency of the data we use in our app.
+
+With a simple facade, we would implement data transformation logic separately for each component which fetches external data. This results in a bias towards structuring the data in the most convenient way for each particular place in the app. The developer writing the code will likely be focusing on the feature they're building, so any tradeoffs inherent in this decision are likely to be missed.
+
+This might not seem like much of a problem, but inconsistent data structures can become a major pain point. They also make it much harder to combine data from multiple sources, and add to the overhead involved in updating in the event of changes to the API's data structures.
+
+This issue is less important in situations where we're relying on an API we maintain ourselves, but most large apps interact with at least some external resources.
+
+We could solve this by exporting helper transformation functions alongside our simple facade, but that approach isn't ideal. Instead, we could create an API object.
+
+### Solution 2: API Object
+
+We can solve the data consistency problems by creating an object which contains all of our endpoints as separate callable functions. This would typically be built on top of the simple facade mentioned above, though the custom fetch function itself is an implementation detail which is no longer exposed to the rest of the app.
+
+```js
+function setupAPI() {
+	const api = {
+		everyone: () => customFetch('person').then(({ result }) => result),
+		person: personId =>
+			customFetch(`person/${personId}`).then(({ result }) => result),
+	}
+
+	return api
+}
+```
+
+We would then pass this object into the execution phase of our app, and call the endpoint we need:
+
+```js
+api.person(personId)
+	.then(person => setState({ person }))
+	.catch(() => setState({ error: 'Something went wrong!' }))
+```
+
+This approach does a great job of encapsulating any data transformations into the facade. The call site no longer needs to be aware that the original API actually returned a different data structure, which means we can build the internals of our app based on an ideal data structure tailored to our purposes.
+
+It means we can share the same transformation logic across all call sites which use a given endpoint, reducing duplication.
+
+---
+
+### Problem 3: Request Sharing & Caching
+
+With the basic setup more advanced patterns like request sharing and caching are more or less impossible.
+
+Imagine a situation where we have multiple components which depend on data from the same API endpoint. The larger our app is, the more likely this will happen.
+
+When many of these components happen to render at the same time, it would be more efficient to send only one request rather than sending several redundant ones.
+
+When the data does not change often, it would be more efficient to fetch the data once and re-use it for any components which need it later on, rather than sending a new request every time.
+
+Most apps which deal with these kinds of problems tend to implement a caching layer inside a global state container such as Redux. This benefits from using a well-defined pattern to handle request logic, but introduces some awkward constraints at the same time, and can result in code which is very hard to maintain.
+
+Instead, it could be worthwhile to create a rich API layer, tailored to the problems we encounter in this area of our apps.
+
+### Solution 3: Rich API Layer
+
+A rich API layer introduces an extra level of abstraction over the previous solutions. We would build a layer which implements features such as caching or debouncing/throttling, and allow consumers of this layer to add new endpoints declaratively. These endpoints would then be called during the app's execution phase.
+
+For example, the declarative API for adding a new endpoint might look like this:
+
+```js
+function setupAPI() {
+	// api layer
+	const api = {
+		addEndpoint: (name, config) => {
+			// add endpoint to the api object
+		},
+		request: (name, params) => {
+			// fetch from endpoint
+		},
+	}
+
+	// endpoints declaratively added to api layer
+	api.addEndpoint('everyone', {
+		cacheDuration: 10000,
+		debounce: 500,
+		url: 'person',
+		trsansform: ({ result }) => result,
+	})
+
+	api.addEndpoint('person', {
+		cacheDuration: 10000,
+		debounce: 500,
+		url: personId => `person/${personId}`,
+		transform: ({ result }) => result,
+	})
+
+	// api layer exposed to the rest of the app
+	return api
+}
+```
+
+This example would create two endpoints which include a half-second debounce timer, a ten-second data cache, and a data transformer. Note that this `addEndpoint` function is available to the rest of the app--including other resources which may extend the core API when needed.
+
+We would then call these endpoints in our execution phase like so:
+
+```js
+api.request('person', personId)
+	.then(person => setState({ person }))
+	.catch(() => setState({ error: 'Something went wrong!' }))
+```
+
+At first glance, this looks like it comes with a significant disadvantage: the layer of abstraction and complex logic is something extra which developers will need to understand and debug.
+
+However, while this is a valid concern, a rich API layer removes the need to manually implement or consume these features at each call site. Depending on the frequency of use of these features, this can reduce complexity overall, and ensure there's less of a risk of divergence of approach.
+
+When built this way, this abstraction tends to collect some of the complexity which is spread throughout our applications and isolate it into the API layer. This encapsulation simplifies the code elsewhere while locating the more complex shared logic into one place, allowing developers to move faster.
+
+It's still a trade-off which needs to be considered carefully, but in a large-scale app it can save a lot of pain.
+
+<WaveSection separator />
+
+One of the most significant benefits of encapsulating a resource into a `setupResource` function is that by colocating its code, we can change its implementation more easily, and move along the spectrum of simplicity to complexity much more easily.
+
+It often makes sense to start with a simple API facade, and to build up the extra layers of abstraction when needed. Once we reach a point where we need more powerful features, we have a natural place for them to belong. Our components can remain relatively simple, unaware of most changes to the logic of the endpoints they call, while still benefiting from improvements to the shared code.
+
+The places I've worked which consciously followed the setup pattern used the API object approach. We discussed adding a rich resource with caching, which would have let us remove some of the most complex code in our apps (i.e. request caching built into Redux), but never got around to implementing it due to other priorities.
+
+Regardless of how far we take it, this setup structure keeps the api:consumer relationship loosely cooupled while making the code more cohesive at both an architectural and implementation level.
+
+Next we'll look at the idea of a **Telemetry** resource, which has similar properties to those we've explored here.
