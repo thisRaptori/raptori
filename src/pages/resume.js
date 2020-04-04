@@ -34,10 +34,10 @@ const ResumePage = () => (
 					<p>
 						Software engineer contributing to a visual website
 						design and development platform with over a million
-						customers. Part of the Collaboration team—focused on
-						building collaboration features such as deep linking,
-						site version control, and real-time webRTC multi-user
-						editing functionality.
+						customers. Worked on various high-impact features
+						across multiple teams, including content editor,
+						multi-user, comments, activity log, and internal
+						codebase decoupling & modularisation.
 					</p>
 				</Resume.Description>
 			</Resume.Position>
