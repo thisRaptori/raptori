@@ -97,7 +97,11 @@ const PostLink = ({
 }) => (
 	<StyledLink
 		className="background transition"
-		featured={featured || (tags || []).includes('featured')}
+		featured={
+			typeof featured === 'undefined'
+				? (tags || []).includes('featured')
+				: featured
+		}
 		inFooter={inFooter}
 		to={path}
 	>
