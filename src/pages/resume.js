@@ -11,8 +11,8 @@ const ResumePage = () => (
 				<p>
 					Here's an overview of some of the things I've worked on
 					since I started building software for the web way back in
-					2009. For more details, download my resume as a PDF, or check
-					out some of my code on GitHub!
+					2009. For more details, download my resume as a PDF, or
+					check out some of my code on GitHub!
 				</p>
 				<p>
 					<Link to="/joe-mcgrath-resume.pdf" external button>
@@ -34,10 +34,10 @@ const ResumePage = () => (
 					<p>
 						Software engineer contributing to a visual website
 						design and development platform with over a million
-						customers. Worked on various high-impact features
-						across multiple teams, including content editor,
-						multi-user, comments, activity log, and internal
-						codebase decoupling & modularisation.
+						customers. Worked on various high-impact features across
+						multiple teams, including content editor, multi-user,
+						comments, activity log, and internal codebase decoupling
+						& modularisation.
 					</p>
 				</Resume.Description>
 			</Resume.Position>

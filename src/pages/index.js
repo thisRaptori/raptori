@@ -13,7 +13,8 @@ import { get } from 'src/utils'
 
 const IndexPage = ({ data }) => {
 	const width = useWindowWidth()
-	const postCount = width > 1200 ? 5 : 3
+	const isDesktop = width > 1200
+	const postCount = isDesktop ? 5 : 3
 	const edges = get(data, 'allMdx', 'edges').slice(0, postCount) || []
 
 	return (
@@ -50,7 +51,13 @@ const IndexPage = ({ data }) => {
 						{edges.map((edge, i) => (
 							<PostLink
 								key={edge.node.id}
-								featured={i === 0}
+								featured={
+									isDesktop
+										? edge.node.frontmatter.tags.includes(
+												'home-featured'
+										  )
+										: i === 0
+								}
 								post={edge.node}
 							/>
 						))}
@@ -85,6 +92,7 @@ export const pageQuery = graphql`
 						path
 						title
 						subtitle
+						tags
 					}
 					fields {
 						readingTime {
