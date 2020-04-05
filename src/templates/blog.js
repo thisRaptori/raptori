@@ -10,7 +10,7 @@ const BlogPage = ({ data, pageContext: { currentPage, pageCount } }) => {
 		<Layout activePage="blog">
 			<SEO title="Blog" />
 			<h1>Latest Posts</h1>
-			<PostGrid>
+			<PostGrid wide>
 				{edges.map(edge => (
 					<PostLink key={edge.node.id} post={edge.node} />
 				))}
@@ -23,11 +23,9 @@ const BlogPage = ({ data, pageContext: { currentPage, pageCount } }) => {
 export default BlogPage
 
 export const pageQuery = graphql`
-	query($skip: Int!, $limit: Int!) {
+	query {
 		allMdx(
 			sort: { order: DESC, fields: [frontmatter___date] }
-			limit: $limit
-			skip: $skip
 		) {
 			edges {
 				node {
