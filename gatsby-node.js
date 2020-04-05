@@ -53,17 +53,9 @@ exports.createPages = ({ actions, graphql }) => {
 			})
 		})
 
-		Array.from({ length: pageCount }).forEach((_, i) => {
-			createPage({
-				path: i === 0 ? '/blog' : `/blog/${i + 1}`,
-				component: blogListTemplate,
-				context: {
-					limit: postsPerPage,
-					skip: i * postsPerPage,
-					pageCount,
-					currentPage: i + 1,
-				},
-			})
+		createPage({
+			path: '/blog',
+			component: blogListTemplate,
 		})
 	})
 }
