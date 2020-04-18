@@ -42,7 +42,7 @@ html body {
 	background-color: var(--primary);
 }
 
-body,
+html body,
 button {
 	color: var(--text);
 }
