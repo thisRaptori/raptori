@@ -3,6 +3,20 @@ import styled from 'styled-components'
 
 import { Image, Link, MetaText } from 'src/components'
 
+const wide = `
+grid-column-end: span 2;
+min-height: 230px;
+padding: 1.5rem 1.5rem 1rem calc(50% + 4.5rem);
+
+.gatsby-image-wrapper {
+	bottom: 0;
+	left: 0;
+	margin: 0 -2rem 0 0;
+	position: absolute !important;
+	right: 50%;
+	top: 0;
+}`
+
 const StyledLink = styled(Link)`
 	color: var(${props => (props.inFooter ? '--dark' : '--text')}) !important;
 	display: flex;
@@ -44,21 +58,15 @@ const StyledLink = styled(Link)`
 
 	@media (min-width: 600px) {
 		${props =>
-			props.featured
-				? `
-			grid-column-end: span 2;
-			min-height: 230px;
-			padding: 1.5rem 1.5rem 1rem calc(50% + 4.5rem);
+		props.featured
+			? wide
+			: ''}
 
-			.gatsby-image-wrapper {
-				bottom: 0;
-				left: 0;
-				margin: 0 -2rem 0 0;
-				position: absolute !important;
-				right: 50%;
-				top: 0;
-			}`
-				: ''}
+		@media (max-width: 1199px) {
+			&:first-child {
+				${wide}
+			}
+		}
 	}
 	& + & {
 		margin-top: calc(4rem + 1vw);
@@ -95,22 +103,22 @@ const PostLink = ({
 	},
 	inFooter,
 }) => (
-	<StyledLink
-		className="background transition"
-		featured={
-			typeof featured === 'undefined'
-				? (tags || []).includes('featured')
-				: featured
-		}
-		inFooter={inFooter}
-		to={path}
-	>
-		<Image className="transition" image={featuredImage} />
-		<h4>{title}</h4>
-		{subtitle ? <p>{subtitle}</p> : null}
-		<hr />
-		<MetaText italic>{readingTime.text}</MetaText>
-	</StyledLink>
-)
+		<StyledLink
+			className="background transition"
+			featured={
+				typeof featured === 'undefined'
+					? (tags || []).includes('featured')
+					: featured
+			}
+			inFooter={inFooter}
+			to={path}
+		>
+			<Image className="transition" image={featuredImage} />
+			<h4>{title}</h4>
+			{subtitle ? <p>{subtitle}</p> : null}
+			<hr />
+			<MetaText italic>{readingTime.text}</MetaText>
+		</StyledLink>
+	)
 
 export default PostLink
